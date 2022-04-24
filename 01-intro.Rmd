@@ -8,10 +8,9 @@ output: html_notebook
 The course structure and some of the material is adapted from the
 [Python part of the debugging course](https://aaltoscicomp.github.io/python-debugging).
 
-This course will often reference the excellent book [Advanced R by Hadley Wickham](https://adv-r.hadley.nz/)[@wickham2019advanced].
-This book is released under Creative Commons licence
-([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/>`_))
-and it is a great tool for learning about R programming.
+Most of the R material is constructed from various books and blog posts available online.
+Reading this material for more in-depth explanation of concepts shown in this course
+is highly recommended.
 
 ## The four steps of debugging
 

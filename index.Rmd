@@ -42,6 +42,6 @@ Rendering might require texlive to be installed as well.
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'sloop'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'sloop', 'Rcpp'
 ), 'packages.bib')
 ```

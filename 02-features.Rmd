@@ -37,7 +37,7 @@ Rscript --help
 - On one hand testing individual smaller functions can be easy, but on the
   other hand the function call stacks can get quite deep.
 - For more info, see
-  [this chapter of Advanced R](https://adv-r.hadley.nz/fp.html)[@wickham2019advanced].
+  [this chapter of Advanced R](https://adv-r.hadley.nz/fp.html).
 
 ### Lazy evaluation
 
@@ -95,7 +95,7 @@ x
 
 - This can obviously cause problems and should be avoided in most cases.
 - For more info, see
-  [this chapter of Advanced R](https://adv-r.hadley.nz/environments.html)[@wickham2019advanced].
+  [this chapter of Advanced R](https://adv-r.hadley.nz/environments.html).
 
 ## Objects
 
@@ -124,7 +124,6 @@ d <- function(x,y) {
 d(10,3)
 d(10L,3L)
 ```
-- Thus 
 
 - For more info, see
   [this chapter of Advanced R](https://adv-r.hadley.nz/base-types.html).
@@ -204,28 +203,33 @@ my_coefs
 ```
 - After this, one might do a predictive fit:
 ```{r, collapse=TRUE}
-y_pred <- my_coefs[1] * x + my_coefs[2]
+y_pred <- my_coefs[2] * x + my_coefs[1]
 y_pred
 ```
-- However, coefficients do not contain all of the information that the model has:
-```{r}
-sloop::s3_class(my_model)
+- However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function `predict` for models that support it. This will allow the model to stay as an S3 object:
+```{r, collapse=TRUE}
 attributes(my_model)
-```
-
-```{r}
-
 
 sloop::ftype(predict)
-methods(predict)
 predict(my_model)
-
-attributes(my_model)
+```
+- Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, `predict` can operate on multiple different models with corresponding methods: 
+```{r}
+methods(predict)
 ```
 
 
-R language is often extended using outside libraries
-----------------------------------------------------
+## Libraries
 
-- Many packages use C or C++ extensions that are compiled during package
-  installation.
+### Libraries are usually compiled
+
+- R libraries can be pure R or they can utilize other languages. Many R's internal functions
+  utilize R's [API for writing extensions](https://cran.r-project.org/doc/manuals/R-exts.html).
+  Common used languages are C, C++ and Fortran. Reason for this is speed provided by these lower
+  level languages.
+- However, this API can be very complicated and thus most new packages use C/C++ with
+  [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html)-package.[@R-Rcpp]
+- This means that during installation many R libraries need C/C++ compiler and external libraries, which can result in various errors.
+- Debugging `Rcpp`-code requires one to utilize C/C++ debuggers. For more information one can look for example at [this blog post ](https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/).[@VaughanRcppDebug]
+
+- For more information on Rcpp, one can check [Rcpp for everyone](https://teuder.github.io/rcpp4everyone_en/)[@RcppForEveryone], [this chapter in Advanced R](https://adv-r.hadley.nz/rcpp.html)
