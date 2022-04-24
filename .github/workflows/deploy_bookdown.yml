@@ -43,4 +43,5 @@ jobs:
        uses: Cecilapp/GitHub-Pages-deploy@master
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         BUILD_DIR: _book/                     # "_site/" by default
+       with:
+         build_dir: _book/                     # "_site/" by default
