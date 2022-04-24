@@ -1,0 +1,17 @@
+about-this-course
+requirements
+building-the-materials
+intro
+the-four-steps-of-debugging
+debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation
+r-features-relevant-for-debugging
+interpreter
+functions
+r-is-a-functional-language
+lazy-evaluation
+r-functions-are-evaluated-in-an-environment
+objects
+all-objects-in-r-have-a-base-type
+base-types-are-extended-using-object-oriented-oo-programming
+method-dispatch
+r-language-is-often-extended-using-outside-libraries
