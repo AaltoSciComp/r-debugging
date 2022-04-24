@@ -16,28 +16,17 @@ output: html_notebook
 
 This course is a part of [How to debug code](https://scicomp.aalto.fi/training/scip/debugging-2022/)-course by Aalto Scientific Computing.
 
+The course structure and some of the material is adapted from the
+[Python part of the debugging course](https://aaltoscicomp.github.io/python-debugging).
+
+Most of the R material is constructed from various books and blog posts available online.
+Reading this material for more in-depth explanation of concepts shown in this course
+is highly recommended.
+
 ## Requirements
 
-For this course one needs [RStudio IDE](https://www.rstudio.com/).
+This course utilizes [RStudio IDE](https://www.rstudio.com/) as it provides easy access for many debugging tools.
 
-## Building the materials
-
-One can clone the git repository and build the materials. 
-
-```{sh eval=FALSE}
-git clone https://github.com/AaltoSciComp/r-debugging
-cd r-debugging
-conda env create -f environment.yml
-```
-
-After this one needs to install bookdown[@R-bookdown] and render the materials:
-
-```{r eval=FALSE}
-install.packages("bookdown")
-rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
-```
-
-Rendering might require texlive to be installed as well.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.Rprofile
 _book/
 _bookdown_files/
 **/*.html
