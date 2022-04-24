@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | R debugging</title>
+  <title>References | R features relevant for debugging</title>
   <meta name="description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | R debugging" />
+  <meta property="og:title" content="References | R features relevant for debugging" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | R debugging" />
+  <meta name="twitter:title" content="References | R features relevant for debugging" />
   
   <meta name="twitter:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
@@ -49,25 +49,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -120,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,27 +158,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R debugging</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this course</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this course</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i><b>1.1</b> Requirements</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#building-the-materials"><i class="fa fa-check"></i><b>1.2</b> Building the materials</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#the-four-steps-of-debugging"><i class="fa fa-check"></i><b>2.1</b> The four steps of debugging</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation"><i class="fa fa-check"></i><b>2.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html"><i class="fa fa-check"></i><b>3</b> R features relevant for debugging</a><ul>
+<li class="chapter" data-level="3" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html"><i class="fa fa-check"></i><b>3</b> R features relevant for debugging</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#interpreter"><i class="fa fa-check"></i><b>3.1</b> Interpreter</a></li>
-<li class="chapter" data-level="3.2" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a><ul>
+<li class="chapter" data-level="3.2" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#r-is-a-functional-language"><i class="fa fa-check"></i><b>3.2.1</b> R is a functional language</a></li>
 <li class="chapter" data-level="3.2.2" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#lazy-evaluation"><i class="fa fa-check"></i><b>3.2.2</b> Lazy evaluation</a></li>
 <li class="chapter" data-level="3.2.3" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#r-functions-are-evaluated-in-an-environment"><i class="fa fa-check"></i><b>3.2.3</b> R functions are evaluated in an environment</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a><ul>
+<li class="chapter" data-level="3.3" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>3.3.1</b> All objects in R have a base type</a></li>
 <li class="chapter" data-level="3.3.2" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
 <li class="chapter" data-level="3.3.3" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.3</b> Method dispatch</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a><ul>
+<li class="chapter" data-level="3.4" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="r-features-relevant-for-debugging.html"><a href="r-features-relevant-for-debugging.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
 </ul></li>
 </ul></li>
@@ -174,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R debugging</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R features relevant for debugging</a>
           </h1>
         </div>
 
@@ -185,21 +212,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="references" class="section level1 unnumbered hasAnchor">
 <h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-<div id="refs" class="references">
-<div>
-<p>Chang, Winston. <em>R6: Encapsulated Classes with Reference Semantics</em>, 2022.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Chang, Winston. <em>R6: Encapsulated Classes with Reference Semantics</em>, 2022.
 </div>
-<div>
-<p>Tsuda, Masaki E. <em>Rcpp for Everyone</em>, 2020. <a href="https://teuder.github.io/rcpp4everyone_en/">https://teuder.github.io/rcpp4everyone_en/</a>.</p>
+<div class="csl-entry">
+Tsuda, Masaki E. <em>Rcpp for Everyone</em>, 2020. <a href="https://teuder.github.io/rcpp4everyone_en/">https://teuder.github.io/rcpp4everyone_en/</a>.
 </div>
-<div>
-<p>Vaughan, Davis. “Debugging an R Package with C++,” 2017. <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.</p>
+<div class="csl-entry">
+Vaughan, Davis. <span>“Debugging an r Package with c++,”</span> 2017. <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.
 </div>
-<div>
-<p>Wickham, Hadley. <em>Sloop: Helpers for Oop in R</em>, 2019. <a href="https://CRAN.R-project.org/package=sloop">https://CRAN.R-project.org/package=sloop</a>.</p>
+<div class="csl-entry">
+Wickham, Hadley. <em>Sloop: Helpers for OOP in r</em>, 2019. <a href="https://CRAN.R-project.org/package=sloop">https://CRAN.R-project.org/package=sloop</a>.
 </div>
-<div>
-<p>Xie, Yihui. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>, 2022. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
+<div class="csl-entry">
+Xie, Yihui. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>, 2022. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
 </div>
 </div>
 </div>
