@@ -1,0 +1,13 @@
+name: r-debugging
+channels:
+  - defaults
+  - r
+dependencies:
+  - r-base>=3.6
+  - r-rlang
+  - r-rmarkdown
+  - rstudio
+  - pip
+  - python
+  - ipython
+  - pandoc

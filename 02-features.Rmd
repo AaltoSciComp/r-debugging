@@ -1,0 +1,231 @@
+---
+title: "R features relevant for debugging"
+output:
+  html_document:
+    df_print: paged
+---
+
+# R features relevant for debugging
+
+## Interpreter
+
+R is an interpreted language, which means that code is interpreted by the R
+interpreter during runtime. This has the effect that syntax errors occur only
+when the code is run. Thus using an IDE like Rstudio makes coding easier as it
+notifies the user on such errors beforehand.
+
+When R exists it also can save the current environment (aka. workspace) into a
+`.RData`-file. One should be careful to make certain that existing workspace does
+not interfere with the code.
+
+For non-interactive usage one usually uses `Rscript` or `R CMD BATCH`. `Rscript`
+is usually better. However, when interpreter is launched using `Rscript`, the list
+of default packages is minimal:
+```{sh}
+Rscript --help
+```
+
+
+## Functions
+
+### R is a functional language
+
+- R is at its core a functional language. This means that coding is often
+  done in terms of functions that operate on objects and which return a new
+  object. These function calls are then often chained together
+  and vectorized with ``apply``-family of functions.
+- On one hand testing individual smaller functions can be easy, but on the
+  other hand the function call stacks can get quite deep.
+- For more info, see
+  [this chapter of Advanced R](https://adv-r.hadley.nz/fp.html)[@wickham2019advanced].
+
+### Lazy evaluation
+
+- R uses lazy evaluation when functions are called.
+  This means that functions are evaluated only when the output is actually used.
+- In the following example the value of ``g(x)`` is not evaluated for positive values and
+  thus the undefined variable is not encountered until ``f(x)`` is called with a negative
+  value::
+
+```{r,  collapse=TRUE, error=TRUE}
+g <- function(x) {
+  return(x + z)
+}
+
+f <- function(x,y = g(x)) {
+  if (x>0) {
+    return(x)
+  } else {
+    return(g(x))
+  }
+}
+f(1)
+f(-1)
+```
+- Lazy evaluation can make it easy to miss bugs in alternative execution paths.
+- See this [r-bloggers' post](https://www.r-bloggers.com/2018/07/about-lazy-evaluation/)
+  for more information on lazy evaluation.
+
+### R functions are evaluated in an environment
+
+- Each R function has an environment that houses known names to values
+  (e.g. function names, variables etc.).
+- The global environment is the top level environment that contains everything
+  done by the user. Function calls etc. get their own environment that inherit
+  their parent's environment.
+- Thus one can easily run into situations such as this:
+
+```{r, collapse=TRUE, error=TRUE}
+  f(-2)
+  z <- 2
+  f(-2)
+```
+
+
+- Objects can also write to their parents' environment:
+```{r, collapse=TRUE}
+h <- function(x) {
+  x <<- x
+}
+x <- 1
+x
+h(2)
+x
+```
+
+- This can obviously cause problems and should be avoided in most cases.
+- For more info, see
+  [this chapter of Advanced R](https://adv-r.hadley.nz/environments.html)[@wickham2019advanced].
+
+## Objects
+
+### All objects in R have a base type
+
+- There are 25 base types in R such as ``integer``, ``double``, ``list`` and
+  ``closure`` (function). One can check the type using ``typeof(x)``-function.
+
+```{r, collapse=TRUE}
+a <- 1:10
+b <- list(a=1:10)
+c <- data.frame(b)
+typeof(a)
+typeof(b)
+typeof(c)
+typeof(f)
+```
+- R is strongly, but dynamically typed. This means that objects have to keep their type, but objects can be cast to new types automatically. As an example, consider the following function that does a simple division:
+```{r, collapse=TRUE}
+d <- function(x,y) {
+  print(is.integer(x))
+  print(is.integer(y))
+  print(is.integer(x/y))
+  return(x/y)
+}
+d(10,3)
+d(10L,3L)
+```
+- Thus 
+
+- For more info, see
+  [this chapter of Advanced R](https://adv-r.hadley.nz/base-types.html).
+
+### Base types are extended using object-oriented (OO) programming
+- Examples in this section utilize the [sloop](https://cran.r-project.org/web/packages/sloop/index.html)[@R-sloop]-package.
+  For finding more information on objects. You can install it with:
+```{r, eval=FALSE}
+install.packages("sloop")
+```
+
+- In R nomenclature, everything is an object. But not everything is an OO-style object.
+  OO-objects have a `class`-attribute. One can also use `is.object()`-function to check
+  whether the object is an OO object and `sloop::s3_class` to get the class in a reliable way:
+```{r, collapse=TRUE}
+attr(a, "class")
+attr(b, "class")
+attr(c, "class")
+is.object(a)
+is.object(b)
+is.object(c)
+sloop::s3_class(a)
+sloop::s3_class(b)
+sloop::s3_class(c)
+```
+- One can strip the object back to its base types with `unclass()`-function:
+```{r, collapse=TRUE}
+unclass(c)
+```
+
+- There are multiple OO paradigms in R:
+  - [S3](https://adv-r.hadley.nz/s3.html): Oldest and simplest system. Most of R OO-objects are S3 objects.
+  - [S4](https://adv-r.hadley.nz/s4.html): More advanced version of S3. Heavily used by the [Bioconductor](https://www.bioconductor.org/)-project.
+  - [R6](https://adv-r.hadley.nz/r6.html): More like other OO languages. Improved version on R's feature called [reference classes](https://www.rdocumentation.org/packages/methods/versions/3.6.2/topics/ReferenceClasses). See [R6 manual for more information](https://r6.r-lib.org/)[@R6manual].
+
+### Method dispatch
+
+- Most R functions are S3 **generic** functions that choose between available **methods** for a class. One can check whether a function is a generic function or a method with `sloop::ftype()`.
+- For example, `paste` is an internal method that works with types, but `print` is an S3 generic:
+```{r, collapse=TRUE}
+sloop::ftype(paste)
+sloop::ftype(print)
+```
+- To see which function is used for a given object, one can use `sloop::s3_dispatch()`:
+```{r, collapse=TRUE}
+sloop::s3_dispatch(print(c))
+```
+- Now one can check the difference between these methods:
+```{r, collapse=TRUE}
+sloop::ftype(print.data.frame)
+sloop::ftype(print.default)
+print.data.frame(c)
+print.default(c)
+```
+- Knowing about method dispatch is especially important when dealing with numerical data. Numeric can mean that something is a double **or** that something behaves like a number (integer and double). Typically everything in R is stored as doubles.
+```{r, collapse=TRUE}
+x_i <- 1L
+x_n <- 1
+is.integer(x_i)
+is.numeric(x_i)
+is.integer(x_n)
+is.numeric(x_n)
+```
+- Another problem that can happen is that one can easily remove the class functionality from an S3 object. Let's consider a simple linear model. After fitting a linear model, one might try to store the coefficients into a variable:
+```{r, collapse=TRUE}
+
+x <- 1:10
+err <- rnorm(10, 0, 0.5)
+y <- 10 * x - 10 + err
+d <- data.frame(x=x, y=y)
+
+my_model <- lm(y ~ x, data=d)
+
+my_coefs <- my_model$coefficients
+
+my_coefs
+```
+- After this, one might do a predictive fit:
+```{r, collapse=TRUE}
+y_pred <- my_coefs[1] * x + my_coefs[2]
+y_pred
+```
+- However, coefficients do not contain all of the information that the model has:
+```{r}
+sloop::s3_class(my_model)
+attributes(my_model)
+```
+
+```{r}
+
+
+sloop::ftype(predict)
+methods(predict)
+predict(my_model)
+
+attributes(my_model)
+```
+
+
+R language is often extended using outside libraries
+----------------------------------------------------
+
+- Many packages use C or C++ extensions that are compiled during package
+  installation.

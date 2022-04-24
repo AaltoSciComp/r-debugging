@@ -1,0 +1,47 @@
+--- 
+title: "R debugging"
+author: "Simo Tuomisto"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
+#link-citations: yes
+description: "Materials for Aalto Scientific Computing's How to debug-course, R part"
+output: html_notebook
+---
+
+# About this course
+
+This course is a part of [How to debug code](https://scicomp.aalto.fi/training/scip/debugging-2022/)-course by Aalto Scientific Computing.
+
+## Requirements
+
+For this course one needs [RStudio IDE](https://www.rstudio.com/).
+
+## Building the materials
+
+One can clone the git repository and build the materials. 
+
+```{sh eval=FALSE}
+git clone https://github.com/AaltoSciComp/r-debugging
+cd r-debugging
+conda env create -f environment.yml
+```
+
+After this one needs to install bookdown[@R-bookdown] and render the materials:
+
+```{r eval=FALSE}
+install.packages("bookdown")
+rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
+```
+
+Rendering might require texlive to be installed as well.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'sloop'
+), 'packages.bib')
+```
