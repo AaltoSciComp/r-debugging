@@ -1,10 +1,12 @@
 about-this-course
 requirements
-building-the-materials
 intro
 the-four-steps-of-debugging
 debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation
-r-features-relevant-for-debugging
+whatis
+the-four-steps-of-debugging-1
+debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation-1
+features
 interpreter
 functions
 r-is-a-functional-language

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>R features relevant for debugging</title>
+  <title>3 What is debugging | R features relevant for debugging</title>
   <meta name="description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R features relevant for debugging" />
+  <meta property="og:title" content="3 What is debugging | R features relevant for debugging" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R features relevant for debugging" />
+  <meta name="twitter:title" content="3 What is debugging | R features relevant for debugging" />
   
   <meta name="twitter:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="features.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -213,22 +213,40 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R features relevant for debugging</h1>
-<p class="author"><em>Simo Tuomisto</em></p>
-<p class="date"><em>2022-04-24</em></p>
+<div id="whatis" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> What is debugging<a href="whatis.html#whatis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="the-four-steps-of-debugging-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> The four steps of debugging<a href="whatis.html#the-four-steps-of-debugging-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Identify the bug</p>
+<ul>
+<li>Get a report from user or find an example input that exhibits the problem</li>
+<li>Find the faulty line or piece of logic</li>
+</ul></li>
+<li><p>Isolate</p>
+<ul>
+<li>Confirm that you have found the problem</li>
+<li>Could be e.g. a unit test or a minimal (non)working example</li>
+</ul></li>
+<li><p>Fix</p>
+<ul>
+<li>Replacing the erroneous code with correct code</li>
+</ul></li>
+<li><p>Test</p>
+<ul>
+<li>Check that the bug is fixed and no new bugs were introduced.</li>
+</ul></li>
+</ol>
+<p>In this course we are concentrating on the identifying phase. It is expected, that as soon as you identify the bug, it is more or less obvious how it should be fixed.</p>
 </div>
-<div id="about-this-course" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> About this course<a href="index.html#about-this-course" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This course is a part of <a href="https://scicomp.aalto.fi/training/scip/debugging-2022/">How to debug code</a>-course by Aalto Scientific Computing.</p>
-<p>The course structure and some of the material is adapted from the
-<a href="https://aaltoscicomp.github.io/python-debugging">Python part of the debugging course</a>.</p>
-<p>Most of the R material is constructed from various books and blog posts available online.
-Reading this material for more in-depth explanation of concepts shown in this course
-is highly recommended.</p>
-<div id="requirements" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Requirements<a href="index.html#requirements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This course utilizes <a href="https://www.rstudio.com/">RStudio IDE</a> as it provides easy access for many debugging tools.</p>
+<div id="debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation-1" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Debugging is the art of identifying inconsistency between the expected and actual operation<a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A problem exists whenever the user expects the system to operate differently from how it actually operates. The issue may lay either in the expectations or in the system.</p>
+<p>Sometimes a program does do what the programmer intents it to do, but the user expects some other behaviour. Then the bug is in the user interface (UI), in the application programming interface (API) or in the documentation. For scientific computation this is most often encountered when starting to use a new library or software.</p>
+<p>However, we concentrate on the common and basic problem of how to fix your own code. Here the inconsistency is usually between what you mean the computer to do and what you tell the computer to do.
+The key to success is to have sufficiently deep understanding of what your code and the programming language does, to simulate in your mind the program.</p>
+<p>This is all just a complicated way to say, that to debug R successfully, you need to know the R language and some details of the underlying runtime.</p>
+<p>Thus, we first recapitulate a few key features of the R language. We say a few words on how to avoid problems. After that we take a look at the R specific tools to help analyze a R program.</p>
 
 </div>
 </div>
@@ -237,8 +255,8 @@ is highly recommended.</p>
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="features.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
