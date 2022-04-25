@@ -1,5 +1,8 @@
 ---
-title: "Introduction"
+title: "What is debugging?"
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
 output: html_notebook
 ---
 

@@ -1,8 +1,9 @@
 ---
 title: "R features relevant for debugging"
-output:
-  html_document:
-    df_print: paged
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
+output: html_notebook
 ---
 
 # R features relevant for debugging {#features}

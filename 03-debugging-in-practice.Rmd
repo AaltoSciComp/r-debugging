@@ -1,8 +1,9 @@
 ---
-title: "Debugging R"
-output:
-  html_document:
-    df_print: paged
+title: "Debugging in practice"
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
+output: html_notebook
 ---
 
 # Debugging R code {#practice}
