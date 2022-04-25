@@ -466,12 +466,12 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb16-10"><a href="features.html#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-11"><a href="features.html#cb16-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
 <span id="cb16-12"><a href="features.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb16-13"><a href="features.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.14736    10.04802</span></span></code></pre></div>
+<span id="cb16-13"><a href="features.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -9.957068   10.016288</span></span></code></pre></div>
 <p>After this, one might do a predictive fit:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="features.html#cb17-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
 <span id="cb17-2"><a href="features.html#cb17-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
-<span id="cb17-3"><a href="features.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.09934399  9.94867140 19.99668679 30.04470217 40.09271756 50.14073295</span></span>
-<span id="cb17-4"><a href="features.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 60.18874833 70.23676372 80.28477911 90.33279450</span></span></code></pre></div>
+<span id="cb17-3"><a href="features.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  0.05922033 10.07550869 20.09179705 30.10808541 40.12437377 50.14066213</span></span>
+<span id="cb17-4"><a href="features.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 60.15695049 70.17323885 80.18952721 90.20581557</span></span></code></pre></div>
 <p>However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function <code>predict</code> for models that support it. This will allow the model to stay as an S3 object:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="features.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
 <span id="cb18-2"><a href="features.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
@@ -486,9 +486,9 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb18-11"><a href="features.html#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
 <span id="cb18-12"><a href="features.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
 <span id="cb18-13"><a href="features.html#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="do">##           1           2           3           4           5           6 </span></span>
-<span id="cb18-14"><a href="features.html#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.09934399  9.94867140 19.99668679 30.04470217 40.09271756 50.14073295 </span></span>
+<span id="cb18-14"><a href="features.html#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.05922033 10.07550869 20.09179705 30.10808541 40.12437377 50.14066213 </span></span>
 <span id="cb18-15"><a href="features.html#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="do">##           7           8           9          10 </span></span>
-<span id="cb18-16"><a href="features.html#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 60.18874833 70.23676372 80.28477911 90.33279450</span></span></code></pre></div>
+<span id="cb18-16"><a href="features.html#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 60.15695049 70.17323885 80.18952721 90.20581557</span></span></code></pre></div>
 <p>Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, <code>predict</code> can operate on multiple different models with corresponding methods:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="features.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
 <pre><code>##  [1] predict.ar*                predict.Arima*            
