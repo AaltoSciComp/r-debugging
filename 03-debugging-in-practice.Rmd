@@ -7,7 +7,11 @@ output:
 
 # Debugging R code {#practice}
 
+This chapter follows the excellent [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html)[@wickham2019advanced].
+
 ## Tracing errors
+
+### Traceback
 
 Let's consider the previously showed function example with a missing variable:
 
@@ -24,7 +28,7 @@ f <- function(x,y = g(x)) {
   if (x>0) {
     return(x)
   } else {
-    return(g(x))
+    return(y)
   }
 }
 f(-1)
@@ -33,13 +37,55 @@ This example is available [here](https://raw.githubusercontent.com/AaltoSciComp/
 
 Opening the file with Rstudio and sourcing the file will return the following kind of an error:
 
-![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variable.png)
+![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables.png)
 
-Now clicking the `Show traceback`-button will expand the traceback:
+Now clicking the **Show traceback**-button will expand the traceback:
 
 ![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-traceback.png)
 
-This view will quickly show that the error comes from the `g(x)`-function call in line #13.
+This view will quickly show that the error comes from the `g(x)`-function call in line #13. 
+
+Sometimes lazy evaluation can make reading the call stack complicated. Here we have few additional functions that are called in the argument definition:
+
+```{r, collapse=TRUE, error=TRUE}
+i <- function() {
+  return(z)
+}
+h <- function() {
+  return(i())
+}
+f(x=-1, y=h())
+```
+
+![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-lazy-evaluation.png)
+
+Error is raised by `i()`, but looking at the call stack it almost looks like `f()` is somehow involved. This is because value of `h()` is evaluated only when it is needed in `f()`. Writing the code like this would reveal the true culprit:
+```{r, collapse=TRUE, error=TRUE}
+h_value=h()
+f(x=-1, y=h_value)
+```
+
+Of course, this is not something you want to do generally. Lazy evaluation is good for speeding up your code, so doing changes like this should be limited to situations where you're unsure which function causes the error.
+
+![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-nonlazy-evaluation.png)
+
+
+### Traceback outside of Rstudio editor
+
+If you run the code in R console in Rstudio or in a separate interpreter you might not get the **Show Traceback**-prompt.
+In those situations you can use the `traceback()`-function to get the trace. You can try it out with the following test in the console:
+```{r, eval=FALSE}
+f(-1)
+traceback()
+```
+You can also set the R error handling to call traceback on errors:
+```{r, eval=FALSE}
+backup_options <- options()
+options(error=traceback)
+f(-1)
+options(backup_options)
+```
+Here we also took a backup of the default options. This is usually a good idea as changing options will change the options for the whole R session. 
 
 ## Using interactive debugger
 

@@ -10,7 +10,8 @@ f <- function(x,y = g(x)) {
   if (x>0) {
     return(x)
   } else {
-    return(g(x))
+    return(y)
   }
 }
+
 f(-1)
