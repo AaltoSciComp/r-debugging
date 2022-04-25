@@ -41,6 +41,6 @@ install.packages("sloop")
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'sloop', 'Rcpp', 'tibble', 'data.table'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'sloop', 'tibble', 'data.table'
 ), 'packages.bib')
 ```

@@ -209,19 +209,19 @@ It has an additional constraints added to it:
 `tibble` is a modern drop-in replacement for `data.frame` that is highly
 recommended for its usability.
 For more information on tibbles, see
-[the packages web page](https://tibble.tidyverse.org/).[@r-tibble]
+[the packages web page](https://tibble.tidyverse.org/).[@R-tibble]
 
 `data.table` is another popular alternative for `data.frame`. It has its own
 usability enhancements and it scales better for big data than a normal data frame. 
 For more information on `data.table`, see
-[the packages web page](https://tibble.tidyverse.org/).[@r-data.table]
+[the packages web page](https://tibble.tidyverse.org/).[@R-data.table]
 
 For more info on vectors, lists and data frames, see
 [this chapter of Advanced R](https://adv-r.hadley.nz/vectors-chap.html).
 
 ### Base types are extended using object-oriented (OO) programming
 
-Examples in this section utilize the [sloop](https://cran.r-project.org/web/packages/sloop/index.html)-package[@R-sloop]
+Examples in this section utilize the [sloop](https://cran.r-project.org/web/packages/sloop/index.html)-package
 for finding more information on objects. You can install it with:
 ```{r, eval=FALSE}
 install.packages("sloop")
@@ -321,7 +321,7 @@ methods(predict)
 
 R libraries can be pure R or they can utilize other languages. Many R's internal functions
 utilize R's [API for writing extensions](https://cran.r-project.org/doc/manuals/R-exts.html).
-Common used languages are C, C++ and Fortran. Reason for this is speed provided by these lower
+Common used languages are C, C++ and Fortran. Reason for this is speed provided by these lower´
 level languages.
 
 However, this API can be very complicated and thus most new packages use C/C++ with
