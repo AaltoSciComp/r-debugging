@@ -12,8 +12,10 @@ output:
 Let's consider the previously showed function example with a missing variable:
 
 ```{r, collapse=TRUE, error=TRUE}
-# Verify that z is really missing
-rm(z)
+# Ensure that z is missing
+if (exists("z")) {
+  rm(z)
+}
 g <- function(x) {
   return(x + z)
 }
@@ -27,11 +29,17 @@ f <- function(x,y = g(x)) {
 }
 f(-1)
 ```
-This example is available [here](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variable.R).
+This example is available [here](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R).
 
 Opening the file with Rstudio and sourcing the file will return the following kind of an error:
+
 ![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variable.png)
 
+Now clicking the `Show traceback`-button will expand the traceback:
+
+![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-traceback.png)
+
+This view will quickly show that the error comes from the `g(x)`-function call in line #13.
 
 ## Using interactive debugger
 
