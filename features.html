@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 R features relevant for debugging | Debugging R</title>
+  <title>3 R features relevant for debugging | Debugging in practice</title>
   <meta name="description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 R features relevant for debugging | Debugging R" />
+  <meta property="og:title" content="3 R features relevant for debugging | Debugging in practice" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 R features relevant for debugging | Debugging R" />
+  <meta name="twitter:title" content="3 R features relevant for debugging | Debugging in practice" />
   
   <meta name="twitter:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
@@ -220,7 +220,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Debugging R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Debugging in practice</a>
           </h1>
         </div>
 
@@ -409,7 +409,7 @@ There are two types of vectors in R: <strong>atomic vectors</strong> and <strong
 <span id="cb13-2"><a href="features.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2)</span>
 <span id="cb13-3"><a href="features.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
 <span id="cb13-4"><a href="features.html#cb13-4" aria-hidden="true" tabindex="-1"></a>x_list2<span class="sc">$</span>x_vector2 <span class="ot">&lt;-</span> x_vector2</span>
-<span id="cb13-5"><a href="features.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## tracemem[0x55b0743847a0 -&gt; 0x55b074a6bc50]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; render_cur_session &lt;Anonymous&gt;</span></span>
+<span id="cb13-5"><a href="features.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## tracemem[0x559bfbaef5b8 -&gt; 0x559bfc1d2250]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; render_cur_session &lt;Anonymous&gt;</span></span>
 <span id="cb13-6"><a href="features.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2)</span>
 <span id="cb13-7"><a href="features.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
 <span id="cb13-8"><a href="features.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list<span class="sc">$</span>x_vector) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2<span class="sc">$</span>x_vector)</span>
@@ -553,12 +553,12 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb22-10"><a href="features.html#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-11"><a href="features.html#cb22-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
 <span id="cb22-12"><a href="features.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb22-13"><a href="features.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.36754    10.04941</span></span></code></pre></div>
+<span id="cb22-13"><a href="features.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -9.768667    9.970639</span></span></code></pre></div>
 <p>After this, one might do a predictive fit:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="features.html#cb23-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
 <span id="cb23-2"><a href="features.html#cb23-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
-<span id="cb23-3"><a href="features.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.3181328  9.7312731 19.7806789 29.8300848 39.8794907 49.9288966</span></span>
-<span id="cb23-4"><a href="features.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 59.9783025 70.0277084 80.0771143 90.1265202</span></span></code></pre></div>
+<span id="cb23-3"><a href="features.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  0.2019729 10.1726124 20.1432518 30.1138913 40.0845308 50.0551702</span></span>
+<span id="cb23-4"><a href="features.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 60.0258097 69.9964491 79.9670886 89.9377281</span></span></code></pre></div>
 <p>However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function <code>predict</code> for models that support it. This will allow the model to stay as an S3 object:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="features.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
 <span id="cb24-2"><a href="features.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
@@ -573,9 +573,9 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb24-11"><a href="features.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
 <span id="cb24-12"><a href="features.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
 <span id="cb24-13"><a href="features.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">##          1          2          3          4          5          6          7 </span></span>
-<span id="cb24-14"><a href="features.html#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.3181328  9.7312731 19.7806789 29.8300848 39.8794907 49.9288966 59.9783025 </span></span>
+<span id="cb24-14"><a href="features.html#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.2019729 10.1726124 20.1432518 30.1138913 40.0845308 50.0551702 60.0258097 </span></span>
 <span id="cb24-15"><a href="features.html#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">##          8          9         10 </span></span>
-<span id="cb24-16"><a href="features.html#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 70.0277084 80.0771143 90.1265202</span></span></code></pre></div>
+<span id="cb24-16"><a href="features.html#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 69.9964491 79.9670886 89.9377281</span></span></code></pre></div>
 <p>Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, <code>predict</code> can operate on multiple different models with corresponding methods:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="features.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
 <pre><code>##  [1] predict.ar*                predict.Arima*            
