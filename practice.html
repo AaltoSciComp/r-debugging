@@ -189,7 +189,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="practice.html"><a href="practice.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a></li>
+<li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="practice.html"><a href="practice.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
+<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of Rstudio editor</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#using-interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Using interactive debugger</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -215,8 +219,11 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="practice" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Debugging R code<a href="practice.html#practice" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter follows the excellent <a href="https://adv-r.hadley.nz/debugging.html">debugging-chapter from Advanced R</a><span class="citation"><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></span>.</p>
 <div id="tracing-errors" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Tracing errors<a href="practice.html#tracing-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="traceback" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Traceback<a href="practice.html#traceback" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s consider the previously showed function example with a missing variable:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="practice.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure that z is missing</span></span>
 <span id="cb20-2"><a href="practice.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;z&quot;</span>)) {</span>
@@ -230,22 +237,59 @@ div.csl-indent {
 <span id="cb20-10"><a href="practice.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
 <span id="cb20-11"><a href="practice.html#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
 <span id="cb20-12"><a href="practice.html#cb20-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb20-13"><a href="practice.html#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">g</span>(x))</span>
+<span id="cb20-13"><a href="practice.html#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
 <span id="cb20-14"><a href="practice.html#cb20-14" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb20-15"><a href="practice.html#cb20-15" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb20-16"><a href="practice.html#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
 <span id="cb20-17"><a href="practice.html#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
 <p>This example is available <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R">here</a>.</p>
 <p>Opening the file with Rstudio and sourcing the file will return the following kind of an error:</p>
-<p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variable.png" /></p>
-<p>Now clicking the <code>Show traceback</code>-button will expand the traceback:</p>
+<p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables.png" /></p>
+<p>Now clicking the <strong>Show traceback</strong>-button will expand the traceback:</p>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-traceback.png" /></p>
 <p>This view will quickly show that the error comes from the <code>g(x)</code>-function call in line #13.</p>
+<p>Sometimes lazy evaluation can make reading the call stack complicated. Here we have few additional functions that are called in the argument definition:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="practice.html#cb21-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb21-2"><a href="practice.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb21-3"><a href="practice.html#cb21-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-4"><a href="practice.html#cb21-4" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb21-5"><a href="practice.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">i</span>())</span>
+<span id="cb21-6"><a href="practice.html#cb21-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-7"><a href="practice.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">h</span>())</span>
+<span id="cb21-8"><a href="practice.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span></code></pre></div>
+<p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-lazy-evaluation.png" /></p>
+<p>Error is raised by <code>i()</code>, but looking at the call stack it almost looks like <code>f()</code> is somehow involved. This is because value of <code>h()</code> is evaluated only when it is needed in <code>f()</code>. Writing the code like this would reveal the true culprit:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="practice.html#cb22-1" aria-hidden="true" tabindex="-1"></a>h_value<span class="ot">=</span><span class="fu">h</span>()</span>
+<span id="cb22-2"><a href="practice.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span>
+<span id="cb22-3"><a href="practice.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span>h_value)</span>
+<span id="cb22-4"><a href="practice.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in f(x = -1, y = h_value): object &#39;h_value&#39; not found</span></span></code></pre></div>
+<p>Of course, this is not something you want to do generally. Lazy evaluation is good for speeding up your code, so doing changes like this should be limited to situations where you’re unsure which function causes the error.</p>
+<p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-nonlazy-evaluation.png" /></p>
+</div>
+<div id="traceback-outside-of-rstudio-editor" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Traceback outside of Rstudio editor<a href="practice.html#traceback-outside-of-rstudio-editor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you run the code in R console in Rstudio or in a separate interpreter you might not get the <strong>Show Traceback</strong>-prompt.
+In those situations you can use the <code>traceback()</code>-function to get the trace. You can try it out with the following test in the console:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="practice.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb23-2"><a href="practice.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">traceback</span>()</span></code></pre></div>
+<p>You can also set the R error handling to call traceback on errors:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="practice.html#cb24-1" aria-hidden="true" tabindex="-1"></a>backup_options <span class="ot">&lt;-</span> <span class="fu">options</span>()</span>
+<span id="cb24-2"><a href="practice.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error=</span>traceback)</span>
+<span id="cb24-3"><a href="practice.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb24-4"><a href="practice.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
+<p>Here we also took a backup of the default options. This is usually a good idea as changing options will change the options for the whole R session.</p>
+</div>
 </div>
 <div id="using-interactive-debugger" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Using interactive debugger<a href="practice.html#using-interactive-debugger" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="6">
+<li id="fn6"><p>Hadley Wickham, <em>Advanced r</em> (CRC press, 2019), <a href="https://adv-r.hadley.nz" role="doc-biblioref">https://adv-r.hadley.nz</a>.<a href="practice.html#fnref6" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

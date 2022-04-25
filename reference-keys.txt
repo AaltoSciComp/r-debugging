@@ -17,4 +17,6 @@ libraries
 libraries-are-usually-compiled
 practice
 tracing-errors
+traceback
+traceback-outside-of-rstudio-editor
 using-interactive-debugger
