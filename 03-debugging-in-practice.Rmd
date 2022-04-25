@@ -33,7 +33,7 @@ f <- function(x,y = g(x)) {
 }
 f(-1)
 ```
-This example is available [here](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R).
+This example is available here: [missing-variables.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R).
 
 Opening the file with Rstudio and sourcing the file will return the following kind of an error:
 
@@ -87,7 +87,51 @@ options(backup_options)
 ```
 Here we also took a backup of the default options. This is usually a good idea as changing options will change the options for the whole R session. 
 
-## Using interactive debugger
+## Interactive debugger
+
+### Using Rstudio's "Rerun with Debug"
+
+Rstudio can launch you a debugger at the location where the error occured. If you source the file again and launch the debugger with **Rerun with Debug**, you'll get an interactive debugger that looks something like this:
+
+![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-run-with-debug.png)
+
+This view has many areas of interest:
+- On the top left Rstudio will open the source code of the problematic function
+  and it tries to highlight the line that causes the error.
+- On the top right we have an environment browser that shows what variables are defined inside
+  the `g()`-function's environment.
+- On the bottom right we have the traceback of the erroneous function call.
+  The function we're investigating is highlighted.
+- On the bottom left we have the interactive debugger open in the console.
 
 
+
+### `debug` and `debugonce`
+
+You can also launch debugger from the console with `debug`- and `debugonce`-functions.
+
+`debug(f)` will set a permanent flag that will cause a debugger to be launched whenever
+function `f` is called. You can unset this variable with `undebug`.
+
+Alternatively, you can use `debugonce` to launch the debugger once in a function. This is
+especially useful if the function you want to debug is inside a for-loop.
+
+```{r, eval=FALSE}
+debugonce(g)
+f(-1)
+```
+
+
+## Quick debugging with environment browser
+
+Finding the function that causes the error is one thing, but examining what caused is another. For quick debugging we can use the environment browser.
+
+One can launch the interactive browser by specifying `browser()` is the code:
+```{r, eval=FALSE}
+g_browse <- function(x) {
+  browser()
+  return(x + z)
+}
+f(-1, y=g_browse(x))
+```
 
