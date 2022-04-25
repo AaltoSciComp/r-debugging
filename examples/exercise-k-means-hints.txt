@@ -1,0 +1,4 @@
+1. Check data types of function arguments
+2. What was said about vector immutability and data frames?
+3. What data needs to be normalized?
+4. Verify object attributes

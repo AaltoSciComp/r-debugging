@@ -185,3 +185,56 @@ uncheck *Use debug error handler only when my code contains errors* in
 
 There are plenty of more tools like `trace`, `utils::setBreakpoint()` etc. See [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html)[@wickham2019advanced] for more information on these.
 
+## Exercise: k-means clustering
+
+Let's try out interactive debugging with a simple machine learning problem: using k-means clustering on the famous iris-dataset.
+
+In this exercise there are four bugs hidden in the code. Try to use debugging tools to spot them out.
+The bugs should appear in order, so if you fix one, you can continue to the next. 
+
+This example is available here: [exercise-k-means.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R).
+Hints for each of the problems are available here:
+[exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-hints.txt).
+Solution is available here:
+[exercise-k-means-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R).
+
+```{r, collapse=TRUE, error=TRUE}
+
+normalize_standard <- function(dataset) {
+  # Normalizes each column in the dataset to standard normalization
+  # https://en.wikipedia.org/wiki/Standard_score
+  normalized_data <- data.frame()
+  for (column in colnames(dataset)) {
+    data_mean <- mean(dataset[[column]])
+    data_sd <- sd(dataset[column])
+    normalized_data[[column]] <- ((dataset[[column]] - data_mean))/data_sd
+  }
+  return(normalized_data)
+}
+
+kmeans_iris <- function() {
+  # Load data
+  data(iris)
+  
+  # Rename iris to some other variable
+  iris_data <- iris
+  
+  # Normalize data
+  iris_normalized <- normalize_standard(iris_data)
+  
+  # Take species out
+  species <- iris_data$Species
+  iris_data$Species <- NULL
+  
+  # Calculate kmeans clustering
+  # https://en.wikipedia.org/wiki/K-means_clustering
+  clustering <- kmeans(iris_normalized, 3)
+  
+  # Calculate confusion matrix
+  # https://en.wikipedia.org/wiki/Confusion_matrix#Confusion_matrices_with_more_than_two_categories
+  table(species, clustering$clusters)
+}
+
+print(kmeans_iris())
+```
+

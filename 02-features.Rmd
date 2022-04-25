@@ -136,6 +136,88 @@ d(10L,3L)
 For more info, see
 [this chapter of Advanced R](https://adv-r.hadley.nz/base-types.html).
 
+### Vectors are everywhere and they are immutable
+
+R is a heavily vectorized language. Most mathematical operations in R are sped up by
+doing them to the vector as a whole.
+
+You can think of vectors as a collection of a thing with a length.
+There are two types of vectors in R: **atomic vectors** and **list vectors**.
+
+Atomic vectors are your typical logical, numeric (integer or double) and character vectors.
+
+```{r, collapse=TRUE}
+x_vector <- 1:6
+is.atomic(x_vector)
+```
+
+Each vector has a type and a length:
+```{r, collapse=TRUE}
+typeof(x_vector)
+length(x_vector)
+```
+
+Lists are vectors that can contain other vectors. They are not atomic. Elements in a list can have names.
+```{r, collapse=TRUE}
+x_list <- list(x_vector=x_vector)
+x_list
+names(x_list)
+is.vector(x_list)
+is.atomic(x_list)
+```
+
+Whenever you modify objects R will copy the data to a new location:
+```{r, collapse=TRUE}
+x_vector2 <- x_vector
+tracemem(x_vector) == tracemem(x_vector2)
+x_vector2 <- x_vector2 + 1
+tracemem(x_vector) == tracemem(x_vector2)
+```
+
+However, when you modify lists, only the list changes, but not the atomics it points to. This makes it excellent for storing data:
+```{r,  collapse=TRUE}
+x_list2 <- x_list
+tracemem(x_list) == tracemem(x_list2)
+x_list2$x_vector2 <- x_vector2
+tracemem(x_list) == tracemem(x_list2)
+tracemem(x_list$x_vector) == tracemem(x_list2$x_vector)
+```
+
+Most R objects are built on top of vectors or lists by giving them attributes.
+When they get attributes, they cease to be pure vectors.
+
+```{r, collapse=TRUE}
+print(x_vector)
+print(attributes(x_vector))
+print(is.vector(x_vector))
+x_array <- array(x_vector, dim=c(3,2))
+print(x_array)
+print(attributes(x_array))
+print(is.vector(x_array))
+```
+
+`data.frame` is an extremely important object in R built on top of a list.
+It has an additional constraints added to it:
+
+- All vectors in a data frame need to have the same length.
+- It has `rownames()` and `colnames()`. `names()` of the data frame are
+  the column names.
+- A data frame has `nrow()` rows and `ncol()` columns. The `length()`
+  of a data frame gives the number of columns.
+
+`tibble` is a modern drop-in replacement for `data.frame` that is highly
+recommended for its usability.
+For more information on tibbles, see
+[the packages web page](https://tibble.tidyverse.org/).[@r-tibble]
+
+`data.table` is another popular alternative for `data.frame`. It has its own
+usability enhancements and it scales better for big data than a normal data frame. 
+For more information on `data.table`, see
+[the packages web page](https://tibble.tidyverse.org/).[@r-data.table]
+
+For more info on vectors, lists and data frames, see
+[this chapter of Advanced R](https://adv-r.hadley.nz/vectors-chap.html).
+
 ### Base types are extended using object-oriented (OO) programming
 
 Examples in this section utilize the [sloop](https://cran.r-project.org/web/packages/sloop/index.html)-package[@R-sloop]
@@ -148,6 +230,9 @@ In R nomenclature, everything is an object. But not everything is an OO-style ob
 OO-objects have a `class`-attribute. One can also use `is.object()`-function to check
 whether the object is an OO object and `sloop::s3_class()` to get the class in a reliable way:
 ```{r, collapse=TRUE}
+a <- 1:10
+b <- list(a=1:10)
+c <- data.frame(b)
 attr(a, "class")
 attr(b, "class")
 attr(c, "class")
