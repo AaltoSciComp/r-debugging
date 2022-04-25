@@ -1,0 +1,39 @@
+---
+title: "Debugging R"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Debugging R code {#practice}
+
+## Tracing errors
+
+Let's consider the previously showed function example with a missing variable:
+
+```{r, collapse=TRUE, error=TRUE}
+# Verify that z is really missing
+rm(z)
+g <- function(x) {
+  return(x + z)
+}
+
+f <- function(x,y = g(x)) {
+  if (x>0) {
+    return(x)
+  } else {
+    return(g(x))
+  }
+}
+f(-1)
+```
+This example is available [here](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variable.R).
+
+Opening the file with Rstudio and sourcing the file will return the following kind of an error:
+![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variable.png)
+
+
+## Using interactive debugger
+
+
+
