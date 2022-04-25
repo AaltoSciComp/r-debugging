@@ -1,3 +1,4 @@
+fig:unnamed-chunk-25
 about-this-course
 requirements
 whatis
@@ -20,6 +21,10 @@ tracing-errors
 traceback
 traceback-outside-of-rstudio-editor
 interactive-debugger
-using-rstudios-rerun-with-debug
+launching-debugger-with-rstudios-rerun-with-debug
+debugger-commands
 debug-and-debugonce
-quick-debugging-with-environment-browser
+launching-browser-in-code
+setting-breakpoint-in-editor
+launching-debugger-with-recover
+more-tools

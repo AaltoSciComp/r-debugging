@@ -192,14 +192,18 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="practice.html"><a href="practice.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
-<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of Rstudio editor</a></li>
+<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of RStudio editor</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Interactive debugger</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#using-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Using Rstudio’s “Rerun with Debug”</a></li>
-<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.2</b> <code>debug</code> and <code>debugonce</code></a></li>
+<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#launching-debugger-with-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Launching debugger with RStudio’s “Rerun with Debug”</a></li>
+<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debugger-commands"><i class="fa fa-check"></i><b>4.2.2</b> Debugger commands</a></li>
+<li class="chapter" data-level="4.2.3" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.3</b> <code>debug</code> and <code>debugonce</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#quick-debugging-with-environment-browser"><i class="fa fa-check"></i><b>4.3</b> Quick debugging with environment browser</a></li>
+<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#launching-browser-in-code"><i class="fa fa-check"></i><b>4.3</b> Launching browser in code</a></li>
+<li class="chapter" data-level="4.4" data-path="practice.html"><a href="practice.html#setting-breakpoint-in-editor"><i class="fa fa-check"></i><b>4.4</b> Setting breakpoint in editor</a></li>
+<li class="chapter" data-level="4.5" data-path="practice.html"><a href="practice.html#launching-debugger-with-recover"><i class="fa fa-check"></i><b>4.5</b> Launching debugger with <code>recover()</code></a></li>
+<li class="chapter" data-level="4.6" data-path="practice.html"><a href="practice.html#more-tools"><i class="fa fa-check"></i><b>4.6</b> More tools</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -236,7 +240,7 @@ not interfere with the code.</p>
 <p>For non-interactive usage one usually uses <code>Rscript</code> or <code>R CMD BATCH</code>. <code>Rscript</code>
 is usually better. However, when interpreter is launched using <code>Rscript</code>, the list
 of default packages is minimal:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="features.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--help</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="features.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--help</span></span></code></pre></div>
 <pre><code>## Usage: /path/to/Rscript [--options] [-e expr [-e expr2 ...] | file] [args]
 ## 
 ## --options accepted are
@@ -246,7 +250,7 @@ of default packages is minimal:</p>
 ##   --default-packages=list
 ##                       Where &#39;list&#39; is a comma-separated set
 ##                         of package names, or &#39;NULL&#39;
-## or options to R, in addition to --no-echo --no-restore, such as
+## or options to R, in addition to --slave --no-restore, such as
 ##   --save              Do save workspace at the end of the session
 ##   --no-environ        Don&#39;t read the site and user environment files
 ##   --no-site-file      Don&#39;t read the site-wide Rprofile
@@ -277,21 +281,21 @@ This means that functions are evaluated only when the output is actually used.</
 <p>In the following example the value of <code>g(x)</code> is not evaluated for positive values and
 thus the undefined variable is not encountered until <code>f(x)</code> is called with a negative
 value:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="features.html#cb3-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb3-2"><a href="features.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
-<span id="cb3-3"><a href="features.html#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-4"><a href="features.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="features.html#cb3-5" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">y =</span> <span class="fu">g</span>(x)) {</span>
-<span id="cb3-6"><a href="features.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
-<span id="cb3-7"><a href="features.html#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
-<span id="cb3-8"><a href="features.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb3-9"><a href="features.html#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
-<span id="cb3-10"><a href="features.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-11"><a href="features.html#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-12"><a href="features.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span>
-<span id="cb3-13"><a href="features.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
-<span id="cb3-14"><a href="features.html#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb3-15"><a href="features.html#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="features.html#cb4-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb4-2"><a href="features.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
+<span id="cb4-3"><a href="features.html#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-4"><a href="features.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="features.html#cb4-5" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">y =</span> <span class="fu">g</span>(x)) {</span>
+<span id="cb4-6"><a href="features.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
+<span id="cb4-7"><a href="features.html#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb4-8"><a href="features.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb4-9"><a href="features.html#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
+<span id="cb4-10"><a href="features.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-11"><a href="features.html#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-12"><a href="features.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span>
+<span id="cb4-13"><a href="features.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb4-14"><a href="features.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb4-15"><a href="features.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
 <p>Lazy evaluation can make it easy to miss bugs in alternative execution paths.</p>
 <p>See this <a href="https://www.r-bloggers.com/2018/07/about-lazy-evaluation/">r-bloggers’ post</a>
 for more information on lazy evaluation.</p>
@@ -308,21 +312,21 @@ filled with various variables and definitions. Thus it is a good idea to clean
 up the environment every now and then and verify that your code works from a clean
 slate.</p>
 <p>Thus one can easily run into situations such as this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="features.html#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">f</span>(<span class="sc">-</span><span class="dv">2</span>)</span>
-<span id="cb4-2"><a href="features.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span>
-<span id="cb4-3"><a href="features.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb4-4"><a href="features.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">f</span>(<span class="sc">-</span><span class="dv">2</span>)</span>
-<span id="cb4-5"><a href="features.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="features.html#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">f</span>(<span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb5-2"><a href="features.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span>
+<span id="cb5-3"><a href="features.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb5-4"><a href="features.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">f</span>(<span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb5-5"><a href="features.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code></pre></div>
 <p>Objects can also write to their parents’ environment using the <code>&lt;&lt;-</code>-operator:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="features.html#cb5-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb5-2"><a href="features.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;&lt;-</span> x</span>
-<span id="cb5-3"><a href="features.html#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-4"><a href="features.html#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb5-5"><a href="features.html#cb5-5" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb5-6"><a href="features.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
-<span id="cb5-7"><a href="features.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">h</span>(<span class="dv">2</span>)</span>
-<span id="cb5-8"><a href="features.html#cb5-8" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb5-9"><a href="features.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="features.html#cb6-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb6-2"><a href="features.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;&lt;-</span> x</span>
+<span id="cb6-3"><a href="features.html#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-4"><a href="features.html#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb6-5"><a href="features.html#cb6-5" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb6-6"><a href="features.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb6-7"><a href="features.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">h</span>(<span class="dv">2</span>)</span>
+<span id="cb6-8"><a href="features.html#cb6-8" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb6-9"><a href="features.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code></pre></div>
 <p>This can obviously cause problems and should be avoided in most cases.</p>
 <p>For more info, see
 <a href="https://adv-r.hadley.nz/environments.html">this chapter of Advanced R</a>.</p>
@@ -334,159 +338,159 @@ slate.</p>
 <h3><span class="header-section-number">3.3.1</span> All objects in R have a base type<a href="features.html#all-objects-in-r-have-a-base-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are 25 base types in R such as <code>integer</code>, <code>double</code>, <code>list</code> and
 <code>closure</code> (function). One can check the type using <code>typeof(x)</code>-function.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="features.html#cb6-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb6-2"><a href="features.html#cb6-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb6-3"><a href="features.html#cb6-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(b)</span>
-<span id="cb6-4"><a href="features.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a)</span>
-<span id="cb6-5"><a href="features.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span>
-<span id="cb6-6"><a href="features.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(b)</span>
-<span id="cb6-7"><a href="features.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;list&quot;</span></span>
-<span id="cb6-8"><a href="features.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(c)</span>
-<span id="cb6-9"><a href="features.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;list&quot;</span></span>
-<span id="cb6-10"><a href="features.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(f)</span>
-<span id="cb6-11"><a href="features.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;closure&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="features.html#cb7-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb7-2"><a href="features.html#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb7-3"><a href="features.html#cb7-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(b)</span>
+<span id="cb7-4"><a href="features.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a)</span>
+<span id="cb7-5"><a href="features.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span>
+<span id="cb7-6"><a href="features.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(b)</span>
+<span id="cb7-7"><a href="features.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;list&quot;</span></span>
+<span id="cb7-8"><a href="features.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(c)</span>
+<span id="cb7-9"><a href="features.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;list&quot;</span></span>
+<span id="cb7-10"><a href="features.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(f)</span>
+<span id="cb7-11"><a href="features.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;closure&quot;</span></span></code></pre></div>
 <p>R is strongly, but dynamically typed. This means that objects have to keep their type, but objects can be cast to new types automatically. As an example, consider the following function that does a simple division:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="features.html#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) {</span>
-<span id="cb7-2"><a href="features.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">is.integer</span>(x))</span>
-<span id="cb7-3"><a href="features.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">is.integer</span>(y))</span>
-<span id="cb7-4"><a href="features.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">is.integer</span>(x<span class="sc">/</span>y))</span>
-<span id="cb7-5"><a href="features.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x<span class="sc">/</span>y)</span>
-<span id="cb7-6"><a href="features.html#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-7"><a href="features.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">d</span>(<span class="dv">10</span>,<span class="dv">3</span>)</span>
-<span id="cb7-8"><a href="features.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb7-9"><a href="features.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb7-10"><a href="features.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb7-11"><a href="features.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.333333</span></span>
-<span id="cb7-12"><a href="features.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">d</span>(10L,3L)</span>
-<span id="cb7-13"><a href="features.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
-<span id="cb7-14"><a href="features.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
-<span id="cb7-15"><a href="features.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb7-16"><a href="features.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.333333</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="features.html#cb8-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) {</span>
+<span id="cb8-2"><a href="features.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">is.integer</span>(x))</span>
+<span id="cb8-3"><a href="features.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">is.integer</span>(y))</span>
+<span id="cb8-4"><a href="features.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">is.integer</span>(x<span class="sc">/</span>y))</span>
+<span id="cb8-5"><a href="features.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x<span class="sc">/</span>y)</span>
+<span id="cb8-6"><a href="features.html#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-7"><a href="features.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">d</span>(<span class="dv">10</span>,<span class="dv">3</span>)</span>
+<span id="cb8-8"><a href="features.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
+<span id="cb8-9"><a href="features.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
+<span id="cb8-10"><a href="features.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
+<span id="cb8-11"><a href="features.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.333333</span></span>
+<span id="cb8-12"><a href="features.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">d</span>(10L,3L)</span>
+<span id="cb8-13"><a href="features.html#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
+<span id="cb8-14"><a href="features.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
+<span id="cb8-15"><a href="features.html#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
+<span id="cb8-16"><a href="features.html#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.333333</span></span></code></pre></div>
 <p>For more info, see
 <a href="https://adv-r.hadley.nz/base-types.html">this chapter of Advanced R</a>.</p>
 </div>
 <div id="base-types-are-extended-using-object-oriented-oo-programming" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Base types are extended using object-oriented (OO) programming<a href="features.html#base-types-are-extended-using-object-oriented-oo-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Examples in this section utilize the <a href="https://cran.r-project.org/web/packages/sloop/index.html">sloop</a><span class="citation"><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></span>-package
+<p>Examples in this section utilize the <a href="https://cran.r-project.org/web/packages/sloop/index.html">sloop</a>-package<span class="citation"><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></span>
 for finding more information on objects. You can install it with:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="features.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sloop&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="features.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sloop&quot;</span>)</span></code></pre></div>
 <p>In R nomenclature, everything is an object. But not everything is an OO-style object.
 OO-objects have a <code>class</code>-attribute. One can also use <code>is.object()</code>-function to check
 whether the object is an OO object and <code>sloop::s3_class()</code> to get the class in a reliable way:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="features.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(a, <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb9-2"><a href="features.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## NULL</span></span>
-<span id="cb9-3"><a href="features.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(b, <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb9-4"><a href="features.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## NULL</span></span>
-<span id="cb9-5"><a href="features.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(c, <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb9-6"><a href="features.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;data.frame&quot;</span></span>
-<span id="cb9-7"><a href="features.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">is.object</span>(a)</span>
-<span id="cb9-8"><a href="features.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb9-9"><a href="features.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">is.object</span>(b)</span>
-<span id="cb9-10"><a href="features.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb9-11"><a href="features.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">is.object</span>(c)</span>
-<span id="cb9-12"><a href="features.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
-<span id="cb9-13"><a href="features.html#cb9-13" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_class</span>(a)</span>
-<span id="cb9-14"><a href="features.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot; &quot;numeric&quot;</span></span>
-<span id="cb9-15"><a href="features.html#cb9-15" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_class</span>(b)</span>
-<span id="cb9-16"><a href="features.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;list&quot;</span></span>
-<span id="cb9-17"><a href="features.html#cb9-17" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_class</span>(c)</span>
-<span id="cb9-18"><a href="features.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;data.frame&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="features.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(a, <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb10-2"><a href="features.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## NULL</span></span>
+<span id="cb10-3"><a href="features.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(b, <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb10-4"><a href="features.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## NULL</span></span>
+<span id="cb10-5"><a href="features.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(c, <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb10-6"><a href="features.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;data.frame&quot;</span></span>
+<span id="cb10-7"><a href="features.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">is.object</span>(a)</span>
+<span id="cb10-8"><a href="features.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
+<span id="cb10-9"><a href="features.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">is.object</span>(b)</span>
+<span id="cb10-10"><a href="features.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
+<span id="cb10-11"><a href="features.html#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">is.object</span>(c)</span>
+<span id="cb10-12"><a href="features.html#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
+<span id="cb10-13"><a href="features.html#cb10-13" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_class</span>(a)</span>
+<span id="cb10-14"><a href="features.html#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot; &quot;numeric&quot;</span></span>
+<span id="cb10-15"><a href="features.html#cb10-15" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_class</span>(b)</span>
+<span id="cb10-16"><a href="features.html#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;list&quot;</span></span>
+<span id="cb10-17"><a href="features.html#cb10-17" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_class</span>(c)</span>
+<span id="cb10-18"><a href="features.html#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;data.frame&quot;</span></span></code></pre></div>
 <p>One can strip the object back to its base types with <code>unclass()</code>-function:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="features.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unclass</span>(c)</span>
-<span id="cb10-2"><a href="features.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $a</span></span>
-<span id="cb10-3"><a href="features.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  1  2  3  4  5  6  7  8  9 10</span></span>
-<span id="cb10-4"><a href="features.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb10-5"><a href="features.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">## attr(,&quot;row.names&quot;)</span></span>
-<span id="cb10-6"><a href="features.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  1  2  3  4  5  6  7  8  9 10</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="features.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unclass</span>(c)</span>
+<span id="cb11-2"><a href="features.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $a</span></span>
+<span id="cb11-3"><a href="features.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  1  2  3  4  5  6  7  8  9 10</span></span>
+<span id="cb11-4"><a href="features.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-5"><a href="features.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## attr(,&quot;row.names&quot;)</span></span>
+<span id="cb11-6"><a href="features.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  1  2  3  4  5  6  7  8  9 10</span></span></code></pre></div>
 <p>There are multiple OO paradigms in R:
 - <a href="https://adv-r.hadley.nz/s3.html">S3</a>: Oldest and simplest system. Most of R OO-objects are S3 objects.
 - <a href="https://adv-r.hadley.nz/s4.html">S4</a>: More advanced version of S3. Heavily used by the <a href="https://www.bioconductor.org/">Bioconductor</a>-project.
-- <a href="https://adv-r.hadley.nz/r6.html">R6</a>: More like other OO languages. Improved version on R’s feature called <a href="https://www.rdocumentation.org/packages/methods/versions/3.6.2/topics/ReferenceClasses">reference classes</a>. See <a href="https://r6.r-lib.org/">R6 manual for more information</a><span class="citation"><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></span>.</p>
+- <a href="https://adv-r.hadley.nz/r6.html">R6</a>: More like other OO languages. Improved version on R’s feature called <a href="https://www.rdocumentation.org/packages/methods/versions/3.6.2/topics/ReferenceClasses">reference classes</a>. See <a href="https://r6.r-lib.org/">R6 manual for more information</a><span class="citation"><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></span>.</p>
 </div>
 <div id="method-dispatch" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Method dispatch<a href="features.html#method-dispatch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Most R functions are S3 <strong>generic</strong> functions that choose between available <strong>methods</strong> for a class. One can check whether a function is a generic function or a method with <code>sloop::ftype()</code>.</p>
 <p>For example, <code>paste()</code> is an internal method that works with types, but <code>print()</code> is an S3 generic:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="features.html#cb11-1" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(paste)</span>
-<span id="cb11-2"><a href="features.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;internal&quot;</span></span>
-<span id="cb11-3"><a href="features.html#cb11-3" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(print)</span>
-<span id="cb11-4"><a href="features.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="features.html#cb12-1" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(paste)</span>
+<span id="cb12-2"><a href="features.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;internal&quot;</span></span>
+<span id="cb12-3"><a href="features.html#cb12-3" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(print)</span>
+<span id="cb12-4"><a href="features.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span></code></pre></div>
 <p>To see which function is used for a given object, one can use <code>sloop::s3_dispatch()</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="features.html#cb12-1" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_dispatch</span>(<span class="fu">print</span>(c))</span>
-<span id="cb12-2"><a href="features.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## =&gt; print.data.frame</span></span>
-<span id="cb12-3"><a href="features.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  * print.default</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="features.html#cb13-1" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">s3_dispatch</span>(<span class="fu">print</span>(c))</span>
+<span id="cb13-2"><a href="features.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## =&gt; print.data.frame</span></span>
+<span id="cb13-3"><a href="features.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  * print.default</span></span></code></pre></div>
 <p>Now one can check the difference between these methods:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="features.html#cb13-1" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(print.data.frame)</span>
-<span id="cb13-2"><a href="features.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;     &quot;method&quot;</span></span>
-<span id="cb13-3"><a href="features.html#cb13-3" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(print.default)</span>
-<span id="cb13-4"><a href="features.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;internal&quot;</span></span>
-<span id="cb13-5"><a href="features.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print.data.frame</span>(c)</span>
-<span id="cb13-6"><a href="features.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     a</span></span>
-<span id="cb13-7"><a href="features.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   1</span></span>
-<span id="cb13-8"><a href="features.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2   2</span></span>
-<span id="cb13-9"><a href="features.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3   3</span></span>
-<span id="cb13-10"><a href="features.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   4</span></span>
-<span id="cb13-11"><a href="features.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   5</span></span>
-<span id="cb13-12"><a href="features.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 6   6</span></span>
-<span id="cb13-13"><a href="features.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 7   7</span></span>
-<span id="cb13-14"><a href="features.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   8</span></span>
-<span id="cb13-15"><a href="features.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   9</span></span>
-<span id="cb13-16"><a href="features.html#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 10</span></span>
-<span id="cb13-17"><a href="features.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print.default</span>(c)</span>
-<span id="cb13-18"><a href="features.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="do">## $a</span></span>
-<span id="cb13-19"><a href="features.html#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  1  2  3  4  5  6  7  8  9 10</span></span>
-<span id="cb13-20"><a href="features.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-21"><a href="features.html#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="do">## attr(,&quot;class&quot;)</span></span>
-<span id="cb13-22"><a href="features.html#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;data.frame&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="features.html#cb14-1" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(print.data.frame)</span>
+<span id="cb14-2"><a href="features.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;     &quot;method&quot;</span></span>
+<span id="cb14-3"><a href="features.html#cb14-3" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(print.default)</span>
+<span id="cb14-4"><a href="features.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;internal&quot;</span></span>
+<span id="cb14-5"><a href="features.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print.data.frame</span>(c)</span>
+<span id="cb14-6"><a href="features.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     a</span></span>
+<span id="cb14-7"><a href="features.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   1</span></span>
+<span id="cb14-8"><a href="features.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2   2</span></span>
+<span id="cb14-9"><a href="features.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3   3</span></span>
+<span id="cb14-10"><a href="features.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   4</span></span>
+<span id="cb14-11"><a href="features.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   5</span></span>
+<span id="cb14-12"><a href="features.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 6   6</span></span>
+<span id="cb14-13"><a href="features.html#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 7   7</span></span>
+<span id="cb14-14"><a href="features.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   8</span></span>
+<span id="cb14-15"><a href="features.html#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   9</span></span>
+<span id="cb14-16"><a href="features.html#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 10</span></span>
+<span id="cb14-17"><a href="features.html#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print.default</span>(c)</span>
+<span id="cb14-18"><a href="features.html#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">## $a</span></span>
+<span id="cb14-19"><a href="features.html#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  1  2  3  4  5  6  7  8  9 10</span></span>
+<span id="cb14-20"><a href="features.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-21"><a href="features.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="do">## attr(,&quot;class&quot;)</span></span>
+<span id="cb14-22"><a href="features.html#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;data.frame&quot;</span></span></code></pre></div>
 <p>Knowing about method dispatch is especially important when dealing with numerical data. Numeric can mean that something is a double <strong>or</strong> that something behaves like a number (integer and double). Typically everything in R is stored as doubles.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="features.html#cb14-1" aria-hidden="true" tabindex="-1"></a>x_i <span class="ot">&lt;-</span> 1L</span>
-<span id="cb14-2"><a href="features.html#cb14-2" aria-hidden="true" tabindex="-1"></a>x_n <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb14-3"><a href="features.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(x_i)</span>
-<span id="cb14-4"><a href="features.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
-<span id="cb14-5"><a href="features.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(x_i)</span>
-<span id="cb14-6"><a href="features.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
-<span id="cb14-7"><a href="features.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(x_n)</span>
-<span id="cb14-8"><a href="features.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb14-9"><a href="features.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(x_n)</span>
-<span id="cb14-10"><a href="features.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="features.html#cb15-1" aria-hidden="true" tabindex="-1"></a>x_i <span class="ot">&lt;-</span> 1L</span>
+<span id="cb15-2"><a href="features.html#cb15-2" aria-hidden="true" tabindex="-1"></a>x_n <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb15-3"><a href="features.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(x_i)</span>
+<span id="cb15-4"><a href="features.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
+<span id="cb15-5"><a href="features.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(x_i)</span>
+<span id="cb15-6"><a href="features.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
+<span id="cb15-7"><a href="features.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(x_n)</span>
+<span id="cb15-8"><a href="features.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
+<span id="cb15-9"><a href="features.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(x_n)</span>
+<span id="cb15-10"><a href="features.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span></code></pre></div>
 <p>Another problem that can happen is that one can easily remove the class functionality from an S3 object. Let’s consider a simple linear model. After fitting a linear model, one might try to store the coefficients into a variable:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="features.html#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="features.html#cb15-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb15-3"><a href="features.html#cb15-3" aria-hidden="true" tabindex="-1"></a>err <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb15-4"><a href="features.html#cb15-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="dv">10</span> <span class="sc">+</span> err</span>
-<span id="cb15-5"><a href="features.html#cb15-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)</span>
-<span id="cb15-6"><a href="features.html#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="features.html#cb15-7" aria-hidden="true" tabindex="-1"></a>my_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data=</span>d)</span>
-<span id="cb15-8"><a href="features.html#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="features.html#cb15-9" aria-hidden="true" tabindex="-1"></a>my_coefs <span class="ot">&lt;-</span> my_model<span class="sc">$</span>coefficients</span>
-<span id="cb15-10"><a href="features.html#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="features.html#cb15-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
-<span id="cb15-12"><a href="features.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb15-13"><a href="features.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.23413    10.03377</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="features.html#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="features.html#cb16-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb16-3"><a href="features.html#cb16-3" aria-hidden="true" tabindex="-1"></a>err <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb16-4"><a href="features.html#cb16-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="dv">10</span> <span class="sc">+</span> err</span>
+<span id="cb16-5"><a href="features.html#cb16-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)</span>
+<span id="cb16-6"><a href="features.html#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="features.html#cb16-7" aria-hidden="true" tabindex="-1"></a>my_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data=</span>d)</span>
+<span id="cb16-8"><a href="features.html#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="features.html#cb16-9" aria-hidden="true" tabindex="-1"></a>my_coefs <span class="ot">&lt;-</span> my_model<span class="sc">$</span>coefficients</span>
+<span id="cb16-10"><a href="features.html#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="features.html#cb16-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
+<span id="cb16-12"><a href="features.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
+<span id="cb16-13"><a href="features.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.14736    10.04802</span></span></code></pre></div>
 <p>After this, one might do a predictive fit:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="features.html#cb16-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
-<span id="cb16-2"><a href="features.html#cb16-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
-<span id="cb16-3"><a href="features.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.2003617  9.8334094 19.8671805 29.9009516 39.9347227 49.9684937</span></span>
-<span id="cb16-4"><a href="features.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 60.0022648 70.0360359 80.0698070 90.1035781</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="features.html#cb17-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
+<span id="cb17-2"><a href="features.html#cb17-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
+<span id="cb17-3"><a href="features.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.09934399  9.94867140 19.99668679 30.04470217 40.09271756 50.14073295</span></span>
+<span id="cb17-4"><a href="features.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 60.18874833 70.23676372 80.28477911 90.33279450</span></span></code></pre></div>
 <p>However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function <code>predict</code> for models that support it. This will allow the model to stay as an S3 object:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="features.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
-<span id="cb17-2"><a href="features.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
-<span id="cb17-3"><a href="features.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         </span></span>
-<span id="cb17-4"><a href="features.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  </span></span>
-<span id="cb17-5"><a href="features.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;        </span></span>
-<span id="cb17-6"><a href="features.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb17-7"><a href="features.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">## $class</span></span>
-<span id="cb17-8"><a href="features.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;lm&quot;</span></span>
-<span id="cb17-9"><a href="features.html#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="features.html#cb17-10" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(predict)</span>
-<span id="cb17-11"><a href="features.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
-<span id="cb17-12"><a href="features.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
-<span id="cb17-13"><a href="features.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">##          1          2          3          4          5          6          7 </span></span>
-<span id="cb17-14"><a href="features.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.2003617  9.8334094 19.8671805 29.9009516 39.9347227 49.9684937 60.0022648 </span></span>
-<span id="cb17-15"><a href="features.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">##          8          9         10 </span></span>
-<span id="cb17-16"><a href="features.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 70.0360359 80.0698070 90.1035781</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="features.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
+<span id="cb18-2"><a href="features.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
+<span id="cb18-3"><a href="features.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         </span></span>
+<span id="cb18-4"><a href="features.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  </span></span>
+<span id="cb18-5"><a href="features.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;        </span></span>
+<span id="cb18-6"><a href="features.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-7"><a href="features.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="do">## $class</span></span>
+<span id="cb18-8"><a href="features.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;lm&quot;</span></span>
+<span id="cb18-9"><a href="features.html#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="features.html#cb18-10" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(predict)</span>
+<span id="cb18-11"><a href="features.html#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
+<span id="cb18-12"><a href="features.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
+<span id="cb18-13"><a href="features.html#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="do">##           1           2           3           4           5           6 </span></span>
+<span id="cb18-14"><a href="features.html#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.09934399  9.94867140 19.99668679 30.04470217 40.09271756 50.14073295 </span></span>
+<span id="cb18-15"><a href="features.html#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="do">##           7           8           9          10 </span></span>
+<span id="cb18-16"><a href="features.html#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 60.18874833 70.23676372 80.28477911 90.33279450</span></span></code></pre></div>
 <p>Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, <code>predict</code> can operate on multiple different models with corresponding methods:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="features.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="features.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
 <pre><code>##  [1] predict.ar*                predict.Arima*            
 ##  [3] predict.arima0*            predict.glm               
 ##  [5] predict.HoltWinters*       predict.lm                
@@ -507,23 +511,23 @@ utilize R’s <a href="https://cran.r-project.org/doc/manuals/R-exts.html">API f
 Common used languages are C, C++ and Fortran. Reason for this is speed provided by these lower
 level languages.</p>
 <p>However, this API can be very complicated and thus most new packages use C/C++ with
-<a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>-package.<span class="citation"><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></span></p>
+<a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>-package.<span class="citation"><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></span></p>
 <p>This means that during installation many R libraries need C and C++ compilers and external libraries,
 which can result in various errors if you lack said requirements.</p>
-<p>Debugging <code>Rcpp</code>-code requires one to utilize C/C++ debuggers. For more information one can look for example at <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">this blog post</a>.<span class="citation"><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></span></p>
-<p>For more information on Rcpp, one can check <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a><span class="citation"><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></span>, <a href="https://adv-r.hadley.nz/rcpp.html">this chapter in Advanced R</a></p>
+<p>Debugging <code>Rcpp</code>-code requires one to utilize C/C++ debuggers. For more information one can look for example at <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">this blog post</a>.<span class="citation"><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></span></p>
+<p>For more information on Rcpp, one can check <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a><span class="citation"><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></span>, <a href="https://adv-r.hadley.nz/rcpp.html">this chapter in Advanced R</a></p>
 
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Hadley Wickham, <em>Sloop: Helpers for OOP in r</em>, 2019, <a href="https://CRAN.R-project.org/package=sloop" role="doc-biblioref">https://CRAN.R-project.org/package=sloop</a>.<a href="features.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Winston Chang, <em>R6: Encapsulated Classes with Reference Semantics</em>, 2022.<a href="features.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p><strong>R-Rcpp?</strong><a href="features.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Davis Vaughan, <span>“Debugging an r Package with c++,”</span> 2017, <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/" role="doc-biblioref">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.<a href="features.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Masaki E. Tsuda, <em>Rcpp for Everyone</em>, 2020, <a href="https://teuder.github.io/rcpp4everyone_en/" role="doc-biblioref">https://teuder.github.io/rcpp4everyone_en/</a>.<a href="features.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<ol start="3">
+<li id="fn3"><p>Wickham.<a href="features.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Winston Chang, <em>R6: Encapsulated Classes with Reference Semantics</em>, 2022.<a href="features.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p><strong>R-Rcpp?</strong><a href="features.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Davis Vaughan, <span>“Debugging an r Package with c++,”</span> 2017, <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/" role="doc-biblioref">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.<a href="features.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Masaki E. Tsuda, <em>Rcpp for Everyone</em>, 2020, <a href="https://teuder.github.io/rcpp4everyone_en/" role="doc-biblioref">https://teuder.github.io/rcpp4everyone_en/</a>.<a href="features.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

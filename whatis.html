@@ -192,14 +192,18 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="practice.html"><a href="practice.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
-<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of Rstudio editor</a></li>
+<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of RStudio editor</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Interactive debugger</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#using-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Using Rstudio’s “Rerun with Debug”</a></li>
-<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.2</b> <code>debug</code> and <code>debugonce</code></a></li>
+<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#launching-debugger-with-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Launching debugger with RStudio’s “Rerun with Debug”</a></li>
+<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debugger-commands"><i class="fa fa-check"></i><b>4.2.2</b> Debugger commands</a></li>
+<li class="chapter" data-level="4.2.3" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.3</b> <code>debug</code> and <code>debugonce</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#quick-debugging-with-environment-browser"><i class="fa fa-check"></i><b>4.3</b> Quick debugging with environment browser</a></li>
+<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#launching-browser-in-code"><i class="fa fa-check"></i><b>4.3</b> Launching browser in code</a></li>
+<li class="chapter" data-level="4.4" data-path="practice.html"><a href="practice.html#setting-breakpoint-in-editor"><i class="fa fa-check"></i><b>4.4</b> Setting breakpoint in editor</a></li>
+<li class="chapter" data-level="4.5" data-path="practice.html"><a href="practice.html#launching-debugger-with-recover"><i class="fa fa-check"></i><b>4.5</b> Launching debugger with <code>recover()</code></a></li>
+<li class="chapter" data-level="4.6" data-path="practice.html"><a href="practice.html#more-tools"><i class="fa fa-check"></i><b>4.6</b> More tools</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -246,16 +250,25 @@ div.csl-indent {
 <li>Check that the bug is fixed and no new bugs were introduced.</li>
 </ul></li>
 </ol>
-<p>In this course we are concentrating on the identifying phase. It is expected, that as soon as you identify the bug, it is more or less obvious how it should be fixed.</p>
+<p>In this course we are concentrating on the identifying phase. It is expected, that as soon as you
+identify the bug, it is more or less obvious how it should be fixed.</p>
 </div>
 <div id="debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Debugging is the art of identifying inconsistency between the expected and actual operation<a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A problem exists whenever the user expects the system to operate differently from how it actually operates. The issue may lay either in the expectations or in the system.</p>
-<p>Sometimes a program does do what the programmer intents it to do, but the user expects some other behaviour. Then the bug is in the user interface (UI), in the application programming interface (API) or in the documentation. For scientific computation this is most often encountered when starting to use a new library or software.</p>
-<p>However, we concentrate on the common and basic problem of how to fix your own code. Here the inconsistency is usually between what you mean the computer to do and what you tell the computer to do.
-The key to success is to have sufficiently deep understanding of what your code and the programming language does, to simulate in your mind the program.</p>
-<p>This is all just a complicated way to say, that to debug R successfully, you need to know the R language and some details of the underlying runtime.</p>
-<p>Thus, we first recapitulate a few key features of the R language. We say a few words on how to avoid problems. After that we take a look at the R specific tools to help analyze a R program.</p>
+<p>A problem exists whenever the user expects the system to operate differently from how it actually operates.
+The issue may lay either in the expectations or in the system.</p>
+<p>Sometimes a program does do what the programmer intents it to do, but the user expects some other behaviour.
+Then the bug is in the user interface (UI), in the application programming interface (API) or in the
+documentation. For scientific computation this is most often encountered when starting to use a new
+library or software.</p>
+<p>However, we concentrate on the common and basic problem of how to fix your own code. Here the inconsistency
+is usually between what you mean the computer to do and what you tell the computer to do.
+The key to success is to have sufficiently deep understanding of what your code and the programming language
+does, to simulate in your mind the program.</p>
+<p>This is all just a complicated way to say, that to debug R successfully, you need to know the R language
+and some details of the underlying runtime.</p>
+<p>Thus, we first recapitulate a few key features of the R language. We say a few words on how to avoid
+problems. After that we take a look at the R specific tools to help analyze a R program.</p>
 
 </div>
 </div>

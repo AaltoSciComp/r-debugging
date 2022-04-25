@@ -192,14 +192,18 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="practice.html"><a href="practice.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
-<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of Rstudio editor</a></li>
+<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of RStudio editor</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Interactive debugger</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#using-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Using Rstudio’s “Rerun with Debug”</a></li>
-<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.2</b> <code>debug</code> and <code>debugonce</code></a></li>
+<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#launching-debugger-with-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Launching debugger with RStudio’s “Rerun with Debug”</a></li>
+<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debugger-commands"><i class="fa fa-check"></i><b>4.2.2</b> Debugger commands</a></li>
+<li class="chapter" data-level="4.2.3" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.3</b> <code>debug</code> and <code>debugonce</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#quick-debugging-with-environment-browser"><i class="fa fa-check"></i><b>4.3</b> Quick debugging with environment browser</a></li>
+<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#launching-browser-in-code"><i class="fa fa-check"></i><b>4.3</b> Launching browser in code</a></li>
+<li class="chapter" data-level="4.4" data-path="practice.html"><a href="practice.html#setting-breakpoint-in-editor"><i class="fa fa-check"></i><b>4.4</b> Setting breakpoint in editor</a></li>
+<li class="chapter" data-level="4.5" data-path="practice.html"><a href="practice.html#launching-debugger-with-recover"><i class="fa fa-check"></i><b>4.5</b> Launching debugger with <code>recover()</code></a></li>
+<li class="chapter" data-level="4.6" data-path="practice.html"><a href="practice.html#more-tools"><i class="fa fa-check"></i><b>4.6</b> More tools</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -229,17 +233,31 @@ div.csl-indent {
 </div>
 <div id="about-this-course" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> About this course<a href="index.html#about-this-course" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This course is a part of <a href="https://scicomp.aalto.fi/training/scip/debugging-2022/">How to debug code</a>-course by Aalto Scientific Computing.</p>
+<p>This course is a part of
+<a href="https://scicomp.aalto.fi/training/scip/debugging-2022/">How to debug code</a>-course
+by Aalto Scientific Computing.</p>
 <p>The course structure and some of the material is adapted from the
 <a href="https://aaltoscicomp.github.io/python-debugging">Python part of the debugging course</a>.</p>
 <p>Most of the R material is constructed from various books and blog posts available online.
 Reading this material for more in-depth explanation of concepts shown in this course
-is highly recommended.</p>
+is highly recommended. <a href="https://adv-r.hadley.nz/">Advanced R by Hadley Wickham</a><span class="citation"><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></span>
+especially cannot be recommended enough.</p>
 <div id="requirements" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Requirements<a href="index.html#requirements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This course utilizes <a href="https://www.rstudio.com/">RStudio IDE</a> as it provides easy access for many debugging tools.</p>
+<p>This course utilizes <a href="https://www.rstudio.com/">RStudio IDE</a> as it provides easy access
+for many debugging tools.</p>
+<p><a href="https://cran.r-project.org/web/packages/sloop/index.html">sloop</a>-package<span class="citation"><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></span> is used
+to check some R object features:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sloop&quot;</span>)</span></code></pre></div>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Hadley Wickham, <em>Advanced r</em> (CRC press, 2019), <a href="https://adv-r.hadley.nz" role="doc-biblioref">https://adv-r.hadley.nz</a>.<a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Hadley Wickham, <em>Sloop: Helpers for OOP in r</em>, 2019, <a href="https://CRAN.R-project.org/package=sloop" role="doc-biblioref">https://CRAN.R-project.org/package=sloop</a>.<a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
