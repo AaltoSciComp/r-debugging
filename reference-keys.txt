@@ -1,11 +1,8 @@
 about-this-course
 requirements
-intro
+whatis
 the-four-steps-of-debugging
 debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation
-whatis
-the-four-steps-of-debugging-1
-debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation-1
 features
 interpreter
 functions
@@ -18,3 +15,6 @@ base-types-are-extended-using-object-oriented-oo-programming
 method-dispatch
 libraries
 libraries-are-usually-compiled
+practice
+tracing-errors
+using-interactive-debugger

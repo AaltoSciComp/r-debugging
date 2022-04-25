@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | R features relevant for debugging</title>
+  <title>Page not found | Debugging R</title>
   <meta name="description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | R features relevant for debugging" />
+  <meta property="og:title" content="Page not found | Debugging R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | R features relevant for debugging" />
+  <meta name="twitter:title" content="Page not found | Debugging R" />
   
   <meta name="twitter:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Simo Tuomisto" />
 
 
-<meta name="date" content="2022-04-24" />
+<meta name="date" content="2022-04-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,35 +162,35 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i><b>1.1</b> Requirements</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<li class="chapter" data-level="2" data-path="whatis.html"><a href="whatis.html"><i class="fa fa-check"></i><b>2</b> What is debugging</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#the-four-steps-of-debugging"><i class="fa fa-check"></i><b>2.1</b> The four steps of debugging</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation"><i class="fa fa-check"></i><b>2.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
+<li class="chapter" data-level="2.1" data-path="whatis.html"><a href="whatis.html#the-four-steps-of-debugging"><i class="fa fa-check"></i><b>2.1</b> The four steps of debugging</a></li>
+<li class="chapter" data-level="2.2" data-path="whatis.html"><a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation"><i class="fa fa-check"></i><b>2.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="whatis.html"><a href="whatis.html"><i class="fa fa-check"></i><b>3</b> What is debugging</a>
+<li class="chapter" data-level="3" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>3</b> R features relevant for debugging</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="whatis.html"><a href="whatis.html#the-four-steps-of-debugging-1"><i class="fa fa-check"></i><b>3.1</b> The four steps of debugging</a></li>
-<li class="chapter" data-level="3.2" data-path="whatis.html"><a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation-1"><i class="fa fa-check"></i><b>3.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
+<li class="chapter" data-level="3.1" data-path="features.html"><a href="features.html#interpreter"><i class="fa fa-check"></i><b>3.1</b> Interpreter</a></li>
+<li class="chapter" data-level="3.2" data-path="features.html"><a href="features.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="features.html"><a href="features.html#r-is-a-functional-language"><i class="fa fa-check"></i><b>3.2.1</b> R is a functional language</a></li>
+<li class="chapter" data-level="3.2.2" data-path="features.html"><a href="features.html#lazy-evaluation"><i class="fa fa-check"></i><b>3.2.2</b> Lazy evaluation</a></li>
+<li class="chapter" data-level="3.2.3" data-path="features.html"><a href="features.html#r-functions-are-evaluated-in-an-environment"><i class="fa fa-check"></i><b>3.2.3</b> R functions are evaluated in an environment</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> R features relevant for debugging</a>
+<li class="chapter" data-level="3.3" data-path="features.html"><a href="features.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#interpreter"><i class="fa fa-check"></i><b>4.1</b> Interpreter</a></li>
-<li class="chapter" data-level="4.2" data-path="features.html"><a href="features.html#functions"><i class="fa fa-check"></i><b>4.2</b> Functions</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="features.html"><a href="features.html#r-is-a-functional-language"><i class="fa fa-check"></i><b>4.2.1</b> R is a functional language</a></li>
-<li class="chapter" data-level="4.2.2" data-path="features.html"><a href="features.html#lazy-evaluation"><i class="fa fa-check"></i><b>4.2.2</b> Lazy evaluation</a></li>
-<li class="chapter" data-level="4.2.3" data-path="features.html"><a href="features.html#r-functions-are-evaluated-in-an-environment"><i class="fa fa-check"></i><b>4.2.3</b> R functions are evaluated in an environment</a></li>
+<li class="chapter" data-level="3.3.1" data-path="features.html"><a href="features.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>3.3.1</b> All objects in R have a base type</a></li>
+<li class="chapter" data-level="3.3.2" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
+<li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.3</b> Method dispatch</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="features.html"><a href="features.html#objects"><i class="fa fa-check"></i><b>4.3</b> Objects</a>
+<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="features.html"><a href="features.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>4.3.1</b> All objects in R have a base type</a></li>
-<li class="chapter" data-level="4.3.2" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>4.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
-<li class="chapter" data-level="4.3.3" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>4.3.3</b> Method dispatch</a></li>
+<li class="chapter" data-level="3.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>4.4</b> Libraries</a>
+</ul></li>
+<li class="chapter" data-level="4" data-path="practice.html"><a href="practice.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>4.4.1</b> Libraries are usually compiled</a></li>
-</ul></li>
+<li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a></li>
+<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#using-interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Using interactive debugger</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -205,7 +205,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R features relevant for debugging</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Debugging R</a>
           </h1>
         </div>
 

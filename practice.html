@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Introduction | R features relevant for debugging</title>
+  <title>4 Debugging R code | Debugging R</title>
   <meta name="description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Introduction | R features relevant for debugging" />
+  <meta property="og:title" content="4 Debugging R code | Debugging R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Introduction | R features relevant for debugging" />
+  <meta name="twitter:title" content="4 Debugging R code | Debugging R" />
   
   <meta name="twitter:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="Simo Tuomisto" />
 
 
-<meta name="date" content="2022-04-24" />
+<meta name="date" content="2022-04-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="whatis.html"/>
+<link rel="prev" href="features.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,35 +162,35 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i><b>1.1</b> Requirements</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<li class="chapter" data-level="2" data-path="whatis.html"><a href="whatis.html"><i class="fa fa-check"></i><b>2</b> What is debugging</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#the-four-steps-of-debugging"><i class="fa fa-check"></i><b>2.1</b> The four steps of debugging</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation"><i class="fa fa-check"></i><b>2.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
+<li class="chapter" data-level="2.1" data-path="whatis.html"><a href="whatis.html#the-four-steps-of-debugging"><i class="fa fa-check"></i><b>2.1</b> The four steps of debugging</a></li>
+<li class="chapter" data-level="2.2" data-path="whatis.html"><a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation"><i class="fa fa-check"></i><b>2.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="whatis.html"><a href="whatis.html"><i class="fa fa-check"></i><b>3</b> What is debugging</a>
+<li class="chapter" data-level="3" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>3</b> R features relevant for debugging</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="whatis.html"><a href="whatis.html#the-four-steps-of-debugging-1"><i class="fa fa-check"></i><b>3.1</b> The four steps of debugging</a></li>
-<li class="chapter" data-level="3.2" data-path="whatis.html"><a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation-1"><i class="fa fa-check"></i><b>3.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
+<li class="chapter" data-level="3.1" data-path="features.html"><a href="features.html#interpreter"><i class="fa fa-check"></i><b>3.1</b> Interpreter</a></li>
+<li class="chapter" data-level="3.2" data-path="features.html"><a href="features.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="features.html"><a href="features.html#r-is-a-functional-language"><i class="fa fa-check"></i><b>3.2.1</b> R is a functional language</a></li>
+<li class="chapter" data-level="3.2.2" data-path="features.html"><a href="features.html#lazy-evaluation"><i class="fa fa-check"></i><b>3.2.2</b> Lazy evaluation</a></li>
+<li class="chapter" data-level="3.2.3" data-path="features.html"><a href="features.html#r-functions-are-evaluated-in-an-environment"><i class="fa fa-check"></i><b>3.2.3</b> R functions are evaluated in an environment</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> R features relevant for debugging</a>
+<li class="chapter" data-level="3.3" data-path="features.html"><a href="features.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#interpreter"><i class="fa fa-check"></i><b>4.1</b> Interpreter</a></li>
-<li class="chapter" data-level="4.2" data-path="features.html"><a href="features.html#functions"><i class="fa fa-check"></i><b>4.2</b> Functions</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="features.html"><a href="features.html#r-is-a-functional-language"><i class="fa fa-check"></i><b>4.2.1</b> R is a functional language</a></li>
-<li class="chapter" data-level="4.2.2" data-path="features.html"><a href="features.html#lazy-evaluation"><i class="fa fa-check"></i><b>4.2.2</b> Lazy evaluation</a></li>
-<li class="chapter" data-level="4.2.3" data-path="features.html"><a href="features.html#r-functions-are-evaluated-in-an-environment"><i class="fa fa-check"></i><b>4.2.3</b> R functions are evaluated in an environment</a></li>
+<li class="chapter" data-level="3.3.1" data-path="features.html"><a href="features.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>3.3.1</b> All objects in R have a base type</a></li>
+<li class="chapter" data-level="3.3.2" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
+<li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.3</b> Method dispatch</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="features.html"><a href="features.html#objects"><i class="fa fa-check"></i><b>4.3</b> Objects</a>
+<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="features.html"><a href="features.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>4.3.1</b> All objects in R have a base type</a></li>
-<li class="chapter" data-level="4.3.2" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>4.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
-<li class="chapter" data-level="4.3.3" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>4.3.3</b> Method dispatch</a></li>
+<li class="chapter" data-level="3.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>4.4</b> Libraries</a>
+</ul></li>
+<li class="chapter" data-level="4" data-path="practice.html"><a href="practice.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>4.4.1</b> Libraries are usually compiled</a></li>
-</ul></li>
+<li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a></li>
+<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#using-interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Using interactive debugger</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -205,7 +205,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R features relevant for debugging</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Debugging R</a>
           </h1>
         </div>
 
@@ -213,45 +213,32 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Introduction<a href="intro.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The course structure and some of the material is adapted from the
-<a href="https://aaltoscicomp.github.io/python-debugging">Python part of the debugging course</a>.</p>
-<p>Most of the R material is constructed from various books and blog posts available online.
-Reading this material for more in-depth explanation of concepts shown in this course
-is highly recommended.</p>
-<div id="the-four-steps-of-debugging" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> The four steps of debugging<a href="intro.html#the-four-steps-of-debugging" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol style="list-style-type: decimal">
-<li><p>Identify the bug</p>
-<ul>
-<li>Get a report from user or find an example input that exhibits the problem</li>
-<li>Find the faulty line or piece of logic</li>
-</ul></li>
-<li><p>Isolate</p>
-<ul>
-<li>Confirm that you have found the problem</li>
-<li>Could be e.g. a unit test or a minimal (non)working example</li>
-</ul></li>
-<li><p>Fix</p>
-<ul>
-<li>Replacing the erroneous code with correct code</li>
-</ul></li>
-<li><p>Test</p>
-<ul>
-<li>Check that the bug is fixed and no new bugs were introduced.</li>
-</ul></li>
-</ol>
-<p>In this course we are concentrating on the identifying phase. It is expected, that as soon as you identify the bug, it is more or less obvious how it should be fixed.</p>
+<div id="practice" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Debugging R code<a href="practice.html#practice" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="tracing-errors" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Tracing errors<a href="practice.html#tracing-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s consider the previously showed function example with a missing variable:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="practice.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that z is really missing</span></span>
+<span id="cb20-2"><a href="practice.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(z)</span>
+<span id="cb20-3"><a href="practice.html#cb20-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb20-4"><a href="practice.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
+<span id="cb20-5"><a href="practice.html#cb20-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-6"><a href="practice.html#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="practice.html#cb20-7" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">y =</span> <span class="fu">g</span>(x)) {</span>
+<span id="cb20-8"><a href="practice.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
+<span id="cb20-9"><a href="practice.html#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb20-10"><a href="practice.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb20-11"><a href="practice.html#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">g</span>(x))</span>
+<span id="cb20-12"><a href="practice.html#cb20-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-13"><a href="practice.html#cb20-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-14"><a href="practice.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb20-15"><a href="practice.html#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
+<p>This example is available <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variable.R">here</a>.</p>
+<p>Opening the file with Rstudio and sourcing the file will return the following kind of an error:
+<img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variable.png" /></p>
 </div>
-<div id="debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Debugging is the art of identifying inconsistency between the expected and actual operation<a href="intro.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A problem exists whenever the user expects the system to operate differently from how it actually operates. The issue may lay either in the expectations or in the system.</p>
-<p>Sometimes a program does do what the programmer intents it to do, but the user expects some other behaviour. Then the bug is in the user interface (UI), in the application programming interface (API) or in the documentation. For scientific computation this is most often encountered when starting to use a new library or software.</p>
-<p>However, we concentrate on the common and basic problem of how to fix your own code. Here the inconsistency is usually between what you mean the computer to do and what you tell the computer to do.
-The key to success is to have sufficiently deep understanding of what your code and the programming language does, to simulate in your mind the program.</p>
-<p>This is all just a complicated way to say, that to debug R successfully, you need to know the R language and some details of the underlying runtime.</p>
-<p>Thus, we first recapitulate a few key features of the R language. We say a few words on how to avoid problems. After that we take a look at the R specific tools to help analyze a R program.</p>
+<div id="using-interactive-debugger" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Using interactive debugger<a href="practice.html#using-interactive-debugger" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
@@ -260,8 +247,8 @@ The key to success is to have sufficiently deep understanding of what your code 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="whatis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="features.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

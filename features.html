@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 R features relevant for debugging | R features relevant for debugging</title>
+  <title>3 R features relevant for debugging | Debugging R</title>
   <meta name="description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 R features relevant for debugging | R features relevant for debugging" />
+  <meta property="og:title" content="3 R features relevant for debugging | Debugging R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 R features relevant for debugging | R features relevant for debugging" />
+  <meta name="twitter:title" content="3 R features relevant for debugging | Debugging R" />
   
   <meta name="twitter:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Simo Tuomisto" />
 
 
-<meta name="date" content="2022-04-24" />
+<meta name="date" content="2022-04-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="whatis.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="practice.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,35 +162,35 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#requirements"><i class="fa fa-check"></i><b>1.1</b> Requirements</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<li class="chapter" data-level="2" data-path="whatis.html"><a href="whatis.html"><i class="fa fa-check"></i><b>2</b> What is debugging</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#the-four-steps-of-debugging"><i class="fa fa-check"></i><b>2.1</b> The four steps of debugging</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation"><i class="fa fa-check"></i><b>2.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
+<li class="chapter" data-level="2.1" data-path="whatis.html"><a href="whatis.html#the-four-steps-of-debugging"><i class="fa fa-check"></i><b>2.1</b> The four steps of debugging</a></li>
+<li class="chapter" data-level="2.2" data-path="whatis.html"><a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation"><i class="fa fa-check"></i><b>2.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="whatis.html"><a href="whatis.html"><i class="fa fa-check"></i><b>3</b> What is debugging</a>
+<li class="chapter" data-level="3" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>3</b> R features relevant for debugging</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="whatis.html"><a href="whatis.html#the-four-steps-of-debugging-1"><i class="fa fa-check"></i><b>3.1</b> The four steps of debugging</a></li>
-<li class="chapter" data-level="3.2" data-path="whatis.html"><a href="whatis.html#debugging-is-the-art-of-identifying-inconsistency-between-the-expected-and-actual-operation-1"><i class="fa fa-check"></i><b>3.2</b> Debugging is the art of identifying inconsistency between the expected and actual operation</a></li>
+<li class="chapter" data-level="3.1" data-path="features.html"><a href="features.html#interpreter"><i class="fa fa-check"></i><b>3.1</b> Interpreter</a></li>
+<li class="chapter" data-level="3.2" data-path="features.html"><a href="features.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="features.html"><a href="features.html#r-is-a-functional-language"><i class="fa fa-check"></i><b>3.2.1</b> R is a functional language</a></li>
+<li class="chapter" data-level="3.2.2" data-path="features.html"><a href="features.html#lazy-evaluation"><i class="fa fa-check"></i><b>3.2.2</b> Lazy evaluation</a></li>
+<li class="chapter" data-level="3.2.3" data-path="features.html"><a href="features.html#r-functions-are-evaluated-in-an-environment"><i class="fa fa-check"></i><b>3.2.3</b> R functions are evaluated in an environment</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> R features relevant for debugging</a>
+<li class="chapter" data-level="3.3" data-path="features.html"><a href="features.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#interpreter"><i class="fa fa-check"></i><b>4.1</b> Interpreter</a></li>
-<li class="chapter" data-level="4.2" data-path="features.html"><a href="features.html#functions"><i class="fa fa-check"></i><b>4.2</b> Functions</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="features.html"><a href="features.html#r-is-a-functional-language"><i class="fa fa-check"></i><b>4.2.1</b> R is a functional language</a></li>
-<li class="chapter" data-level="4.2.2" data-path="features.html"><a href="features.html#lazy-evaluation"><i class="fa fa-check"></i><b>4.2.2</b> Lazy evaluation</a></li>
-<li class="chapter" data-level="4.2.3" data-path="features.html"><a href="features.html#r-functions-are-evaluated-in-an-environment"><i class="fa fa-check"></i><b>4.2.3</b> R functions are evaluated in an environment</a></li>
+<li class="chapter" data-level="3.3.1" data-path="features.html"><a href="features.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>3.3.1</b> All objects in R have a base type</a></li>
+<li class="chapter" data-level="3.3.2" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
+<li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.3</b> Method dispatch</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="features.html"><a href="features.html#objects"><i class="fa fa-check"></i><b>4.3</b> Objects</a>
+<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="features.html"><a href="features.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>4.3.1</b> All objects in R have a base type</a></li>
-<li class="chapter" data-level="4.3.2" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>4.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
-<li class="chapter" data-level="4.3.3" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>4.3.3</b> Method dispatch</a></li>
+<li class="chapter" data-level="3.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>4.4</b> Libraries</a>
+</ul></li>
+<li class="chapter" data-level="4" data-path="practice.html"><a href="practice.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>4.4.1</b> Libraries are usually compiled</a></li>
-</ul></li>
+<li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a></li>
+<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#using-interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Using interactive debugger</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -205,7 +205,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R features relevant for debugging</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Debugging R</a>
           </h1>
         </div>
 
@@ -213,10 +213,10 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="features" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> R features relevant for debugging<a href="features.html#features" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="interpreter" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Interpreter<a href="features.html#interpreter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="features" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> R features relevant for debugging<a href="features.html#features" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="interpreter" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Interpreter<a href="features.html#interpreter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>R is an interpreted language, which means that code is interpreted by the R
 interpreter during runtime. This has the effect that syntax errors occur only
 when the code is run. Thus using an IDE like Rstudio makes coding easier as it
@@ -250,10 +250,10 @@ of default packages is minimal:</p>
 ## Expressions (one or more &#39;-e &lt;expr&gt;&#39;) may be used *instead* of &#39;file&#39;
 ## See also  ?Rscript  from within R</code></pre>
 </div>
-<div id="functions" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Functions<a href="features.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="r-is-a-functional-language" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> R is a functional language<a href="features.html#r-is-a-functional-language" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="functions" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Functions<a href="features.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="r-is-a-functional-language" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> R is a functional language<a href="features.html#r-is-a-functional-language" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R is at its core a functional language. This means that coding is often
 done in terms of functions that operate on objects and which return a new
 object. These function calls are then often chained together
@@ -261,8 +261,8 @@ and vectorized with <code>apply</code>-family of functions.</p>
 <p>For more info, see
 <a href="https://adv-r.hadley.nz/fp.html">this chapter of Advanced R</a>.</p>
 </div>
-<div id="lazy-evaluation" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Lazy evaluation<a href="features.html#lazy-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="lazy-evaluation" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Lazy evaluation<a href="features.html#lazy-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R uses lazy evaluation when functions are called.
 This means that functions are evaluated only when the output is actually used.</p>
 <p>In the following example the value of <code>g(x)</code> is not evaluated for positive values and
@@ -287,8 +287,8 @@ value:</p>
 <p>See this <a href="https://www.r-bloggers.com/2018/07/about-lazy-evaluation/">r-bloggers’ post</a>
 for more information on lazy evaluation.</p>
 </div>
-<div id="r-functions-are-evaluated-in-an-environment" class="section level3 hasAnchor" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> R functions are evaluated in an environment<a href="features.html#r-functions-are-evaluated-in-an-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="r-functions-are-evaluated-in-an-environment" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> R functions are evaluated in an environment<a href="features.html#r-functions-are-evaluated-in-an-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Each R function has an environment that houses known names to values
 (e.g. function names, variables etc.).</p>
 <p>The global environment is the top level environment that contains everything
@@ -319,10 +319,10 @@ slate.</p>
 <a href="https://adv-r.hadley.nz/environments.html">this chapter of Advanced R</a>.</p>
 </div>
 </div>
-<div id="objects" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Objects<a href="features.html#objects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="all-objects-in-r-have-a-base-type" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> All objects in R have a base type<a href="features.html#all-objects-in-r-have-a-base-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="objects" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Objects<a href="features.html#objects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="all-objects-in-r-have-a-base-type" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> All objects in R have a base type<a href="features.html#all-objects-in-r-have-a-base-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are 25 base types in R such as <code>integer</code>, <code>double</code>, <code>list</code> and
 <code>closure</code> (function). One can check the type using <code>typeof(x)</code>-function.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="features.html#cb6-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
@@ -356,8 +356,8 @@ slate.</p>
 <p>For more info, see
 <a href="https://adv-r.hadley.nz/base-types.html">this chapter of Advanced R</a>.</p>
 </div>
-<div id="base-types-are-extended-using-object-oriented-oo-programming" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Base types are extended using object-oriented (OO) programming<a href="features.html#base-types-are-extended-using-object-oriented-oo-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="base-types-are-extended-using-object-oriented-oo-programming" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Base types are extended using object-oriented (OO) programming<a href="features.html#base-types-are-extended-using-object-oriented-oo-programming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Examples in this section utilize the <a href="https://cran.r-project.org/web/packages/sloop/index.html">sloop</a><span class="citation"><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></span>-package
 for finding more information on objects. You can install it with:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="features.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sloop&quot;</span>)</span></code></pre></div>
@@ -394,8 +394,8 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 - <a href="https://adv-r.hadley.nz/s4.html">S4</a>: More advanced version of S3. Heavily used by the <a href="https://www.bioconductor.org/">Bioconductor</a>-project.
 - <a href="https://adv-r.hadley.nz/r6.html">R6</a>: More like other OO languages. Improved version on R’s feature called <a href="https://www.rdocumentation.org/packages/methods/versions/3.6.2/topics/ReferenceClasses">reference classes</a>. See <a href="https://r6.r-lib.org/">R6 manual for more information</a><span class="citation"><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></span>.</p>
 </div>
-<div id="method-dispatch" class="section level3 hasAnchor" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Method dispatch<a href="features.html#method-dispatch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="method-dispatch" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Method dispatch<a href="features.html#method-dispatch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Most R functions are S3 <strong>generic</strong> functions that choose between available <strong>methods</strong> for a class. One can check whether a function is a generic function or a method with <code>sloop::ftype()</code>.</p>
 <p>For example, <code>paste()</code> is an internal method that works with types, but <code>print()</code> is an S3 generic:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="features.html#cb11-1" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(paste)</span>
@@ -453,12 +453,12 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb15-10"><a href="features.html#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-11"><a href="features.html#cb15-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
 <span id="cb15-12"><a href="features.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb15-13"><a href="features.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -9.765784    9.965663</span></span></code></pre></div>
+<span id="cb15-13"><a href="features.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -9.913002    9.986845</span></span></code></pre></div>
 <p>After this, one might do a predictive fit:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="features.html#cb16-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
 <span id="cb16-2"><a href="features.html#cb16-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
-<span id="cb16-3"><a href="features.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  0.1998795 10.1655428 20.1312062 30.0968696 40.0625330 50.0281964</span></span>
-<span id="cb16-4"><a href="features.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 59.9938598 69.9595232 79.9251866 89.8908500</span></span></code></pre></div>
+<span id="cb16-3"><a href="features.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  0.07384334 10.06068862 20.04753391 30.03437920 40.02122449 50.00806977</span></span>
+<span id="cb16-4"><a href="features.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 59.99491506 69.98176035 79.96860564 89.95545092</span></span></code></pre></div>
 <p>However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function <code>predict</code> for models that support it. This will allow the model to stay as an S3 object:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="features.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
 <span id="cb17-2"><a href="features.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
@@ -472,10 +472,10 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb17-10"><a href="features.html#cb17-10" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(predict)</span>
 <span id="cb17-11"><a href="features.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
 <span id="cb17-12"><a href="features.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
-<span id="cb17-13"><a href="features.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">##          1          2          3          4          5          6          7 </span></span>
-<span id="cb17-14"><a href="features.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.1998795 10.1655428 20.1312062 30.0968696 40.0625330 50.0281964 59.9938598 </span></span>
-<span id="cb17-15"><a href="features.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">##          8          9         10 </span></span>
-<span id="cb17-16"><a href="features.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 69.9595232 79.9251866 89.8908500</span></span></code></pre></div>
+<span id="cb17-13"><a href="features.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">##           1           2           3           4           5           6 </span></span>
+<span id="cb17-14"><a href="features.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.07384334 10.06068862 20.04753391 30.03437920 40.02122449 50.00806977 </span></span>
+<span id="cb17-15"><a href="features.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">##           7           8           9          10 </span></span>
+<span id="cb17-16"><a href="features.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 59.99491506 69.98176035 79.96860564 89.95545092</span></span></code></pre></div>
 <p>Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, <code>predict</code> can operate on multiple different models with corresponding methods:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="features.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
 <pre><code>##  [1] predict.ar*                predict.Arima*            
@@ -489,10 +489,10 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 </div>
 </div>
-<div id="libraries" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Libraries<a href="features.html#libraries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="libraries-are-usually-compiled" class="section level3 hasAnchor" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Libraries are usually compiled<a href="features.html#libraries-are-usually-compiled" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="libraries" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Libraries<a href="features.html#libraries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="libraries-are-usually-compiled" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Libraries are usually compiled<a href="features.html#libraries-are-usually-compiled" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R libraries can be pure R or they can utilize other languages. Many R’s internal functions
 utilize R’s <a href="https://cran.r-project.org/doc/manuals/R-exts.html">API for writing extensions</a>.
 Common used languages are C, C++ and Fortran. Reason for this is speed provided by these lower
@@ -523,7 +523,7 @@ which can result in various errors if you lack said requirements.</p>
         </div>
       </div>
 <a href="whatis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="practice.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
