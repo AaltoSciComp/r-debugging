@@ -194,7 +194,12 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.1" data-path="practice.html"><a href="practice.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
 <li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of Rstudio editor</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#using-interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Using interactive debugger</a></li>
+<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Interactive debugger</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#using-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Using Rstudio’s “Rerun with Debug”</a></li>
+<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.2</b> <code>debug</code> and <code>debugonce</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#quick-debugging-with-environment-browser"><i class="fa fa-check"></i><b>4.3</b> Quick debugging with environment browser</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -242,7 +247,7 @@ div.csl-indent {
 <span id="cb20-15"><a href="practice.html#cb20-15" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb20-16"><a href="practice.html#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
 <span id="cb20-17"><a href="practice.html#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
-<p>This example is available <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R">here</a>.</p>
+<p>This example is available here: <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R">missing-variables.R</a>.</p>
 <p>Opening the file with Rstudio and sourcing the file will return the following kind of an error:</p>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables.png" /></p>
 <p>Now clicking the <strong>Show traceback</strong>-button will expand the traceback:</p>
@@ -280,8 +285,41 @@ In those situations you can use the <code>traceback()</code>-function to get the
 <p>Here we also took a backup of the default options. This is usually a good idea as changing options will change the options for the whole R session.</p>
 </div>
 </div>
-<div id="using-interactive-debugger" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Using interactive debugger<a href="practice.html#using-interactive-debugger" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="interactive-debugger" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Interactive debugger<a href="practice.html#interactive-debugger" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="using-rstudios-rerun-with-debug" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Using Rstudio’s “Rerun with Debug”<a href="practice.html#using-rstudios-rerun-with-debug" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Rstudio can launch you a debugger at the location where the error occured. If you source the file again and launch the debugger with <strong>Rerun with Debug</strong>, you’ll get an interactive debugger that looks something like this:</p>
+<p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-run-with-debug.png" /></p>
+<p>This view has many areas of interest:
+- On the top left Rstudio will open the source code of the problematic function
+and it tries to highlight the line that causes the error.
+- On the top right we have an environment browser that shows what variables are defined inside
+the <code>g()</code>-function’s environment.
+- On the bottom right we have the traceback of the erroneous function call.
+The function we’re investigating is highlighted.
+- On the bottom left we have the interactive debugger open in the console.</p>
+</div>
+<div id="debug-and-debugonce" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> <code>debug</code> and <code>debugonce</code><a href="practice.html#debug-and-debugonce" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You can also launch debugger from the console with <code>debug</code>- and <code>debugonce</code>-functions.</p>
+<p><code>debug(f)</code> will set a permanent flag that will cause a debugger to be launched whenever
+function <code>f</code> is called. You can unset this variable with <code>undebug</code>.</p>
+<p>Alternatively, you can use <code>debugonce</code> to launch the debugger once in a function. This is
+especially useful if the function you want to debug is inside a for-loop.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="practice.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(g)</span>
+<span id="cb25-2"><a href="practice.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="quick-debugging-with-environment-browser" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Quick debugging with environment browser<a href="practice.html#quick-debugging-with-environment-browser" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Finding the function that causes the error is one thing, but examining what caused is another. For quick debugging we can use the environment browser.</p>
+<p>One can launch the interactive browser by specifying <code>browser()</code> is the code:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="practice.html#cb26-1" aria-hidden="true" tabindex="-1"></a>g_browse <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb26-2"><a href="practice.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">browser</span>()</span>
+<span id="cb26-3"><a href="practice.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
+<span id="cb26-4"><a href="practice.html#cb26-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-5"><a href="practice.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">g_browse</span>(x))</span></code></pre></div>
 
 </div>
 </div>

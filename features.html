@@ -194,7 +194,12 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.1" data-path="practice.html"><a href="practice.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
 <li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of Rstudio editor</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#using-interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Using interactive debugger</a></li>
+<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Interactive debugger</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#using-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Using Rstudio’s “Rerun with Debug”</a></li>
+<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.2</b> <code>debug</code> and <code>debugonce</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#quick-debugging-with-environment-browser"><i class="fa fa-check"></i><b>4.3</b> Quick debugging with environment browser</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -457,12 +462,12 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb15-10"><a href="features.html#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-11"><a href="features.html#cb15-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
 <span id="cb15-12"><a href="features.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb15-13"><a href="features.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  -10.084477    9.991231</span></span></code></pre></div>
+<span id="cb15-13"><a href="features.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.23413    10.03377</span></span></code></pre></div>
 <p>After this, one might do a predictive fit:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="features.html#cb16-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
 <span id="cb16-2"><a href="features.html#cb16-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
-<span id="cb16-3"><a href="features.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.09324535  9.89798602 19.88921738 29.88044875 39.87168012 49.86291149</span></span>
-<span id="cb16-4"><a href="features.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 59.85414285 69.84537422 79.83660559 89.82783696</span></span></code></pre></div>
+<span id="cb16-3"><a href="features.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.2003617  9.8334094 19.8671805 29.9009516 39.9347227 49.9684937</span></span>
+<span id="cb16-4"><a href="features.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 60.0022648 70.0360359 80.0698070 90.1035781</span></span></code></pre></div>
 <p>However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function <code>predict</code> for models that support it. This will allow the model to stay as an S3 object:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="features.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
 <span id="cb17-2"><a href="features.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
@@ -476,10 +481,10 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb17-10"><a href="features.html#cb17-10" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(predict)</span>
 <span id="cb17-11"><a href="features.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
 <span id="cb17-12"><a href="features.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
-<span id="cb17-13"><a href="features.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">##           1           2           3           4           5           6 </span></span>
-<span id="cb17-14"><a href="features.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.09324535  9.89798602 19.88921738 29.88044875 39.87168012 49.86291149 </span></span>
-<span id="cb17-15"><a href="features.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">##           7           8           9          10 </span></span>
-<span id="cb17-16"><a href="features.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 59.85414285 69.84537422 79.83660559 89.82783696</span></span></code></pre></div>
+<span id="cb17-13"><a href="features.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">##          1          2          3          4          5          6          7 </span></span>
+<span id="cb17-14"><a href="features.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.2003617  9.8334094 19.8671805 29.9009516 39.9347227 49.9684937 60.0022648 </span></span>
+<span id="cb17-15"><a href="features.html#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">##          8          9         10 </span></span>
+<span id="cb17-16"><a href="features.html#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 70.0360359 80.0698070 90.1035781</span></span></code></pre></div>
 <p>Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, <code>predict</code> can operate on multiple different models with corresponding methods:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="features.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
 <pre><code>##  [1] predict.ar*                predict.Arima*            

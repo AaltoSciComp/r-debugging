@@ -19,4 +19,7 @@ practice
 tracing-errors
 traceback
 traceback-outside-of-rstudio-editor
-using-interactive-debugger
+interactive-debugger
+using-rstudios-rerun-with-debug
+debug-and-debugonce
+quick-debugging-with-environment-browser
