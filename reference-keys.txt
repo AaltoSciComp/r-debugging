@@ -1,4 +1,4 @@
-fig:unnamed-chunk-25
+fig:unnamed-chunk-31
 about-this-course
 requirements
 whatis
@@ -12,6 +12,7 @@ lazy-evaluation
 r-functions-are-evaluated-in-an-environment
 objects
 all-objects-in-r-have-a-base-type
+vectors-are-everywhere-and-they-are-immutable
 base-types-are-extended-using-object-oriented-oo-programming
 method-dispatch
 libraries
@@ -28,3 +29,4 @@ launching-browser-in-code
 setting-breakpoint-in-editor
 launching-debugger-with-recover
 more-tools
+exercise-k-means-clustering

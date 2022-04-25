@@ -179,8 +179,9 @@ div.csl-indent {
 <li class="chapter" data-level="3.3" data-path="features.html"><a href="features.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="features.html"><a href="features.html#all-objects-in-r-have-a-base-type"><i class="fa fa-check"></i><b>3.3.1</b> All objects in R have a base type</a></li>
-<li class="chapter" data-level="3.3.2" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.2</b> Base types are extended using object-oriented (OO) programming</a></li>
-<li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.3</b> Method dispatch</a></li>
+<li class="chapter" data-level="3.3.2" data-path="features.html"><a href="features.html#vectors-are-everywhere-and-they-are-immutable"><i class="fa fa-check"></i><b>3.3.2</b> Vectors are everywhere and they are immutable</a></li>
+<li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.3</b> Base types are extended using object-oriented (OO) programming</a></li>
+<li class="chapter" data-level="3.3.4" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.4</b> Method dispatch</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
 <ul>
@@ -204,6 +205,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="practice.html"><a href="practice.html#setting-breakpoint-in-editor"><i class="fa fa-check"></i><b>4.4</b> Setting breakpoint in editor</a></li>
 <li class="chapter" data-level="4.5" data-path="practice.html"><a href="practice.html#launching-debugger-with-recover"><i class="fa fa-check"></i><b>4.5</b> Launching debugger with <code>recover()</code></a></li>
 <li class="chapter" data-level="4.6" data-path="practice.html"><a href="practice.html#more-tools"><i class="fa fa-check"></i><b>4.6</b> More tools</a></li>
+<li class="chapter" data-level="4.7" data-path="practice.html"><a href="practice.html#exercise-k-means-clustering"><i class="fa fa-check"></i><b>4.7</b> Exercise: k-means clustering</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -228,29 +230,29 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="practice" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Debugging R code<a href="practice.html#practice" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter follows the excellent <a href="https://adv-r.hadley.nz/debugging.html">debugging-chapter from Advanced R</a><span class="citation"><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></span>.</p>
+<p>This chapter follows the excellent <a href="https://adv-r.hadley.nz/debugging.html">debugging-chapter from Advanced R</a><span class="citation"><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></span>.</p>
 <div id="tracing-errors" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Tracing errors<a href="practice.html#tracing-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="traceback" class="section level3 hasAnchor" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Traceback<a href="practice.html#traceback" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s consider the previously showed function example with a missing variable:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="practice.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure that z is missing</span></span>
-<span id="cb21-2"><a href="practice.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;z&quot;</span>)) {</span>
-<span id="cb21-3"><a href="practice.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(z)</span>
-<span id="cb21-4"><a href="practice.html#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-5"><a href="practice.html#cb21-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb21-6"><a href="practice.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
-<span id="cb21-7"><a href="practice.html#cb21-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-8"><a href="practice.html#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="practice.html#cb21-9" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">y =</span> <span class="fu">g</span>(x)) {</span>
-<span id="cb21-10"><a href="practice.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
-<span id="cb21-11"><a href="practice.html#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
-<span id="cb21-12"><a href="practice.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb21-13"><a href="practice.html#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
-<span id="cb21-14"><a href="practice.html#cb21-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-15"><a href="practice.html#cb21-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-16"><a href="practice.html#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb21-17"><a href="practice.html#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="practice.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure that z is missing</span></span>
+<span id="cb27-2"><a href="practice.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;z&quot;</span>)) {</span>
+<span id="cb27-3"><a href="practice.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(z)</span>
+<span id="cb27-4"><a href="practice.html#cb27-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-5"><a href="practice.html#cb27-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb27-6"><a href="practice.html#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
+<span id="cb27-7"><a href="practice.html#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-8"><a href="practice.html#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="practice.html#cb27-9" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">y =</span> <span class="fu">g</span>(x)) {</span>
+<span id="cb27-10"><a href="practice.html#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
+<span id="cb27-11"><a href="practice.html#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb27-12"><a href="practice.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb27-13"><a href="practice.html#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
+<span id="cb27-14"><a href="practice.html#cb27-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-15"><a href="practice.html#cb27-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-16"><a href="practice.html#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb27-17"><a href="practice.html#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
 <p>This example is available here: <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R">missing-variables.R</a>.</p>
 <p>Opening the file with RStudio and sourcing the file will return the following kind of an error:</p>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables.png" /></p>
@@ -259,20 +261,20 @@ div.csl-indent {
 <p>This view will quickly show that the error comes from the <code>g(x)</code>-function call in line #13.</p>
 <p>Sometimes lazy evaluation can make reading the call stack complicated.
 Let’s have a few additional functions that are called in the argument definition:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="practice.html#cb22-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb22-2"><a href="practice.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
-<span id="cb22-3"><a href="practice.html#cb22-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-4"><a href="practice.html#cb22-4" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb22-5"><a href="practice.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">i</span>())</span>
-<span id="cb22-6"><a href="practice.html#cb22-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-7"><a href="practice.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">h</span>())</span>
-<span id="cb22-8"><a href="practice.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="practice.html#cb28-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb28-2"><a href="practice.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb28-3"><a href="practice.html#cb28-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-4"><a href="practice.html#cb28-4" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb28-5"><a href="practice.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">i</span>())</span>
+<span id="cb28-6"><a href="practice.html#cb28-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-7"><a href="practice.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">h</span>())</span>
+<span id="cb28-8"><a href="practice.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-lazy-evaluation.png" /></p>
 <p>Error is raised by <code>i()</code>, but looking at the call stack it almost looks like <code>f()</code> is somehow involved. This is because value of <code>h()</code> is evaluated only when it is needed in <code>f()</code>. Writing the code like this would reveal the true culprit:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="practice.html#cb23-1" aria-hidden="true" tabindex="-1"></a>h_value<span class="ot">=</span><span class="fu">h</span>()</span>
-<span id="cb23-2"><a href="practice.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span>
-<span id="cb23-3"><a href="practice.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span>h_value)</span>
-<span id="cb23-4"><a href="practice.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in f(x = -1, y = h_value): object &#39;h_value&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="practice.html#cb29-1" aria-hidden="true" tabindex="-1"></a>h_value<span class="ot">=</span><span class="fu">h</span>()</span>
+<span id="cb29-2"><a href="practice.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span>
+<span id="cb29-3"><a href="practice.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span>h_value)</span>
+<span id="cb29-4"><a href="practice.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in f(x = -1, y = h_value): object &#39;h_value&#39; not found</span></span></code></pre></div>
 <p>Of course, this is not something you want to do generally. Lazy evaluation is good for speeding up your code, so doing changes like this should be limited to situations where you’re unsure which function causes the error.</p>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-nonlazy-evaluation.png" /></p>
 </div>
@@ -280,13 +282,13 @@ Let’s have a few additional functions that are called in the argument definiti
 <h3><span class="header-section-number">4.1.2</span> Traceback outside of RStudio editor<a href="practice.html#traceback-outside-of-rstudio-editor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If you run the code in R console in RStudio or in a separate interpreter you might not get the <strong>Show Traceback</strong>-prompt.
 In those situations you can use the <code>traceback()</code>-function to get the trace. You can try it out with the following test in the console:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="practice.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb24-2"><a href="practice.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">traceback</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="practice.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb30-2"><a href="practice.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">traceback</span>()</span></code></pre></div>
 <p>You can also set the R error handling to call traceback on errors:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="practice.html#cb25-1" aria-hidden="true" tabindex="-1"></a>backup_options <span class="ot">&lt;-</span> <span class="fu">options</span>()</span>
-<span id="cb25-2"><a href="practice.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error=</span>traceback)</span>
-<span id="cb25-3"><a href="practice.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb25-4"><a href="practice.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="practice.html#cb31-1" aria-hidden="true" tabindex="-1"></a>backup_options <span class="ot">&lt;-</span> <span class="fu">options</span>()</span>
+<span id="cb31-2"><a href="practice.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error=</span>traceback)</span>
+<span id="cb31-3"><a href="practice.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb31-4"><a href="practice.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
 <p>Here we also took a backup of the default options. This is usually a good idea as changing options will change the options for the whole R session.</p>
 </div>
 </div>
@@ -321,7 +323,7 @@ The function we’re investigating is highlighted.</li>
 <li>Quit, <code>Q</code>: Exit the browser and the current evaluation and return to the top-level prompt.</li>
 </ul>
 <p>RStudio also has a toolbar in debugger console with buttons for next (<code>n</code>), step (<code>s</code>), finish (<code>f</code>), continue (<code>c</code>) and stop (<code>Q</code>).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-25"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
 <img src="https://github.com/hadley/adv-r/raw/master/screenshots/debug-toolbar.png" alt="RStudio debugger toolbar. Source: Advanced R" width="70%" />
 <p class="caption">
 Figure 4.1: RStudio debugger toolbar. Source: Advanced R
@@ -336,18 +338,18 @@ Figure 4.1: RStudio debugger toolbar. Source: Advanced R
 function <code>f</code> is called. You can unset this variable with <code>undebug</code>.</p>
 <p>Alternatively, you can use <code>debugonce</code> to launch the debugger once for a function. This is
 especially useful if the function you want to debug is inside a for-loop. You can try this with the following:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="practice.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(g)</span>
-<span id="cb26-2"><a href="practice.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="practice.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(g)</span>
+<span id="cb32-2"><a href="practice.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="launching-browser-in-code" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Launching browser in code<a href="practice.html#launching-browser-in-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>One can also launch the interactive browser by specifying <code>browser()</code> is the code:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="practice.html#cb27-1" aria-hidden="true" tabindex="-1"></a>g_browse <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb27-2"><a href="practice.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">browser</span>()</span>
-<span id="cb27-3"><a href="practice.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
-<span id="cb27-4"><a href="practice.html#cb27-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-5"><a href="practice.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">g_browse</span>(x))</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="practice.html#cb33-1" aria-hidden="true" tabindex="-1"></a>g_browse <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb33-2"><a href="practice.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">browser</span>()</span>
+<span id="cb33-3"><a href="practice.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
+<span id="cb33-4"><a href="practice.html#cb33-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-5"><a href="practice.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">g_browse</span>(x))</span></code></pre></div>
 <p>This is very useful when you’re writing new code and you want to check what the function does line-by-line.</p>
 </div>
 <div id="setting-breakpoint-in-editor" class="section level2 hasAnchor" number="4.4">
@@ -359,9 +361,9 @@ This will put a red dot next to the line number. This is a break point which wil
 <div id="launching-debugger-with-recover" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Launching debugger with <code>recover()</code><a href="practice.html#launching-debugger-with-recover" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You can also launch the debugger when an error occurs by setting the error option to use <code>recover()</code>:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="practice.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">option</span>(<span class="at">error=</span>recover)</span>
-<span id="cb28-2"><a href="practice.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb28-3"><a href="practice.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="practice.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">option</span>(<span class="at">error=</span>recover)</span>
+<span id="cb34-2"><a href="practice.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb34-3"><a href="practice.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
 <p>Again, we’ll want to restore the previous settings once we’re finished.</p>
 <p>You can also set a similar behaviour in RStudio by checking
 <strong>Debug</strong> -&gt; <strong>On Error</strong> -&gt; <strong>Break in Code</strong> from the top menu.</p>
@@ -373,15 +375,64 @@ uncheck <em>Use debug error handler only when my code contains errors</em> in
 </div>
 <div id="more-tools" class="section level2 hasAnchor" number="4.6">
 <h2><span class="header-section-number">4.6</span> More tools<a href="practice.html#more-tools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are plenty of more tools like <code>trace</code>, <code>utils::setBreakpoint()</code> etc. See <a href="https://adv-r.hadley.nz/debugging.html">debugging-chapter from Advanced R</a><span class="citation"><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></span> for more information on these.</p>
+<p>There are plenty of more tools like <code>trace</code>, <code>utils::setBreakpoint()</code> etc. See <a href="https://adv-r.hadley.nz/debugging.html">debugging-chapter from Advanced R</a><span class="citation"><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></span> for more information on these.</p>
+</div>
+<div id="exercise-k-means-clustering" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Exercise: k-means clustering<a href="practice.html#exercise-k-means-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s try out interactive debugging with a simple machine learning problem: using k-means clustering on the famous iris-dataset.</p>
+<p>In this exercise there are four bugs hidden in the code. Try to use debugging tools to spot them out.
+The bugs should appear in order, so if you fix one, you can continue to the next.</p>
+<p>This example is available here: <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R">exercise-k-means.R</a>.
+Hints for each of the problems are available here:
+<a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-hints.txt">exercise-k-means-hints.txt</a>.
+Solution is available here:
+<a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R">exercise-k-means-solution.R</a>.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="practice.html#cb35-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-2"><a href="practice.html#cb35-2" aria-hidden="true" tabindex="-1"></a>normalize_standard <span class="ot">&lt;-</span> <span class="cf">function</span>(dataset) {</span>
+<span id="cb35-3"><a href="practice.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normalizes each column in the dataset to standard normalization</span></span>
+<span id="cb35-4"><a href="practice.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/Standard_score</span></span>
+<span id="cb35-5"><a href="practice.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  normalized_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb35-6"><a href="practice.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (column <span class="cf">in</span> <span class="fu">colnames</span>(dataset)) {</span>
+<span id="cb35-7"><a href="practice.html#cb35-7" aria-hidden="true" tabindex="-1"></a>    data_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(dataset[[column]])</span>
+<span id="cb35-8"><a href="practice.html#cb35-8" aria-hidden="true" tabindex="-1"></a>    data_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(dataset[column])</span>
+<span id="cb35-9"><a href="practice.html#cb35-9" aria-hidden="true" tabindex="-1"></a>    normalized_data[[column]] <span class="ot">&lt;-</span> ((dataset[[column]] <span class="sc">-</span> data_mean))<span class="sc">/</span>data_sd</span>
+<span id="cb35-10"><a href="practice.html#cb35-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb35-11"><a href="practice.html#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(normalized_data)</span>
+<span id="cb35-12"><a href="practice.html#cb35-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-13"><a href="practice.html#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="practice.html#cb35-14" aria-hidden="true" tabindex="-1"></a>kmeans_iris <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb35-15"><a href="practice.html#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load data</span></span>
+<span id="cb35-16"><a href="practice.html#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data</span>(iris)</span>
+<span id="cb35-17"><a href="practice.html#cb35-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-18"><a href="practice.html#cb35-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rename iris to some other variable</span></span>
+<span id="cb35-19"><a href="practice.html#cb35-19" aria-hidden="true" tabindex="-1"></a>  iris_data <span class="ot">&lt;-</span> iris</span>
+<span id="cb35-20"><a href="practice.html#cb35-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-21"><a href="practice.html#cb35-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normalize data</span></span>
+<span id="cb35-22"><a href="practice.html#cb35-22" aria-hidden="true" tabindex="-1"></a>  iris_normalized <span class="ot">&lt;-</span> <span class="fu">normalize_standard</span>(iris_data)</span>
+<span id="cb35-23"><a href="practice.html#cb35-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-24"><a href="practice.html#cb35-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Take species out</span></span>
+<span id="cb35-25"><a href="practice.html#cb35-25" aria-hidden="true" tabindex="-1"></a>  species <span class="ot">&lt;-</span> iris_data<span class="sc">$</span>Species</span>
+<span id="cb35-26"><a href="practice.html#cb35-26" aria-hidden="true" tabindex="-1"></a>  iris_data<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb35-27"><a href="practice.html#cb35-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-28"><a href="practice.html#cb35-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate kmeans clustering</span></span>
+<span id="cb35-29"><a href="practice.html#cb35-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/K-means_clustering</span></span>
+<span id="cb35-30"><a href="practice.html#cb35-30" aria-hidden="true" tabindex="-1"></a>  clustering <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris_normalized, <span class="dv">3</span>)</span>
+<span id="cb35-31"><a href="practice.html#cb35-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-32"><a href="practice.html#cb35-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate confusion matrix</span></span>
+<span id="cb35-33"><a href="practice.html#cb35-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/Confusion_matrix#Confusion_matrices_with_more_than_two_categories</span></span>
+<span id="cb35-34"><a href="practice.html#cb35-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(species, clustering<span class="sc">$</span>clusters)</span>
+<span id="cb35-35"><a href="practice.html#cb35-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-36"><a href="practice.html#cb35-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-37"><a href="practice.html#cb35-37" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">kmeans_iris</span>())</span>
+<span id="cb35-38"><a href="practice.html#cb35-38" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in is.data.frame(x): (list) object cannot be coerced to type &#39;double&#39;</span></span></code></pre></div>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="8">
-<li id="fn8"><p>Wickham, <em>Advanced r</em>.<a href="practice.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>Wickham.<a href="practice.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<ol start="10">
+<li id="fn10"><p>Wickham, <em>Advanced r</em>.<a href="practice.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>Wickham.<a href="practice.html#fnref11" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
