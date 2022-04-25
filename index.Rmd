@@ -14,18 +14,28 @@ output: html_notebook
 
 # About this course
 
-This course is a part of [How to debug code](https://scicomp.aalto.fi/training/scip/debugging-2022/)-course by Aalto Scientific Computing.
+This course is a part of
+[How to debug code](https://scicomp.aalto.fi/training/scip/debugging-2022/)-course
+by Aalto Scientific Computing.
 
 The course structure and some of the material is adapted from the
 [Python part of the debugging course](https://aaltoscicomp.github.io/python-debugging).
 
 Most of the R material is constructed from various books and blog posts available online.
 Reading this material for more in-depth explanation of concepts shown in this course
-is highly recommended.
+is highly recommended. [Advanced R by Hadley Wickham](https://adv-r.hadley.nz/)[@wickham2019advanced]
+especially cannot be recommended enough.
 
 ## Requirements
 
-This course utilizes [RStudio IDE](https://www.rstudio.com/) as it provides easy access for many debugging tools.
+This course utilizes [RStudio IDE](https://www.rstudio.com/) as it provides easy access
+for many debugging tools.
+
+[sloop](https://cran.r-project.org/web/packages/sloop/index.html)-package[@R-sloop] is used
+to check some R object features:
+```{r, eval=FALSE}
+install.packages("sloop")
+```
 
 
 ```{r include=FALSE}

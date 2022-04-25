@@ -35,7 +35,7 @@ f(-1)
 ```
 This example is available here: [missing-variables.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R).
 
-Opening the file with Rstudio and sourcing the file will return the following kind of an error:
+Opening the file with RStudio and sourcing the file will return the following kind of an error:
 
 ![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables.png)
 
@@ -45,7 +45,8 @@ Now clicking the **Show traceback**-button will expand the traceback:
 
 This view will quickly show that the error comes from the `g(x)`-function call in line #13. 
 
-Sometimes lazy evaluation can make reading the call stack complicated. Here we have few additional functions that are called in the argument definition:
+Sometimes lazy evaluation can make reading the call stack complicated.
+Let's have a few additional functions that are called in the argument definition:
 
 ```{r, collapse=TRUE, error=TRUE}
 i <- function() {
@@ -70,9 +71,9 @@ Of course, this is not something you want to do generally. Lazy evaluation is go
 ![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-nonlazy-evaluation.png)
 
 
-### Traceback outside of Rstudio editor
+### Traceback outside of RStudio editor
 
-If you run the code in R console in Rstudio or in a separate interpreter you might not get the **Show Traceback**-prompt.
+If you run the code in R console in RStudio or in a separate interpreter you might not get the **Show Traceback**-prompt.
 In those situations you can use the `traceback()`-function to get the trace. You can try it out with the following test in the console:
 ```{r, eval=FALSE}
 f(-1)
@@ -89,14 +90,15 @@ Here we also took a backup of the default options. This is usually a good idea a
 
 ## Interactive debugger
 
-### Using Rstudio's "Rerun with Debug"
+### Launching debugger with RStudio's "Rerun with Debug"
 
-Rstudio can launch you a debugger at the location where the error occured. If you source the file again and launch the debugger with **Rerun with Debug**, you'll get an interactive debugger that looks something like this:
+RStudio can launch you a debugger at the location where the error occured. If you source the file again and launch the debugger with **Rerun with Debug**, you'll get an interactive debugger that looks something like this:
 
 ![](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-run-with-debug.png)
 
 This view has many areas of interest:
-- On the top left Rstudio will open the source code of the problematic function
+
+- On the top left RStudio will open the source code of the problematic function
   and it tries to highlight the line that causes the error.
 - On the top right we have an environment browser that shows what variables are defined inside
   the `g()`-function's environment.
@@ -104,29 +106,45 @@ This view has many areas of interest:
   The function we're investigating is highlighted.
 - On the bottom left we have the interactive debugger open in the console.
 
+### Debugger commands
 
+The interactive debugger console has multiple commands (more info available [here](https://rdrr.io/r/base/browser.html)):
+
+- Continue, `c` or `cont`: Exit the browser and continue execution at the next statement.
+- Finish, `f`: Finish execution of the current loop or function
+- Help, `help`: Print this list of commands
+- Next, `n` : Evaluate the next statement, stepping over function calls. For byte compiled functions interrupted by browser calls, n is equivalent to c.
+- Step, `s`: Evaluate the next statement, stepping into function calls. Again, byte compiled functions make s equivalent to c.
+- Where, `where`: Print a stack trace of all active function calls.
+- Resume,  `r`: Invoke a "resume" restart if one is available; interpreted as an R expression otherwise. Typically "resume" restarts are established for continuing from user interrupts.
+- Quit, `Q`: Exit the browser and the current evaluation and return to the top-level prompt.
+
+RStudio also has a toolbar in debugger console with buttons for next (`n`), step (`s`), finish (`f`), continue (`c`) and stop (`Q`).
+
+```{r, fig.cap="RStudio debugger toolbar. Source: Advanced R", out.width='70%', echo=FALSE}
+knitr::include_graphics('https://github.com/hadley/adv-r/raw/master/screenshots/debug-toolbar.png')
+```
+
+In addition to these commands one can run arbitrary R-commands to list variables, test their values etc.
 
 ### `debug` and `debugonce`
 
-You can also launch debugger from the console with `debug`- and `debugonce`-functions.
+You can also launch debugger from the console with `debug()`- and `debugonce()`-functions.
 
 `debug(f)` will set a permanent flag that will cause a debugger to be launched whenever
 function `f` is called. You can unset this variable with `undebug`.
 
-Alternatively, you can use `debugonce` to launch the debugger once in a function. This is
-especially useful if the function you want to debug is inside a for-loop.
+Alternatively, you can use `debugonce` to launch the debugger once for a function. This is
+especially useful if the function you want to debug is inside a for-loop. You can try this with the following:
 
 ```{r, eval=FALSE}
 debugonce(g)
 f(-1)
 ```
 
+## Launching browser in code
 
-## Quick debugging with environment browser
-
-Finding the function that causes the error is one thing, but examining what caused is another. For quick debugging we can use the environment browser.
-
-One can launch the interactive browser by specifying `browser()` is the code:
+One can also launch the interactive browser by specifying `browser()` is the code:
 ```{r, eval=FALSE}
 g_browse <- function(x) {
   browser()
@@ -134,4 +152,36 @@ g_browse <- function(x) {
 }
 f(-1, y=g_browse(x))
 ```
+
+This is very useful when you're writing new code and you want to check what the function does line-by-line.
+
+## Setting breakpoint in editor
+
+In RStudio editor you can also set a temporary breakpoint by clicking to the left of the line number.
+This will put a red dot next to the line number. This is a break point which will acts like a `browser()`-call.
+
+Setting breakpoints is even faster way of debugging code while you're developing it.
+
+## Launching debugger with `recover()`
+
+You can also launch the debugger when an error occurs by setting the error option to use `recover()`:
+```{r, eval=FALSE}
+option(error=recover)
+f(-1)
+options(backup_options)
+```
+Again, we'll want to restore the previous settings once we're finished.
+
+You can also set a similar behaviour in RStudio by checking
+**Debug** -> **On Error** -> **Break in Code** from the top menu.
+
+RStudio will try to limit the debugger launching to functions that are written by you.
+In some cases, e.g. if you give wrong arguments to a packaged function, this will result in a situation where
+you do not get a debugger when you want it. To bypass RStudio's check, you'll need to
+uncheck *Use debug error handler only when my code contains errors* in
+**Tools** -> **Global Options** -> **General**.
+
+## More tools
+
+There are plenty of more tools like `trace`, `utils::setBreakpoint()` etc. See [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html)[@wickham2019advanced] for more information on these.
 

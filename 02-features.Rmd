@@ -138,7 +138,7 @@ For more info, see
 
 ### Base types are extended using object-oriented (OO) programming
 
-Examples in this section utilize the [sloop](https://cran.r-project.org/web/packages/sloop/index.html)[@R-sloop]-package
+Examples in this section utilize the [sloop](https://cran.r-project.org/web/packages/sloop/index.html)-package[@R-sloop]
 for finding more information on objects. You can install it with:
 ```{r, eval=FALSE}
 install.packages("sloop")
