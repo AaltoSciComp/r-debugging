@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 R features relevant for debugging | Debugging in practice</title>
+  <title>3 R features relevant for debugging | Execises</title>
   <meta name="description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 R features relevant for debugging | Debugging in practice" />
+  <meta property="og:title" content="3 R features relevant for debugging | Execises" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 R features relevant for debugging | Debugging in practice" />
+  <meta name="twitter:title" content="3 R features relevant for debugging | Execises" />
   
   <meta name="twitter:description" content="Materials for Aalto Scientific Computing’s How to debug-course, R part" />
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="whatis.html"/>
-<link rel="next" href="practice.html"/>
+<link rel="next" href="debugging.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -188,24 +188,33 @@ div.csl-indent {
 <li class="chapter" data-level="3.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="practice.html"><a href="practice.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
+<li class="chapter" data-level="4" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="practice.html"><a href="practice.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a>
+<li class="chapter" data-level="4.1" data-path="debugging.html"><a href="debugging.html#tracing-errors"><i class="fa fa-check"></i><b>4.1</b> Tracing errors</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="practice.html"><a href="practice.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
-<li class="chapter" data-level="4.1.2" data-path="practice.html"><a href="practice.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of RStudio editor</a></li>
+<li class="chapter" data-level="4.1.1" data-path="debugging.html"><a href="debugging.html#traceback"><i class="fa fa-check"></i><b>4.1.1</b> Traceback</a></li>
+<li class="chapter" data-level="4.1.2" data-path="debugging.html"><a href="debugging.html#traceback-outside-of-rstudio-editor"><i class="fa fa-check"></i><b>4.1.2</b> Traceback outside of RStudio editor</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="practice.html"><a href="practice.html#interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Interactive debugger</a>
+<li class="chapter" data-level="4.2" data-path="debugging.html"><a href="debugging.html#interactive-debugger"><i class="fa fa-check"></i><b>4.2</b> Interactive debugger</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="practice.html"><a href="practice.html#launching-debugger-with-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Launching debugger with RStudio’s “Rerun with Debug”</a></li>
-<li class="chapter" data-level="4.2.2" data-path="practice.html"><a href="practice.html#debugger-commands"><i class="fa fa-check"></i><b>4.2.2</b> Debugger commands</a></li>
-<li class="chapter" data-level="4.2.3" data-path="practice.html"><a href="practice.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.3</b> <code>debug</code> and <code>debugonce</code></a></li>
+<li class="chapter" data-level="4.2.1" data-path="debugging.html"><a href="debugging.html#launching-debugger-with-rstudios-rerun-with-debug"><i class="fa fa-check"></i><b>4.2.1</b> Launching debugger with RStudio’s “Rerun with Debug”</a></li>
+<li class="chapter" data-level="4.2.2" data-path="debugging.html"><a href="debugging.html#debugger-commands"><i class="fa fa-check"></i><b>4.2.2</b> Debugger commands</a></li>
+<li class="chapter" data-level="4.2.3" data-path="debugging.html"><a href="debugging.html#debug-and-debugonce"><i class="fa fa-check"></i><b>4.2.3</b> <code>debug</code> and <code>debugonce</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="practice.html"><a href="practice.html#launching-browser-in-code"><i class="fa fa-check"></i><b>4.3</b> Launching browser in code</a></li>
-<li class="chapter" data-level="4.4" data-path="practice.html"><a href="practice.html#setting-breakpoint-in-editor"><i class="fa fa-check"></i><b>4.4</b> Setting breakpoint in editor</a></li>
-<li class="chapter" data-level="4.5" data-path="practice.html"><a href="practice.html#launching-debugger-with-recover"><i class="fa fa-check"></i><b>4.5</b> Launching debugger with <code>recover()</code></a></li>
-<li class="chapter" data-level="4.6" data-path="practice.html"><a href="practice.html#more-tools"><i class="fa fa-check"></i><b>4.6</b> More tools</a></li>
-<li class="chapter" data-level="4.7" data-path="practice.html"><a href="practice.html#exercise-k-means-clustering"><i class="fa fa-check"></i><b>4.7</b> Exercise: k-means clustering</a></li>
+<li class="chapter" data-level="4.3" data-path="debugging.html"><a href="debugging.html#launching-browser-in-code"><i class="fa fa-check"></i><b>4.3</b> Launching browser in code</a></li>
+<li class="chapter" data-level="4.4" data-path="debugging.html"><a href="debugging.html#setting-breakpoint-in-editor"><i class="fa fa-check"></i><b>4.4</b> Setting breakpoint in editor</a></li>
+<li class="chapter" data-level="4.5" data-path="debugging.html"><a href="debugging.html#launching-debugger-with-recover"><i class="fa fa-check"></i><b>4.5</b> Launching debugger with <code>recover()</code></a></li>
+<li class="chapter" data-level="4.6" data-path="debugging.html"><a href="debugging.html#more-tools-for-interactive-debugging"><i class="fa fa-check"></i><b>4.6</b> More tools for interactive debugging</a></li>
+<li class="chapter" data-level="4.7" data-path="debugging.html"><a href="debugging.html#noninteractive"><i class="fa fa-check"></i><b>4.7</b> Non-interactive debugging</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="debugging.html"><a href="debugging.html#print-debugging"><i class="fa fa-check"></i><b>4.7.1</b> Print debugging</a></li>
+<li class="chapter" data-level="4.7.2" data-path="debugging.html"><a href="debugging.html#dump.frames"><i class="fa fa-check"></i><b>4.7.2</b> <code>dump.frames()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>5</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="exercises.html"><a href="exercises.html#exercise-on-interactive-debugging"><i class="fa fa-check"></i><b>5.1</b> Exercise on interactive debugging</a></li>
+<li class="chapter" data-level="5.2" data-path="exercises.html"><a href="exercises.html#exercise-on-non-interactive-debugging"><i class="fa fa-check"></i><b>5.2</b> Exercise on non-interactive debugging</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -220,7 +229,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Debugging in practice</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Execises</a>
           </h1>
         </div>
 
@@ -274,7 +283,7 @@ done in terms of functions that operate on objects and which return a new
 object. These function calls are then often chained together
 and vectorized with <code>apply</code>-family of functions.</p>
 <p>For more info, see
-<a href="https://adv-r.hadley.nz/fp.html">this chapter of Advanced R</a>.</p>
+<a href="https://adv-r.hadley.nz/fp.html">this chapter of Advanced R</a>.<span class="citation"><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></span></p>
 </div>
 <div id="lazy-evaluation" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Lazy evaluation<a href="features.html#lazy-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -409,7 +418,7 @@ There are two types of vectors in R: <strong>atomic vectors</strong> and <strong
 <span id="cb13-2"><a href="features.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2)</span>
 <span id="cb13-3"><a href="features.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
 <span id="cb13-4"><a href="features.html#cb13-4" aria-hidden="true" tabindex="-1"></a>x_list2<span class="sc">$</span>x_vector2 <span class="ot">&lt;-</span> x_vector2</span>
-<span id="cb13-5"><a href="features.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## tracemem[0x5587c20be520 -&gt; 0x5587c27fbc58]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; render_cur_session &lt;Anonymous&gt;</span></span>
+<span id="cb13-5"><a href="features.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## tracemem[0x55a25bd93970 -&gt; 0x55a25c4d5918]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; render_cur_session &lt;Anonymous&gt;</span></span>
 <span id="cb13-6"><a href="features.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2)</span>
 <span id="cb13-7"><a href="features.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
 <span id="cb13-8"><a href="features.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list<span class="sc">$</span>x_vector) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2<span class="sc">$</span>x_vector)</span>
@@ -445,11 +454,11 @@ of a data frame gives the number of columns.</li>
 <p><code>tibble</code> is a modern drop-in replacement for <code>data.frame</code> that is highly
 recommended for its usability.
 For more information on tibbles, see
-<a href="https://tibble.tidyverse.org/">the packages web page</a>.<span class="citation"><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></span></p>
+<a href="https://tibble.tidyverse.org/">the packages web page</a>.<span class="citation"><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></span></p>
 <p><code>data.table</code> is another popular alternative for <code>data.frame</code>. It has its own
 usability enhancements and it scales better for big data than a normal data frame.
 For more information on <code>data.table</code>, see
-<a href="https://tibble.tidyverse.org/">the packages web page</a>.<span class="citation"><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></span></p>
+<a href="https://tibble.tidyverse.org/">the packages web page</a>.<span class="citation"><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></span></p>
 <p>For more info on vectors, lists and data frames, see
 <a href="https://adv-r.hadley.nz/vectors-chap.html">this chapter of Advanced R</a>.</p>
 </div>
@@ -492,7 +501,7 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <p>There are multiple OO paradigms in R:
 - <a href="https://adv-r.hadley.nz/s3.html">S3</a>: Oldest and simplest system. Most of R OO-objects are S3 objects.
 - <a href="https://adv-r.hadley.nz/s4.html">S4</a>: More advanced version of S3. Heavily used by the <a href="https://www.bioconductor.org/">Bioconductor</a>-project.
-- <a href="https://adv-r.hadley.nz/r6.html">R6</a>: More like other OO languages. Improved version on R’s feature called <a href="https://www.rdocumentation.org/packages/methods/versions/3.6.2/topics/ReferenceClasses">reference classes</a>. See <a href="https://r6.r-lib.org/">R6 manual for more information</a><span class="citation"><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></span>.</p>
+- <a href="https://adv-r.hadley.nz/r6.html">R6</a>: More like other OO languages. Improved version on R’s feature called <a href="https://www.rdocumentation.org/packages/methods/versions/3.6.2/topics/ReferenceClasses">reference classes</a>. See <a href="https://r6.r-lib.org/">R6 manual for more information</a><span class="citation"><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></span>.</p>
 </div>
 <div id="method-dispatch" class="section level3 hasAnchor" number="3.3.4">
 <h3><span class="header-section-number">3.3.4</span> Method dispatch<a href="features.html#method-dispatch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -553,12 +562,12 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb22-10"><a href="features.html#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-11"><a href="features.html#cb22-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
 <span id="cb22-12"><a href="features.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb22-13"><a href="features.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.11201    10.00144</span></span></code></pre></div>
+<span id="cb22-13"><a href="features.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.00054     9.99278</span></span></code></pre></div>
 <p>After this, one might do a predictive fit:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="features.html#cb23-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
 <span id="cb23-2"><a href="features.html#cb23-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
-<span id="cb23-3"><a href="features.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.1105673  9.8908723 19.8923119 29.8937516 39.8951912 49.8966309</span></span>
-<span id="cb23-4"><a href="features.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 59.8980705 69.8995101 79.9009498 89.9023894</span></span></code></pre></div>
+<span id="cb23-3"><a href="features.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.007755241  9.985024598 19.977804436 29.970584274 39.963364112</span></span>
+<span id="cb23-4"><a href="features.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [6] 49.956143951 59.948923789 69.941703627 79.934483466 89.927263304</span></span></code></pre></div>
 <p>However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function <code>predict</code> for models that support it. This will allow the model to stay as an S3 object:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="features.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
 <span id="cb24-2"><a href="features.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
@@ -572,10 +581,10 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb24-10"><a href="features.html#cb24-10" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(predict)</span>
 <span id="cb24-11"><a href="features.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
 <span id="cb24-12"><a href="features.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
-<span id="cb24-13"><a href="features.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">##          1          2          3          4          5          6          7 </span></span>
-<span id="cb24-14"><a href="features.html#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.1105673  9.8908723 19.8923119 29.8937516 39.8951912 49.8966309 59.8980705 </span></span>
-<span id="cb24-15"><a href="features.html#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">##          8          9         10 </span></span>
-<span id="cb24-16"><a href="features.html#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 69.8995101 79.9009498 89.9023894</span></span></code></pre></div>
+<span id="cb24-13"><a href="features.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">##            1            2            3            4            5            6 </span></span>
+<span id="cb24-14"><a href="features.html#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.007755241  9.985024598 19.977804436 29.970584274 39.963364112 49.956143951 </span></span>
+<span id="cb24-15"><a href="features.html#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">##            7            8            9           10 </span></span>
+<span id="cb24-16"><a href="features.html#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 59.948923789 69.941703627 79.934483466 89.927263304</span></span></code></pre></div>
 <p>Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, <code>predict</code> can operate on multiple different models with corresponding methods:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="features.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
 <pre><code>##  [1] predict.ar*                predict.Arima*            
@@ -598,11 +607,11 @@ utilize R’s <a href="https://cran.r-project.org/doc/manuals/R-exts.html">API f
 Common used languages are C, C++ and Fortran. Reason for this is speed provided by these lower´
 level languages.</p>
 <p>However, this API can be very complicated and thus most new packages use C/C++ with
-<a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>-package.<span class="citation"><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></span></p>
+<a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>-package.<span class="citation"><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></span></p>
 <p>This means that during installation many R libraries need C and C++ compilers and external libraries,
 which can result in various errors if you lack said requirements.</p>
-<p>Debugging <code>Rcpp</code>-code requires one to utilize C/C++ debuggers. For more information one can look for example at <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">this blog post</a>.<span class="citation"><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></span></p>
-<p>For more information on Rcpp, one can check <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a><span class="citation"><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></span>, <a href="https://adv-r.hadley.nz/rcpp.html">this chapter in Advanced R</a></p>
+<p>Debugging <code>Rcpp</code>-code requires one to utilize C/C++ debuggers. For more information one can look for example at <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">this blog post</a>.<span class="citation"><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></span></p>
+<p>For more information on Rcpp, one can check <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a><span class="citation"><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></span>, <a href="https://adv-r.hadley.nz/rcpp.html">this chapter in Advanced R</a></p>
 
 </div>
 </div>
@@ -610,12 +619,13 @@ which can result in various errors if you lack said requirements.</p>
 <div class="footnotes">
 <hr />
 <ol start="3">
-<li id="fn3"><p>Kirill Müller and Hadley Wickham, <em>Tibble: Simple Data Frames</em>, 2021, <a href="https://CRAN.R-project.org/package=tibble" role="doc-biblioref">https://CRAN.R-project.org/package=tibble</a>.<a href="features.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p><strong>R-data.table?</strong><a href="features.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Winston Chang, <em>R6: Encapsulated Classes with Reference Semantics</em>, 2022.<a href="features.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>Dirk Eddelbuettel et al., <em>Rcpp: Seamless r and c++ Integration</em>, 2022, <a href="https://CRAN.R-project.org/package=Rcpp" role="doc-biblioref">https://CRAN.R-project.org/package=Rcpp</a>.<a href="features.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>Davis Vaughan, <span>“Debugging an r Package with c++,”</span> 2017, <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/" role="doc-biblioref">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.<a href="features.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>Masaki E. Tsuda, <em>Rcpp for Everyone</em>, 2020, <a href="https://teuder.github.io/rcpp4everyone_en/" role="doc-biblioref">https://teuder.github.io/rcpp4everyone_en/</a>.<a href="features.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Hadley Wickham, <em>Advanced r</em> (CRC press, 2019), <a href="https://adv-r.hadley.nz" role="doc-biblioref">https://adv-r.hadley.nz</a>.<a href="features.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Kirill Müller and Hadley Wickham, <em>Tibble: Simple Data Frames</em>, 2021, <a href="https://CRAN.R-project.org/package=tibble" role="doc-biblioref">https://CRAN.R-project.org/package=tibble</a>.<a href="features.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Matt Dowle and Arun Srinivasan, <em>Data.table: Extension of ‘Data.frame‘</em>, 2021, <a href="https://CRAN.R-project.org/package=data.table" role="doc-biblioref">https://CRAN.R-project.org/package=data.table</a>.<a href="features.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Winston Chang, <em>R6: Encapsulated Classes with Reference Semantics</em>, 2022.<a href="features.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Dirk Eddelbuettel et al., <em>Rcpp: Seamless r and c++ Integration</em>, 2022, <a href="https://CRAN.R-project.org/package=Rcpp" role="doc-biblioref">https://CRAN.R-project.org/package=Rcpp</a>.<a href="features.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Davis Vaughan, <span>“Debugging an r Package with c++,”</span> 2017, <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/" role="doc-biblioref">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.<a href="features.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Masaki E. Tsuda, <em>Rcpp for Everyone</em>, 2020, <a href="https://teuder.github.io/rcpp4everyone_en/" role="doc-biblioref">https://teuder.github.io/rcpp4everyone_en/</a>.<a href="features.html#fnref9" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -624,7 +634,7 @@ which can result in various errors if you lack said requirements.</p>
         </div>
       </div>
 <a href="whatis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="practice.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="debugging.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

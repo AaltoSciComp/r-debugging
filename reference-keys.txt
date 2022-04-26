@@ -17,7 +17,7 @@ base-types-are-extended-using-object-oriented-oo-programming
 method-dispatch
 libraries
 libraries-are-usually-compiled
-practice
+debugging
 tracing-errors
 traceback
 traceback-outside-of-rstudio-editor
@@ -28,5 +28,10 @@ debug-and-debugonce
 launching-browser-in-code
 setting-breakpoint-in-editor
 launching-debugger-with-recover
-more-tools
-exercise-k-means-clustering
+more-tools-for-interactive-debugging
+noninteractive
+print-debugging
+dump.frames
+exercises
+exercise-on-interactive-debugging
+exercise-on-non-interactive-debugging
