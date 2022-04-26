@@ -1,0 +1,2 @@
+1. Use dump.frames to dump the erroneous state. Use debugger() to find out which line caused the problem.
+2. Use print statements to check the state of the variables in check_survivability(). Are all assigned correctly?

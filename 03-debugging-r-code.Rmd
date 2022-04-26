@@ -1,12 +1,9 @@
 ---
-title: "Debugging in practice"
-bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-csl: chicago-fullnote-bibliography.csl
+title: "Debugging R code"
 output: html_notebook
 ---
 
-# Debugging R code {#practice}
+# Debugging R code {#debugging}
 
 This chapter follows the excellent [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html)[@wickham2019advanced].
 
@@ -182,60 +179,59 @@ you do not get a debugger when you want it. To bypass RStudio's check, you'll ne
 uncheck *Use debug error handler only when my code contains errors* in
 **Tools** -> **Global Options** -> **General**.
 
-## More tools
+## More tools for interactive debugging
 
-There are plenty of more tools like `trace`, `utils::setBreakpoint()` etc. See [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html)[@wickham2019advanced] for more information on these.
+There are plenty of more tools like `trace`, `utils::setBreakpoint()` etc. See [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html) for more information on these.
 
-## Exercise: k-means clustering
+## Non-interactive debugging {#noninteractive}
 
-Let's try out interactive debugging with a simple machine learning problem: using k-means clustering on the famous iris-dataset.
+Non-interactive usage is most common when one wants to run R code in a remote system,
+a virtual machine or a container. When running R code non-interactively it is usually
+a good idea to verify that the R installation is as similar as possible to the
+interactive session.
 
-In this exercise there are four bugs hidden in the code. Try to use debugging tools to spot them out.
-The bugs should appear in order, so if you fix one, you can continue to the next. 
+Using tool such as [renv](https://rstudio.github.io/renv/articles/renv.html) can make
+it easier to replicate the same environment by storing the list of required packages
+into a `renv.lock`-file.[@R-renv]
 
-This example is available here: [exercise-k-means.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R).
-Hints for each of the problems are available here:
-[exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-hints.txt).
-Solution is available here:
-[exercise-k-means-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R).
+Other things such as different package loading order, forgetting to load a package
+explicitly or setting some variables outside of the code into the environment
+can also create problems.
 
-```{r, collapse=TRUE, error=TRUE}
+### Print debugging
 
-normalize_standard <- function(dataset) {
-  # Normalizes each column in the dataset to standard normalization
-  # https://en.wikipedia.org/wiki/Standard_score
-  normalized_data <- data.frame()
-  for (column in colnames(dataset)) {
-    data_mean <- mean(dataset[[column]])
-    data_sd <- sd(dataset[column])
-    normalized_data[[column]] <- ((dataset[[column]] - data_mean))/data_sd
-  }
-  return(normalized_data)
+Print debugging is an age old debugging paradigm that usually works. Few well placed
+`cat`- or `print`- statements can usually tell a lot about the inner workings of the
+program.
+
+More advanced logging packages such as
+[logger](https://daroczig.github.io/logger/)[@R-logger],
+[lgr](https://s-fleck.github.io/lgr/)[@R-lgr] or
+[log4r](https://github.com/johnmyleswhite/log4r)[@R-log4r] can be very useful as well
+as you can leave many debug statements in your code, but print them only when needed.
+
+One can also utilize R's
+[save](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/save)-function
+to save environment variables for further inspection.
+
+### `dump.frames()`
+
+`dump.frames()` allows you to do a `recover()` on a code that was run non-interactively by
+saving the state of the program on error. One can then use interactive `debugger()` to look
+into the failed program state.
+
+The following example from the relevant section on [Advanced R](https://adv-r.hadley.nz/debugging.html#non-interactive-debugging) illustrates the idea perfectly:
+```{r, eval=FALSE}
+# In batch R process ----
+dump_and_quit <- function() {
+  # Save debugging info to file last.dump.rda
+  dump.frames(to.file = TRUE)
+  # Quit R with error status
+  q(status = 1)
 }
+options(error = dump_and_quit)
 
-kmeans_iris <- function() {
-  # Load data
-  data(iris)
-  
-  # Rename iris to some other variable
-  iris_data <- iris
-  
-  # Normalize data
-  iris_normalized <- normalize_standard(iris_data)
-  
-  # Take species out
-  species <- iris_data$Species
-  iris_data$Species <- NULL
-  
-  # Calculate kmeans clustering
-  # https://en.wikipedia.org/wiki/K-means_clustering
-  clustering <- kmeans(iris_normalized, 3)
-  
-  # Calculate confusion matrix
-  # https://en.wikipedia.org/wiki/Confusion_matrix#Confusion_matrices_with_more_than_two_categories
-  table(species, clustering$clusters)
-}
-
-print(kmeans_iris())
+# In a later interactive session ----
+load("last.dump.rda")
+debugger()
 ```
-

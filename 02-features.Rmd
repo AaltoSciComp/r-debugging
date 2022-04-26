@@ -1,8 +1,5 @@
 ---
 title: "R features relevant for debugging"
-bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-csl: chicago-fullnote-bibliography.csl
 output: html_notebook
 ---
 
@@ -37,7 +34,7 @@ object. These function calls are then often chained together
 and vectorized with ``apply``-family of functions.
 
 For more info, see
-[this chapter of Advanced R](https://adv-r.hadley.nz/fp.html).
+[this chapter of Advanced R](https://adv-r.hadley.nz/fp.html).[@wickham2019advanced]
 
 ### Lazy evaluation
 

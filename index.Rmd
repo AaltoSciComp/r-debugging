@@ -5,8 +5,8 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-csl: chicago-fullnote-bibliography.csl
+#biblio-style: apalike
+csl: chicago-fullnote-bibliography-including-subsequent.csl
 #link-citations: yes
 description: "Materials for Aalto Scientific Computing's How to debug-course, R part"
 output: html_notebook
@@ -41,6 +41,6 @@ install.packages("sloop")
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'sloop', 'tibble', 'data.table'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'sloop', 'tibble', 'renv', 'logger', 'lgr', 'log4r'
 ), 'packages.bib')
 ```

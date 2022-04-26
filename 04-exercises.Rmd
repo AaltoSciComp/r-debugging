@@ -1,0 +1,112 @@
+---
+title: "Execises"
+output: html_document
+---
+
+# Exercises
+
+## Exercise on interactive debugging
+
+Let's try out interactive debugging with a simple machine learning problem: using k-means clustering on the famous iris-dataset.
+
+In this exercise there are four bugs hidden in the code.
+Try to use debugging tools presented in [the debugging chapter](#debugging) to spot them out.
+The bugs should appear in order, so if you fix one, you can continue to the next. 
+
+This example is available here: [exercise-k-means.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R).
+Hints for each of the problems are available here:
+[exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-hints.txt).
+Solution is available here:
+[exercise-k-means-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-solution.R.R).
+
+```{r, collapse=TRUE, error=TRUE}
+normalize_standard <- function(dataset) {
+  # Normalizes each column in the dataset to standard normalization
+  # https://en.wikipedia.org/wiki/Standard_score
+  normalized_data <- data.frame()
+  for (column in colnames(dataset)) {
+    data_mean <- mean(dataset[[column]])
+    data_sd <- sd(dataset[column])
+    normalized_data[[column]] <- ((dataset[[column]] - data_mean))/data_sd
+  }
+  return(normalized_data)
+}
+
+kmeans_iris <- function() {
+  # Load data
+  data(iris)
+  
+  # Get a copy of the iris dataset
+  iris_data <- iris
+  
+  # Normalize data
+  iris_normalized <- normalize_standard(iris_data)
+  
+  # Take species out
+  species <- iris_data$Species
+  iris_data$Species <- NULL
+  
+  # Calculate kmeans clustering
+  # https://en.wikipedia.org/wiki/K-means_clustering
+  clustering <- kmeans(iris_normalized, 3)
+  
+  # Calculate confusion matrix
+  # https://en.wikipedia.org/wiki/Confusion_matrix#Confusion_matrices_with_more_than_two_categories
+  table(species, clustering$clusters)
+}
+
+print(kmeans_iris())
+```
+
+## Exercise on non-interactive debugging
+
+Let's try non-interactive debugging with another simple problem: calculating surviability among Titanic passengers based on different features.
+
+In this exercise there are two bugs hidden in the code. One of the bugs is a traditional
+error raising bug, but the other one is a functional one.
+Try to use debugging tools of the [non-interactive debugging](#noninteractive) section to
+find out the bugs.
+
+This example is available here: [exercise-titanic-survivability.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability.R).
+Hints for each of the problems are available here:
+[exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-hints.txt).
+Solution is available here:
+[exercise-titanic-survivability-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-solution.R).
+
+
+
+```{r, collapse=TRUE, error=TRUE}
+# Load titanic survivability data
+data(Titanic)
+
+titanic <- as.data.frame(Titanic)
+
+check_survivability <- function(feature) {
+  # Function for checking survivability per feature
+  
+  # Get the different feature levels
+  levels <- levels(as.factor(titanic[[feature]]))
+  
+  # Create output data frame
+  titanic_survivability <- data.frame(row.names=levels)
+  
+  # Calculate survivability per level
+  for (level in levels) {
+    level_data <- titanic[Titanic[[feature]] == level, ]
+    n_survived <- sum(level_data[level_data$Survived == 'Yes', 'Freq'])
+    n_died <- sum(level_data[level_data$Survived == 'No', 'Freq'])
+    titanic_survivability[levels, 'survivability'] <- n_survived / (n_survived + n_died)
+  }
+  return(titanic_survivability)
+}
+
+# Features to iterate over
+different_features <- c('Class', 'Sex', 'Age')
+
+# Analyze survivability per feature
+for (feature in different_features) {
+  cat(paste('Feature to check:', feature, '\n'))
+  print(check_survivability(feature))
+}
+```
+
