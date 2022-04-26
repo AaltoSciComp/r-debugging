@@ -1,4 +1,4 @@
-fig:unnamed-chunk-31
+fig:unnamed-chunk-34
 about-this-course
 requirements
 whatis
@@ -15,6 +15,7 @@ all-objects-in-r-have-a-base-type
 vectors-are-everywhere-and-they-are-immutable
 base-types-are-extended-using-object-oriented-oo-programming
 method-dispatch
+signals-and-error-handling
 libraries
 libraries-are-usually-compiled
 debugging

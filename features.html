@@ -183,9 +183,10 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.3</b> Base types are extended using object-oriented (OO) programming</a></li>
 <li class="chapter" data-level="3.3.4" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.4</b> Method dispatch</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
+<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#signals-and-error-handling"><i class="fa fa-check"></i><b>3.4</b> Signals and error handling</a></li>
+<li class="chapter" data-level="3.5" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.5</b> Libraries</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
+<li class="chapter" data-level="3.5.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.5.1</b> Libraries are usually compiled</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
@@ -418,7 +419,7 @@ There are two types of vectors in R: <strong>atomic vectors</strong> and <strong
 <span id="cb13-2"><a href="features.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2)</span>
 <span id="cb13-3"><a href="features.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
 <span id="cb13-4"><a href="features.html#cb13-4" aria-hidden="true" tabindex="-1"></a>x_list2<span class="sc">$</span>x_vector2 <span class="ot">&lt;-</span> x_vector2</span>
-<span id="cb13-5"><a href="features.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## tracemem[0x55a25bd93970 -&gt; 0x55a25c4d5918]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; render_cur_session &lt;Anonymous&gt;</span></span>
+<span id="cb13-5"><a href="features.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## tracemem[0x560d94ed7778 -&gt; 0x560d956184b8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; render_cur_session &lt;Anonymous&gt;</span></span>
 <span id="cb13-6"><a href="features.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2)</span>
 <span id="cb13-7"><a href="features.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
 <span id="cb13-8"><a href="features.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x_list<span class="sc">$</span>x_vector) <span class="sc">==</span> <span class="fu">tracemem</span>(x_list2<span class="sc">$</span>x_vector)</span>
@@ -562,12 +563,12 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb22-10"><a href="features.html#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-11"><a href="features.html#cb22-11" aria-hidden="true" tabindex="-1"></a>my_coefs</span>
 <span id="cb22-12"><a href="features.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb22-13"><a href="features.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.00054     9.99278</span></span></code></pre></div>
+<span id="cb22-13"><a href="features.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -10.05653    10.00564</span></span></code></pre></div>
 <p>After this, one might do a predictive fit:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="features.html#cb23-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> my_coefs[<span class="dv">2</span>] <span class="sc">*</span> x <span class="sc">+</span> my_coefs[<span class="dv">1</span>]</span>
 <span id="cb23-2"><a href="features.html#cb23-2" aria-hidden="true" tabindex="-1"></a>y_pred</span>
-<span id="cb23-3"><a href="features.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.007755241  9.985024598 19.977804436 29.970584274 39.963364112</span></span>
-<span id="cb23-4"><a href="features.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [6] 49.956143951 59.948923789 69.941703627 79.934483466 89.927263304</span></span></code></pre></div>
+<span id="cb23-3"><a href="features.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] -0.05088733  9.95475418 19.96039570 29.96603721 39.97167873 49.97732024</span></span>
+<span id="cb23-4"><a href="features.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] 59.98296176 69.98860327 79.99424479 89.99988630</span></span></code></pre></div>
 <p>However, coefficients do not contain all of the information that the model has. Instead of ripping the coefficients out from the object, one should utilize the S3 generic function <code>predict</code> for models that support it. This will allow the model to stay as an S3 object:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="features.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(my_model)</span>
 <span id="cb24-2"><a href="features.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## $names</span></span>
@@ -581,10 +582,10 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 <span id="cb24-10"><a href="features.html#cb24-10" aria-hidden="true" tabindex="-1"></a>sloop<span class="sc">::</span><span class="fu">ftype</span>(predict)</span>
 <span id="cb24-11"><a href="features.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;S3&quot;      &quot;generic&quot;</span></span>
 <span id="cb24-12"><a href="features.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(my_model)</span>
-<span id="cb24-13"><a href="features.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">##            1            2            3            4            5            6 </span></span>
-<span id="cb24-14"><a href="features.html#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.007755241  9.985024598 19.977804436 29.970584274 39.963364112 49.956143951 </span></span>
-<span id="cb24-15"><a href="features.html#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">##            7            8            9           10 </span></span>
-<span id="cb24-16"><a href="features.html#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 59.948923789 69.941703627 79.934483466 89.927263304</span></span></code></pre></div>
+<span id="cb24-13"><a href="features.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">##           1           2           3           4           5           6 </span></span>
+<span id="cb24-14"><a href="features.html#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.05088733  9.95475418 19.96039570 29.96603721 39.97167873 49.97732024 </span></span>
+<span id="cb24-15"><a href="features.html#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">##           7           8           9          10 </span></span>
+<span id="cb24-16"><a href="features.html#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 59.98296176 69.98860327 79.99424479 89.99988630</span></span></code></pre></div>
 <p>Utilizing these generic functions gives R great power, as one can use similar coding structures for various different models. For example, <code>predict</code> can operate on multiple different models with corresponding methods:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="features.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(predict)</span></code></pre></div>
 <pre><code>##  [1] predict.ar*                predict.Arima*            
@@ -598,20 +599,100 @@ whether the object is an OO object and <code>sloop::s3_class()</code> to get the
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 </div>
 </div>
-<div id="libraries" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Libraries<a href="features.html#libraries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="libraries-are-usually-compiled" class="section level3 hasAnchor" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Libraries are usually compiled<a href="features.html#libraries-are-usually-compiled" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="signals-and-error-handling" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Signals and error handling<a href="features.html#signals-and-error-handling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R has a robust system of messages, warnings and errors, that allow users
+to prevent erroneous behaviour.</p>
+<p>R has three different signal types:</p>
+<ul>
+<li>Messages: Messages are meant for informing the user that some action has been taken.</li>
+<li>Warnings: Warnings are meant to signal that not everything went correctly, but
+the program execution will continue.</li>
+<li>Errors: Errors indicate to R that something went wrong and the program execution should
+stop.</li>
+</ul>
+<p>To raise these signals, one can use the following functions:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="features.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&#39;This is a message&#39;</span>)</span>
+<span id="cb27-2"><a href="features.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="do">## This is a message</span></span>
+<span id="cb27-3"><a href="features.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">&#39;This is a warning&#39;</span>)</span>
+<span id="cb27-4"><a href="features.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning: This is a warning</span></span>
+<span id="cb27-5"><a href="features.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">&#39;This is an error&#39;</span>)</span>
+<span id="cb27-6"><a href="features.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in eval(expr, envir, enclos): This is an error</span></span></code></pre></div>
+<p>One can suppress these messages with <code>try()</code>, <code>suppressWarnings()</code> and <code>suppressMessages()</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="features.html#cb28-1" aria-hidden="true" tabindex="-1"></a>signalsender <span class="ot">&lt;-</span> <span class="cf">function</span>(signal_function, text) { <span class="fu">signal_function</span>(text) }</span>
+<span id="cb28-2"><a href="features.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">signalsender</span>(message, <span class="st">&#39;This is a message&#39;</span>)</span>
+<span id="cb28-3"><a href="features.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="do">## This is a message</span></span>
+<span id="cb28-4"><a href="features.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">signalsender</span>(message, <span class="st">&#39;This is a message&#39;</span>))</span>
+<span id="cb28-5"><a href="features.html#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="features.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">signalsender</span>(warning, <span class="st">&#39;This is a warning&#39;</span>)</span>
+<span id="cb28-7"><a href="features.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in signalsender(warning, &quot;This is a warning&quot;): This is a warning</span></span>
+<span id="cb28-8"><a href="features.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">signalsender</span>(warning, <span class="st">&#39;This is a warning&#39;</span>))</span>
+<span id="cb28-9"><a href="features.html#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="features.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">signalsender</span>(stop, <span class="st">&#39;This is an error&#39;</span>))</span>
+<span id="cb28-11"><a href="features.html#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in signalsender(stop, &quot;This is an error&quot;) : This is an error</span></span>
+<span id="cb28-12"><a href="features.html#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">signalsender</span>(stop, <span class="st">&#39;This is an error&#39;</span>), <span class="at">silent=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-13"><a href="features.html#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">signalsender</span>(stop, <span class="st">&#39;This is an error&#39;</span>)</span>
+<span id="cb28-14"><a href="features.html#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in signalsender(stop, &quot;This is an error&quot;): This is an error</span></span></code></pre></div>
+<p>By default <code>try</code> will still print that an error has occured, but it can be silenced.
+However, silencing errors is risky and should only be used when the reason for the error is
+known and expected.</p>
+<p>All of the signals have handlers: functions that react when the signals are raised.
+These handlers can be overwritten with <code>tryCatch()</code>- and <code>withCallingHandlers()</code>-functions:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="features.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>(</span>
+<span id="cb29-2"><a href="features.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">error =</span> <span class="cf">function</span>(cond) {</span>
+<span id="cb29-3"><a href="features.html#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="fu">paste</span>(<span class="st">&#39;Received an error</span><span class="sc">\n</span><span class="st">&#39;</span>, cond))</span>
+<span id="cb29-4"><a href="features.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb29-5"><a href="features.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">signalsender</span>(stop, <span class="st">&#39;Raise an error&#39;</span>)</span>
+<span id="cb29-6"><a href="features.html#cb29-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-7"><a href="features.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Received an error</span></span>
+<span id="cb29-8"><a href="features.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  Error in signalsender(stop, &quot;Raise an error&quot;): Raise an error</span></span>
+<span id="cb29-9"><a href="features.html#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">withCallingHandlers</span>(</span>
+<span id="cb29-10"><a href="features.html#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cf">function</span>(cond) {</span>
+<span id="cb29-11"><a href="features.html#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="st">&#39;I did not expect a message:</span><span class="sc">\n</span><span class="st">&#39;</span>, cond,<span class="st">&#39;</span><span class="sc">\n</span><span class="st">Raising an error!&#39;</span>), <span class="at">call.=</span><span class="cn">FALSE</span>)</span>
+<span id="cb29-12"><a href="features.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb29-13"><a href="features.html#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">signalsender</span>(message, <span class="st">&#39;Send a message&#39;</span>)</span>
+<span id="cb29-14"><a href="features.html#cb29-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-15"><a href="features.html#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Error: I did not expect a message:</span></span>
+<span id="cb29-16"><a href="features.html#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  simpleMessage in signal_function(text): Send a message</span></span>
+<span id="cb29-17"><a href="features.html#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb29-18"><a href="features.html#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  </span></span>
+<span id="cb29-19"><a href="features.html#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising an error!</span></span></code></pre></div>
+<p>There’s a difference between these two functions. From Advanced R:</p>
+<blockquote>
+<ul>
+<li><code>tryCatch()</code> defines exiting handlers; after the condition is handled, control returns to the context where tryCatch() was called. This makes tryCatch() most suitable for working with errors and interrupts, as these have to exit anyway.</li>
+<li><code>withCallingHandlers()</code> defines calling handlers; after the condition is captured control returns to the context where the condition was signalled. This makes it most suitable for working with non-error conditions.</li>
+</ul>
+</blockquote>
+<p>The difference is also well illustrated in the following quote from Advanced R:</p>
+<blockquote>
+<ul>
+<li>An exiting handler handles a signal like you handle a problem; it makes the problem go away.</li>
+<li>A calling handler handles a signal like you handle a car; the car still exists.</li>
+</ul>
+</blockquote>
+<p><a href="https://rlang.r-lib.org/">rlang</a>-package<span class="citation"><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></span> provides additional wrappers for these signals that
+can make error raising and handling easier. You can easily create your own custom error types with it.</p>
+<p>For more info on R’s error handling and on using <code>rlang</code>, see
+<a href="https://adv-r.hadley.nz/conditions.html">this chapter of Advanced R</a>.</p>
+</div>
+<div id="libraries" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Libraries<a href="features.html#libraries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="libraries-are-usually-compiled" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Libraries are usually compiled<a href="features.html#libraries-are-usually-compiled" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R libraries can be pure R or they can utilize other languages. Many R’s internal functions
 utilize R’s <a href="https://cran.r-project.org/doc/manuals/R-exts.html">API for writing extensions</a>.
 Common used languages are C, C++ and Fortran. Reason for this is speed provided by these lower´
 level languages.</p>
 <p>However, this API can be very complicated and thus most new packages use C/C++ with
-<a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>-package.<span class="citation"><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></span></p>
+<a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>-package.<span class="citation"><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></span></p>
 <p>This means that during installation many R libraries need C and C++ compilers and external libraries,
 which can result in various errors if you lack said requirements.</p>
-<p>Debugging <code>Rcpp</code>-code requires one to utilize C/C++ debuggers. For more information one can look for example at <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">this blog post</a>.<span class="citation"><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></span></p>
-<p>For more information on Rcpp, one can check <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a><span class="citation"><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></span>, <a href="https://adv-r.hadley.nz/rcpp.html">this chapter in Advanced R</a></p>
+<p>Debugging C or C++ code requires one to utilize C/C++ debuggers. For more information one
+can look for example at
+<a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/">this blog post</a><span class="citation"><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></span> or
+at the <a href="https://adv-r.hadley.nz/debugging.html#debug-compiled">various links</a> provided in Advanced R.</p>
+<p>For more information on Rcpp, one can check <a href="https://teuder.github.io/rcpp4everyone_en/">Rcpp for everyone</a><span class="citation"><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></span>, <a href="https://adv-r.hadley.nz/rcpp.html">this chapter in Advanced R</a></p>
 
 </div>
 </div>
@@ -623,9 +704,10 @@ which can result in various errors if you lack said requirements.</p>
 <li id="fn4"><p>Kirill Müller and Hadley Wickham, <em>Tibble: Simple Data Frames</em>, 2021, <a href="https://CRAN.R-project.org/package=tibble" role="doc-biblioref">https://CRAN.R-project.org/package=tibble</a>.<a href="features.html#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>Matt Dowle and Arun Srinivasan, <em>Data.table: Extension of ‘Data.frame‘</em>, 2021, <a href="https://CRAN.R-project.org/package=data.table" role="doc-biblioref">https://CRAN.R-project.org/package=data.table</a>.<a href="features.html#fnref5" class="footnote-back">↩︎</a></p></li>
 <li id="fn6"><p>Winston Chang, <em>R6: Encapsulated Classes with Reference Semantics</em>, 2022.<a href="features.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>Dirk Eddelbuettel et al., <em>Rcpp: Seamless r and c++ Integration</em>, 2022, <a href="https://CRAN.R-project.org/package=Rcpp" role="doc-biblioref">https://CRAN.R-project.org/package=Rcpp</a>.<a href="features.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>Davis Vaughan, <span>“Debugging an r Package with c++,”</span> 2017, <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/" role="doc-biblioref">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.<a href="features.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>Masaki E. Tsuda, <em>Rcpp for Everyone</em>, 2020, <a href="https://teuder.github.io/rcpp4everyone_en/" role="doc-biblioref">https://teuder.github.io/rcpp4everyone_en/</a>.<a href="features.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Lionel Henry and Hadley Wickham, <em>Rlang: Functions for Base Types and Core r and Tidyverse Features</em>, 2022, <a href="https://CRAN.R-project.org/package=rlang" role="doc-biblioref">https://CRAN.R-project.org/package=rlang</a>.<a href="features.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Dirk Eddelbuettel et al., <em>Rcpp: Seamless r and c++ Integration</em>, 2022, <a href="https://CRAN.R-project.org/package=Rcpp" role="doc-biblioref">https://CRAN.R-project.org/package=Rcpp</a>.<a href="features.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Davis Vaughan, <span>“Debugging an r Package with c++,”</span> 2017, <a href="https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/" role="doc-biblioref">https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/</a>.<a href="features.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>Masaki E. Tsuda, <em>Rcpp for Everyone</em>, 2020, <a href="https://teuder.github.io/rcpp4everyone_en/" role="doc-biblioref">https://teuder.github.io/rcpp4everyone_en/</a>.<a href="features.html#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

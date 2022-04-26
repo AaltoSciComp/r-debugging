@@ -183,9 +183,10 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.3</b> Base types are extended using object-oriented (OO) programming</a></li>
 <li class="chapter" data-level="3.3.4" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.4</b> Method dispatch</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
+<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#signals-and-error-handling"><i class="fa fa-check"></i><b>3.4</b> Signals and error handling</a></li>
+<li class="chapter" data-level="3.5" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.5</b> Libraries</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
+<li class="chapter" data-level="3.5.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.5.1</b> Libraries are usually compiled</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
@@ -250,43 +251,43 @@ Hints for each of the problems are available here:
 <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-hints.txt">exercise-k-means-hints.txt</a>.
 Solution is available here:
 <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-solution.R.R">exercise-k-means-solution.R</a>.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="exercises.html#cb36-1" aria-hidden="true" tabindex="-1"></a>normalize_standard <span class="ot">&lt;-</span> <span class="cf">function</span>(dataset) {</span>
-<span id="cb36-2"><a href="exercises.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normalizes each column in the dataset to standard normalization</span></span>
-<span id="cb36-3"><a href="exercises.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/Standard_score</span></span>
-<span id="cb36-4"><a href="exercises.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  normalized_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb36-5"><a href="exercises.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (column <span class="cf">in</span> <span class="fu">colnames</span>(dataset)) {</span>
-<span id="cb36-6"><a href="exercises.html#cb36-6" aria-hidden="true" tabindex="-1"></a>    data_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(dataset[[column]])</span>
-<span id="cb36-7"><a href="exercises.html#cb36-7" aria-hidden="true" tabindex="-1"></a>    data_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(dataset[column])</span>
-<span id="cb36-8"><a href="exercises.html#cb36-8" aria-hidden="true" tabindex="-1"></a>    normalized_data[[column]] <span class="ot">&lt;-</span> ((dataset[[column]] <span class="sc">-</span> data_mean))<span class="sc">/</span>data_sd</span>
-<span id="cb36-9"><a href="exercises.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb36-10"><a href="exercises.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(normalized_data)</span>
-<span id="cb36-11"><a href="exercises.html#cb36-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb36-12"><a href="exercises.html#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-13"><a href="exercises.html#cb36-13" aria-hidden="true" tabindex="-1"></a>kmeans_iris <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb36-14"><a href="exercises.html#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load data</span></span>
-<span id="cb36-15"><a href="exercises.html#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data</span>(iris)</span>
-<span id="cb36-16"><a href="exercises.html#cb36-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-17"><a href="exercises.html#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get a copy of the iris dataset</span></span>
-<span id="cb36-18"><a href="exercises.html#cb36-18" aria-hidden="true" tabindex="-1"></a>  iris_data <span class="ot">&lt;-</span> iris</span>
-<span id="cb36-19"><a href="exercises.html#cb36-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-20"><a href="exercises.html#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normalize data</span></span>
-<span id="cb36-21"><a href="exercises.html#cb36-21" aria-hidden="true" tabindex="-1"></a>  iris_normalized <span class="ot">&lt;-</span> <span class="fu">normalize_standard</span>(iris_data)</span>
-<span id="cb36-22"><a href="exercises.html#cb36-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-23"><a href="exercises.html#cb36-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Take species out</span></span>
-<span id="cb36-24"><a href="exercises.html#cb36-24" aria-hidden="true" tabindex="-1"></a>  species <span class="ot">&lt;-</span> iris_data<span class="sc">$</span>Species</span>
-<span id="cb36-25"><a href="exercises.html#cb36-25" aria-hidden="true" tabindex="-1"></a>  iris_data<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb36-26"><a href="exercises.html#cb36-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-27"><a href="exercises.html#cb36-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate kmeans clustering</span></span>
-<span id="cb36-28"><a href="exercises.html#cb36-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/K-means_clustering</span></span>
-<span id="cb36-29"><a href="exercises.html#cb36-29" aria-hidden="true" tabindex="-1"></a>  clustering <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris_normalized, <span class="dv">3</span>)</span>
-<span id="cb36-30"><a href="exercises.html#cb36-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-31"><a href="exercises.html#cb36-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate confusion matrix</span></span>
-<span id="cb36-32"><a href="exercises.html#cb36-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/Confusion_matrix#Confusion_matrices_with_more_than_two_categories</span></span>
-<span id="cb36-33"><a href="exercises.html#cb36-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(species, clustering<span class="sc">$</span>clusters)</span>
-<span id="cb36-34"><a href="exercises.html#cb36-34" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb36-35"><a href="exercises.html#cb36-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-36"><a href="exercises.html#cb36-36" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">kmeans_iris</span>())</span>
-<span id="cb36-37"><a href="exercises.html#cb36-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in is.data.frame(x): (list) object cannot be coerced to type &#39;double&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="exercises.html#cb39-1" aria-hidden="true" tabindex="-1"></a>normalize_standard <span class="ot">&lt;-</span> <span class="cf">function</span>(dataset) {</span>
+<span id="cb39-2"><a href="exercises.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normalizes each column in the dataset to standard normalization</span></span>
+<span id="cb39-3"><a href="exercises.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/Standard_score</span></span>
+<span id="cb39-4"><a href="exercises.html#cb39-4" aria-hidden="true" tabindex="-1"></a>  normalized_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb39-5"><a href="exercises.html#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (column <span class="cf">in</span> <span class="fu">colnames</span>(dataset)) {</span>
+<span id="cb39-6"><a href="exercises.html#cb39-6" aria-hidden="true" tabindex="-1"></a>    data_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(dataset[[column]])</span>
+<span id="cb39-7"><a href="exercises.html#cb39-7" aria-hidden="true" tabindex="-1"></a>    data_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(dataset[column])</span>
+<span id="cb39-8"><a href="exercises.html#cb39-8" aria-hidden="true" tabindex="-1"></a>    normalized_data[[column]] <span class="ot">&lt;-</span> ((dataset[[column]] <span class="sc">-</span> data_mean))<span class="sc">/</span>data_sd</span>
+<span id="cb39-9"><a href="exercises.html#cb39-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb39-10"><a href="exercises.html#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(normalized_data)</span>
+<span id="cb39-11"><a href="exercises.html#cb39-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-12"><a href="exercises.html#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="exercises.html#cb39-13" aria-hidden="true" tabindex="-1"></a>kmeans_iris <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb39-14"><a href="exercises.html#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load data</span></span>
+<span id="cb39-15"><a href="exercises.html#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data</span>(iris)</span>
+<span id="cb39-16"><a href="exercises.html#cb39-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-17"><a href="exercises.html#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get a copy of the iris dataset</span></span>
+<span id="cb39-18"><a href="exercises.html#cb39-18" aria-hidden="true" tabindex="-1"></a>  iris_data <span class="ot">&lt;-</span> iris</span>
+<span id="cb39-19"><a href="exercises.html#cb39-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-20"><a href="exercises.html#cb39-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normalize data</span></span>
+<span id="cb39-21"><a href="exercises.html#cb39-21" aria-hidden="true" tabindex="-1"></a>  iris_normalized <span class="ot">&lt;-</span> <span class="fu">normalize_standard</span>(iris_data)</span>
+<span id="cb39-22"><a href="exercises.html#cb39-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-23"><a href="exercises.html#cb39-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Take species out</span></span>
+<span id="cb39-24"><a href="exercises.html#cb39-24" aria-hidden="true" tabindex="-1"></a>  species <span class="ot">&lt;-</span> iris_data<span class="sc">$</span>Species</span>
+<span id="cb39-25"><a href="exercises.html#cb39-25" aria-hidden="true" tabindex="-1"></a>  iris_data<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb39-26"><a href="exercises.html#cb39-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-27"><a href="exercises.html#cb39-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate kmeans clustering</span></span>
+<span id="cb39-28"><a href="exercises.html#cb39-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/K-means_clustering</span></span>
+<span id="cb39-29"><a href="exercises.html#cb39-29" aria-hidden="true" tabindex="-1"></a>  clustering <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris_normalized, <span class="dv">3</span>)</span>
+<span id="cb39-30"><a href="exercises.html#cb39-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-31"><a href="exercises.html#cb39-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate confusion matrix</span></span>
+<span id="cb39-32"><a href="exercises.html#cb39-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://en.wikipedia.org/wiki/Confusion_matrix#Confusion_matrices_with_more_than_two_categories</span></span>
+<span id="cb39-33"><a href="exercises.html#cb39-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(species, clustering<span class="sc">$</span>clusters)</span>
+<span id="cb39-34"><a href="exercises.html#cb39-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-35"><a href="exercises.html#cb39-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-36"><a href="exercises.html#cb39-36" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">kmeans_iris</span>())</span>
+<span id="cb39-37"><a href="exercises.html#cb39-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in is.data.frame(x): (list) object cannot be coerced to type &#39;double&#39;</span></span></code></pre></div>
 </div>
 <div id="exercise-on-non-interactive-debugging" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Exercise on non-interactive debugging<a href="exercises.html#exercise-on-non-interactive-debugging" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -300,40 +301,40 @@ Hints for each of the problems are available here:
 <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-hints.txt">exercise-k-means-hints.txt</a>.
 Solution is available here:
 <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-solution.R">exercise-titanic-survivability-solution.R</a>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="exercises.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load titanic survivability data</span></span>
-<span id="cb37-2"><a href="exercises.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Titanic)</span>
-<span id="cb37-3"><a href="exercises.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="exercises.html#cb37-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(Titanic)</span>
-<span id="cb37-5"><a href="exercises.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="exercises.html#cb37-6" aria-hidden="true" tabindex="-1"></a>check_survivability <span class="ot">&lt;-</span> <span class="cf">function</span>(feature) {</span>
-<span id="cb37-7"><a href="exercises.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function for checking survivability per feature</span></span>
-<span id="cb37-8"><a href="exercises.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-9"><a href="exercises.html#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the different feature levels</span></span>
-<span id="cb37-10"><a href="exercises.html#cb37-10" aria-hidden="true" tabindex="-1"></a>  levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(titanic[[feature]]))</span>
-<span id="cb37-11"><a href="exercises.html#cb37-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-12"><a href="exercises.html#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create output data frame</span></span>
-<span id="cb37-13"><a href="exercises.html#cb37-13" aria-hidden="true" tabindex="-1"></a>  titanic_survivability <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">row.names=</span>levels)</span>
-<span id="cb37-14"><a href="exercises.html#cb37-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-15"><a href="exercises.html#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate survivability per level</span></span>
-<span id="cb37-16"><a href="exercises.html#cb37-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (level <span class="cf">in</span> levels) {</span>
-<span id="cb37-17"><a href="exercises.html#cb37-17" aria-hidden="true" tabindex="-1"></a>    level_data <span class="ot">&lt;-</span> titanic[Titanic[[feature]] <span class="sc">==</span> level, ]</span>
-<span id="cb37-18"><a href="exercises.html#cb37-18" aria-hidden="true" tabindex="-1"></a>    n_survived <span class="ot">&lt;-</span> <span class="fu">sum</span>(level_data[level_data<span class="sc">$</span>Survived <span class="sc">==</span> <span class="st">&#39;Yes&#39;</span>, <span class="st">&#39;Freq&#39;</span>])</span>
-<span id="cb37-19"><a href="exercises.html#cb37-19" aria-hidden="true" tabindex="-1"></a>    n_died <span class="ot">&lt;-</span> <span class="fu">sum</span>(level_data[level_data<span class="sc">$</span>Survived <span class="sc">==</span> <span class="st">&#39;No&#39;</span>, <span class="st">&#39;Freq&#39;</span>])</span>
-<span id="cb37-20"><a href="exercises.html#cb37-20" aria-hidden="true" tabindex="-1"></a>    titanic_survivability[levels, <span class="st">&#39;survivability&#39;</span>] <span class="ot">&lt;-</span> n_survived <span class="sc">/</span> (n_survived <span class="sc">+</span> n_died)</span>
-<span id="cb37-21"><a href="exercises.html#cb37-21" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb37-22"><a href="exercises.html#cb37-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(titanic_survivability)</span>
-<span id="cb37-23"><a href="exercises.html#cb37-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb37-24"><a href="exercises.html#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-25"><a href="exercises.html#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Features to iterate over</span></span>
-<span id="cb37-26"><a href="exercises.html#cb37-26" aria-hidden="true" tabindex="-1"></a>different_features <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Class&#39;</span>, <span class="st">&#39;Sex&#39;</span>, <span class="st">&#39;Age&#39;</span>)</span>
-<span id="cb37-27"><a href="exercises.html#cb37-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-28"><a href="exercises.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze survivability per feature</span></span>
-<span id="cb37-29"><a href="exercises.html#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (feature <span class="cf">in</span> different_features) {</span>
-<span id="cb37-30"><a href="exercises.html#cb37-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&#39;Feature to check:&#39;</span>, feature, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>))</span>
-<span id="cb37-31"><a href="exercises.html#cb37-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">check_survivability</span>(feature))</span>
-<span id="cb37-32"><a href="exercises.html#cb37-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb37-33"><a href="exercises.html#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Feature to check: Class</span></span>
-<span id="cb37-34"><a href="exercises.html#cb37-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in Titanic[[feature]]: subscript out of bounds</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="exercises.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load titanic survivability data</span></span>
+<span id="cb40-2"><a href="exercises.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Titanic)</span>
+<span id="cb40-3"><a href="exercises.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="exercises.html#cb40-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(Titanic)</span>
+<span id="cb40-5"><a href="exercises.html#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="exercises.html#cb40-6" aria-hidden="true" tabindex="-1"></a>check_survivability <span class="ot">&lt;-</span> <span class="cf">function</span>(feature) {</span>
+<span id="cb40-7"><a href="exercises.html#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function for checking survivability per feature</span></span>
+<span id="cb40-8"><a href="exercises.html#cb40-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-9"><a href="exercises.html#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the different feature levels</span></span>
+<span id="cb40-10"><a href="exercises.html#cb40-10" aria-hidden="true" tabindex="-1"></a>  levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(titanic[[feature]]))</span>
+<span id="cb40-11"><a href="exercises.html#cb40-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-12"><a href="exercises.html#cb40-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create output data frame</span></span>
+<span id="cb40-13"><a href="exercises.html#cb40-13" aria-hidden="true" tabindex="-1"></a>  titanic_survivability <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">row.names=</span>levels)</span>
+<span id="cb40-14"><a href="exercises.html#cb40-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-15"><a href="exercises.html#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate survivability per level</span></span>
+<span id="cb40-16"><a href="exercises.html#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (level <span class="cf">in</span> levels) {</span>
+<span id="cb40-17"><a href="exercises.html#cb40-17" aria-hidden="true" tabindex="-1"></a>    level_data <span class="ot">&lt;-</span> titanic[Titanic[[feature]] <span class="sc">==</span> level, ]</span>
+<span id="cb40-18"><a href="exercises.html#cb40-18" aria-hidden="true" tabindex="-1"></a>    n_survived <span class="ot">&lt;-</span> <span class="fu">sum</span>(level_data[level_data<span class="sc">$</span>Survived <span class="sc">==</span> <span class="st">&#39;Yes&#39;</span>, <span class="st">&#39;Freq&#39;</span>])</span>
+<span id="cb40-19"><a href="exercises.html#cb40-19" aria-hidden="true" tabindex="-1"></a>    n_died <span class="ot">&lt;-</span> <span class="fu">sum</span>(level_data[level_data<span class="sc">$</span>Survived <span class="sc">==</span> <span class="st">&#39;No&#39;</span>, <span class="st">&#39;Freq&#39;</span>])</span>
+<span id="cb40-20"><a href="exercises.html#cb40-20" aria-hidden="true" tabindex="-1"></a>    titanic_survivability[levels, <span class="st">&#39;survivability&#39;</span>] <span class="ot">&lt;-</span> n_survived <span class="sc">/</span> (n_survived <span class="sc">+</span> n_died)</span>
+<span id="cb40-21"><a href="exercises.html#cb40-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb40-22"><a href="exercises.html#cb40-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(titanic_survivability)</span>
+<span id="cb40-23"><a href="exercises.html#cb40-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-24"><a href="exercises.html#cb40-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-25"><a href="exercises.html#cb40-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Features to iterate over</span></span>
+<span id="cb40-26"><a href="exercises.html#cb40-26" aria-hidden="true" tabindex="-1"></a>different_features <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Class&#39;</span>, <span class="st">&#39;Sex&#39;</span>, <span class="st">&#39;Age&#39;</span>)</span>
+<span id="cb40-27"><a href="exercises.html#cb40-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-28"><a href="exercises.html#cb40-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze survivability per feature</span></span>
+<span id="cb40-29"><a href="exercises.html#cb40-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (feature <span class="cf">in</span> different_features) {</span>
+<span id="cb40-30"><a href="exercises.html#cb40-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&#39;Feature to check:&#39;</span>, feature, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>))</span>
+<span id="cb40-31"><a href="exercises.html#cb40-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">check_survivability</span>(feature))</span>
+<span id="cb40-32"><a href="exercises.html#cb40-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-33"><a href="exercises.html#cb40-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Feature to check: Class</span></span>
+<span id="cb40-34"><a href="exercises.html#cb40-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in Titanic[[feature]]: subscript out of bounds</span></span></code></pre></div>
 
 </div>
 </div>

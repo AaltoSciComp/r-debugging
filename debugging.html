@@ -183,9 +183,10 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.3" data-path="features.html"><a href="features.html#base-types-are-extended-using-object-oriented-oo-programming"><i class="fa fa-check"></i><b>3.3.3</b> Base types are extended using object-oriented (OO) programming</a></li>
 <li class="chapter" data-level="3.3.4" data-path="features.html"><a href="features.html#method-dispatch"><i class="fa fa-check"></i><b>3.3.4</b> Method dispatch</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.4</b> Libraries</a>
+<li class="chapter" data-level="3.4" data-path="features.html"><a href="features.html#signals-and-error-handling"><i class="fa fa-check"></i><b>3.4</b> Signals and error handling</a></li>
+<li class="chapter" data-level="3.5" data-path="features.html"><a href="features.html#libraries"><i class="fa fa-check"></i><b>3.5</b> Libraries</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.4.1</b> Libraries are usually compiled</a></li>
+<li class="chapter" data-level="3.5.1" data-path="features.html"><a href="features.html#libraries-are-usually-compiled"><i class="fa fa-check"></i><b>3.5.1</b> Libraries are usually compiled</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>4</b> Debugging R code</a>
@@ -239,29 +240,32 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="debugging" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Debugging R code<a href="debugging.html#debugging" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter follows the excellent <a href="https://adv-r.hadley.nz/debugging.html">debugging-chapter from Advanced R</a><span class="citation"><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></span>.</p>
+<p>This chapter’s structure follows the excellent <a href="https://adv-r.hadley.nz/debugging.html">debugging-chapter from Advanced R</a><span class="citation"><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></span>.</p>
+<p>Another excellent source for debugging in RStudio is
+<a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-the-RStudio-IDE">this blog post</a>
+by Jonathan McPherson.<span class="citation"><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></span></p>
 <div id="tracing-errors" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Tracing errors<a href="debugging.html#tracing-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="traceback" class="section level3 hasAnchor" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Traceback<a href="debugging.html#traceback" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s consider the previously showed function example with a missing variable:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="debugging.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure that z is missing</span></span>
-<span id="cb27-2"><a href="debugging.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;z&quot;</span>)) {</span>
-<span id="cb27-3"><a href="debugging.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(z)</span>
-<span id="cb27-4"><a href="debugging.html#cb27-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-5"><a href="debugging.html#cb27-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb27-6"><a href="debugging.html#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
-<span id="cb27-7"><a href="debugging.html#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-8"><a href="debugging.html#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="debugging.html#cb27-9" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">y =</span> <span class="fu">g</span>(x)) {</span>
-<span id="cb27-10"><a href="debugging.html#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
-<span id="cb27-11"><a href="debugging.html#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
-<span id="cb27-12"><a href="debugging.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb27-13"><a href="debugging.html#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
-<span id="cb27-14"><a href="debugging.html#cb27-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb27-15"><a href="debugging.html#cb27-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-16"><a href="debugging.html#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb27-17"><a href="debugging.html#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="debugging.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure that z is missing</span></span>
+<span id="cb30-2"><a href="debugging.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">exists</span>(<span class="st">&quot;z&quot;</span>)) {</span>
+<span id="cb30-3"><a href="debugging.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(z)</span>
+<span id="cb30-4"><a href="debugging.html#cb30-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-5"><a href="debugging.html#cb30-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb30-6"><a href="debugging.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
+<span id="cb30-7"><a href="debugging.html#cb30-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-8"><a href="debugging.html#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="debugging.html#cb30-9" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">y =</span> <span class="fu">g</span>(x)) {</span>
+<span id="cb30-10"><a href="debugging.html#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&gt;</span><span class="dv">0</span>) {</span>
+<span id="cb30-11"><a href="debugging.html#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb30-12"><a href="debugging.html#cb30-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb30-13"><a href="debugging.html#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
+<span id="cb30-14"><a href="debugging.html#cb30-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-15"><a href="debugging.html#cb30-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-16"><a href="debugging.html#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb30-17"><a href="debugging.html#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in g(x): object &#39;z&#39; not found</span></span></code></pre></div>
 <p>This example is available here: <a href="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/missing-variables.R">missing-variables.R</a>.</p>
 <p>Opening the file with RStudio and sourcing the file will return the following kind of an error:</p>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables.png" /></p>
@@ -270,20 +274,20 @@ div.csl-indent {
 <p>This view will quickly show that the error comes from the <code>g(x)</code>-function call in line #13.</p>
 <p>Sometimes lazy evaluation can make reading the call stack complicated.
 Let’s have a few additional functions that are called in the argument definition:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="debugging.html#cb28-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb28-2"><a href="debugging.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
-<span id="cb28-3"><a href="debugging.html#cb28-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb28-4"><a href="debugging.html#cb28-4" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb28-5"><a href="debugging.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">i</span>())</span>
-<span id="cb28-6"><a href="debugging.html#cb28-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb28-7"><a href="debugging.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">h</span>())</span>
-<span id="cb28-8"><a href="debugging.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="debugging.html#cb31-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb31-2"><a href="debugging.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb31-3"><a href="debugging.html#cb31-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-4"><a href="debugging.html#cb31-4" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb31-5"><a href="debugging.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">i</span>())</span>
+<span id="cb31-6"><a href="debugging.html#cb31-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-7"><a href="debugging.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">h</span>())</span>
+<span id="cb31-8"><a href="debugging.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-lazy-evaluation.png" /></p>
 <p>Error is raised by <code>i()</code>, but looking at the call stack it almost looks like <code>f()</code> is somehow involved. This is because value of <code>h()</code> is evaluated only when it is needed in <code>f()</code>. Writing the code like this would reveal the true culprit:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="debugging.html#cb29-1" aria-hidden="true" tabindex="-1"></a>h_value<span class="ot">=</span><span class="fu">h</span>()</span>
-<span id="cb29-2"><a href="debugging.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span>
-<span id="cb29-3"><a href="debugging.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span>h_value)</span>
-<span id="cb29-4"><a href="debugging.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in f(x = -1, y = h_value): object &#39;h_value&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="debugging.html#cb32-1" aria-hidden="true" tabindex="-1"></a>h_value<span class="ot">=</span><span class="fu">h</span>()</span>
+<span id="cb32-2"><a href="debugging.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in i(): object &#39;z&#39; not found</span></span>
+<span id="cb32-3"><a href="debugging.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span>h_value)</span>
+<span id="cb32-4"><a href="debugging.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in f(x = -1, y = h_value): object &#39;h_value&#39; not found</span></span></code></pre></div>
 <p>Of course, this is not something you want to do generally. Lazy evaluation is good for speeding up your code, so doing changes like this should be limited to situations where you’re unsure which function causes the error.</p>
 <p><img src="https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/images/missing-variables-nonlazy-evaluation.png" /></p>
 </div>
@@ -291,13 +295,13 @@ Let’s have a few additional functions that are called in the argument definiti
 <h3><span class="header-section-number">4.1.2</span> Traceback outside of RStudio editor<a href="debugging.html#traceback-outside-of-rstudio-editor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If you run the code in R console in RStudio or in a separate interpreter you might not get the <strong>Show Traceback</strong>-prompt.
 In those situations you can use the <code>traceback()</code>-function to get the trace. You can try it out with the following test in the console:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="debugging.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb30-2"><a href="debugging.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">traceback</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="debugging.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb33-2"><a href="debugging.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">traceback</span>()</span></code></pre></div>
 <p>You can also set the R error handling to call traceback on errors:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="debugging.html#cb31-1" aria-hidden="true" tabindex="-1"></a>backup_options <span class="ot">&lt;-</span> <span class="fu">options</span>()</span>
-<span id="cb31-2"><a href="debugging.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error=</span>traceback)</span>
-<span id="cb31-3"><a href="debugging.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb31-4"><a href="debugging.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="debugging.html#cb34-1" aria-hidden="true" tabindex="-1"></a>backup_options <span class="ot">&lt;-</span> <span class="fu">options</span>()</span>
+<span id="cb34-2"><a href="debugging.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error=</span>traceback)</span>
+<span id="cb34-3"><a href="debugging.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb34-4"><a href="debugging.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
 <p>Here we also took a backup of the default options. This is usually a good idea as changing options will change the options for the whole R session.</p>
 </div>
 </div>
@@ -332,7 +336,7 @@ The function we’re investigating is highlighted.</li>
 <li>Quit, <code>Q</code>: Exit the browser and the current evaluation and return to the top-level prompt.</li>
 </ul>
 <p>RStudio also has a toolbar in debugger console with buttons for next (<code>n</code>), step (<code>s</code>), finish (<code>f</code>), continue (<code>c</code>) and stop (<code>Q</code>).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
 <img src="https://github.com/hadley/adv-r/raw/master/screenshots/debug-toolbar.png" alt="RStudio debugger toolbar. Source: Advanced R" width="70%" />
 <p class="caption">
 Figure 4.1: RStudio debugger toolbar. Source: Advanced R
@@ -347,18 +351,18 @@ Figure 4.1: RStudio debugger toolbar. Source: Advanced R
 function <code>f</code> is called. You can unset this variable with <code>undebug</code>.</p>
 <p>Alternatively, you can use <code>debugonce</code> to launch the debugger once for a function. This is
 especially useful if the function you want to debug is inside a for-loop. You can try this with the following:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="debugging.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(g)</span>
-<span id="cb32-2"><a href="debugging.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="debugging.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(g)</span>
+<span id="cb35-2"><a href="debugging.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="launching-browser-in-code" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Launching browser in code<a href="debugging.html#launching-browser-in-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>One can also launch the interactive browser by specifying <code>browser()</code> is the code:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="debugging.html#cb33-1" aria-hidden="true" tabindex="-1"></a>g_browse <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb33-2"><a href="debugging.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">browser</span>()</span>
-<span id="cb33-3"><a href="debugging.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
-<span id="cb33-4"><a href="debugging.html#cb33-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-5"><a href="debugging.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">g_browse</span>(x))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="debugging.html#cb36-1" aria-hidden="true" tabindex="-1"></a>g_browse <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb36-2"><a href="debugging.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">browser</span>()</span>
+<span id="cb36-3"><a href="debugging.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">+</span> z)</span>
+<span id="cb36-4"><a href="debugging.html#cb36-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-5"><a href="debugging.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">g_browse</span>(x))</span></code></pre></div>
 <p>This is very useful when you’re writing new code and you want to check what the function does line-by-line.</p>
 </div>
 <div id="setting-breakpoint-in-editor" class="section level2 hasAnchor" number="4.4">
@@ -370,9 +374,9 @@ This will put a red dot next to the line number. This is a break point which wil
 <div id="launching-debugger-with-recover" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Launching debugger with <code>recover()</code><a href="debugging.html#launching-debugger-with-recover" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You can also launch the debugger when an error occurs by setting the error option to use <code>recover()</code>:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="debugging.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">option</span>(<span class="at">error=</span>recover)</span>
-<span id="cb34-2"><a href="debugging.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb34-3"><a href="debugging.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="debugging.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">option</span>(<span class="at">error=</span>recover)</span>
+<span id="cb37-2"><a href="debugging.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb37-3"><a href="debugging.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(backup_options)</span></code></pre></div>
 <p>Again, we’ll want to restore the previous settings once we’re finished.</p>
 <p>You can also set a similar behaviour in RStudio by checking
 <strong>Debug</strong> -&gt; <strong>On Error</strong> -&gt; <strong>Break in Code</strong> from the top menu.</p>
@@ -394,7 +398,7 @@ a good idea to verify that the R installation is as similar as possible to the
 interactive session.</p>
 <p>Using tool such as <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> can make
 it easier to replicate the same environment by storing the list of required packages
-into a <code>renv.lock</code>-file.<span class="citation"><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></span></p>
+into a <code>renv.lock</code>-file.<span class="citation"><a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></span></p>
 <p>Other things such as different package loading order, forgetting to load a package
 explicitly or setting some variables outside of the code into the environment
 can also create problems.</p>
@@ -404,9 +408,9 @@ can also create problems.</p>
 <code>cat</code>- or <code>print</code>- statements can usually tell a lot about the inner workings of the
 program.</p>
 <p>More advanced logging packages such as
-<a href="https://daroczig.github.io/logger/">logger</a><span class="citation"><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></span>,
-<a href="https://s-fleck.github.io/lgr/">lgr</a><span class="citation"><a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></span> or
-<a href="https://github.com/johnmyleswhite/log4r">log4r</a><span class="citation"><a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></span> can be very useful as well
+<a href="https://daroczig.github.io/logger/">logger</a><span class="citation"><a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></span>,
+<a href="https://s-fleck.github.io/lgr/">lgr</a><span class="citation"><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></span> or
+<a href="https://github.com/johnmyleswhite/log4r">log4r</a><span class="citation"><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></span> can be very useful as well
 as you can leave many debug statements in your code, but print them only when needed.</p>
 <p>One can also utilize R’s
 <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/save">save</a>-function
@@ -418,30 +422,31 @@ to save environment variables for further inspection.</p>
 saving the state of the program on error. One can then use interactive <code>debugger()</code> to look
 into the failed program state.</p>
 <p>The following example from the relevant section on <a href="https://adv-r.hadley.nz/debugging.html#non-interactive-debugging">Advanced R</a> illustrates the idea perfectly:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="debugging.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In batch R process ----</span></span>
-<span id="cb35-2"><a href="debugging.html#cb35-2" aria-hidden="true" tabindex="-1"></a>dump_and_quit <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb35-3"><a href="debugging.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Save debugging info to file last.dump.rda</span></span>
-<span id="cb35-4"><a href="debugging.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dump.frames</span>(<span class="at">to.file =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-5"><a href="debugging.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Quit R with error status</span></span>
-<span id="cb35-6"><a href="debugging.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">q</span>(<span class="at">status =</span> <span class="dv">1</span>)</span>
-<span id="cb35-7"><a href="debugging.html#cb35-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-8"><a href="debugging.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error =</span> dump_and_quit)</span>
-<span id="cb35-9"><a href="debugging.html#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="debugging.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># In a later interactive session ----</span></span>
-<span id="cb35-11"><a href="debugging.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;last.dump.rda&quot;</span>)</span>
-<span id="cb35-12"><a href="debugging.html#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="fu">debugger</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="debugging.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In batch R process ----</span></span>
+<span id="cb38-2"><a href="debugging.html#cb38-2" aria-hidden="true" tabindex="-1"></a>dump_and_quit <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb38-3"><a href="debugging.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Save debugging info to file last.dump.rda</span></span>
+<span id="cb38-4"><a href="debugging.html#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dump.frames</span>(<span class="at">to.file =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-5"><a href="debugging.html#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Quit R with error status</span></span>
+<span id="cb38-6"><a href="debugging.html#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">q</span>(<span class="at">status =</span> <span class="dv">1</span>)</span>
+<span id="cb38-7"><a href="debugging.html#cb38-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-8"><a href="debugging.html#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error =</span> dump_and_quit)</span>
+<span id="cb38-9"><a href="debugging.html#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="debugging.html#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># In a later interactive session ----</span></span>
+<span id="cb38-11"><a href="debugging.html#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;last.dump.rda&quot;</span>)</span>
+<span id="cb38-12"><a href="debugging.html#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="fu">debugger</span>()</span></code></pre></div>
 
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="10">
-<li id="fn10"><p>Hadley Wickham, <em>Advanced r</em> (CRC press, 2019), <a href="https://adv-r.hadley.nz" role="doc-biblioref">https://adv-r.hadley.nz</a>.<a href="debugging.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>Kevin Ushey, <em>Renv: Project Environments</em>, 2022, <a href="https://rstudio.github.io/renv/" role="doc-biblioref">https://rstudio.github.io/renv/</a>.<a href="debugging.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>Gergely Daróczi, <em>Logger: A Lightweight, Modern and Flexible Logging Utility</em>, 2021, <a href="https://daroczig.github.io/logger/" role="doc-biblioref">https://daroczig.github.io/logger/</a>.<a href="debugging.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>Stefan Fleck, <em>Lgr: A Fully Featured Logging Framework</em>, 2021, <a href="https://s-fleck.github.io/lgr/" role="doc-biblioref">https://s-fleck.github.io/lgr/</a>.<a href="debugging.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>John Myles White and Aaron Jacobs, <em>Log4r: A Fast and Lightweight Logging System for r, Based on Log4j</em>, 2021, <a href="https://github.com/johnmyleswhite/log4r" role="doc-biblioref">https://github.com/johnmyleswhite/log4r</a>.<a href="debugging.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<ol start="11">
+<li id="fn11"><p>Hadley Wickham, <em>Advanced r</em> (CRC press, 2019), <a href="https://adv-r.hadley.nz" role="doc-biblioref">https://adv-r.hadley.nz</a>.<a href="debugging.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>Jonathan McPherson, <span>“Debugging with the RStudio IDE,”</span> 2021, <a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio" role="doc-biblioref">https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio</a>.<a href="debugging.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>Kevin Ushey, <em>Renv: Project Environments</em>, 2022, <a href="https://rstudio.github.io/renv/" role="doc-biblioref">https://rstudio.github.io/renv/</a>.<a href="debugging.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>Gergely Daróczi, <em>Logger: A Lightweight, Modern and Flexible Logging Utility</em>, 2021, <a href="https://daroczig.github.io/logger/" role="doc-biblioref">https://daroczig.github.io/logger/</a>.<a href="debugging.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>Stefan Fleck, <em>Lgr: A Fully Featured Logging Framework</em>, 2021, <a href="https://s-fleck.github.io/lgr/" role="doc-biblioref">https://s-fleck.github.io/lgr/</a>.<a href="debugging.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>John Myles White and Aaron Jacobs, <em>Log4r: A Fast and Lightweight Logging System for r, Based on Log4j</em>, 2021, <a href="https://github.com/johnmyleswhite/log4r" role="doc-biblioref">https://github.com/johnmyleswhite/log4r</a>.<a href="debugging.html#fnref16" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
