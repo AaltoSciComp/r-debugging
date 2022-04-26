@@ -12,11 +12,12 @@ In this exercise there are four bugs hidden in the code.
 Try to use debugging tools presented in [the debugging chapter](#debugging) to spot them out.
 The bugs should appear in order, so if you fix one, you can continue to the next. 
 
-This example is available here: [exercise-k-means.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R).
-Hints for each of the problems are available here:
-[exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-hints.txt).
-Solution is available here:
-[exercise-k-means-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-solution.R.R).
+- This example is available here:
+  [exercise-k-means.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means.R).
+- Hints for each of the problems are available here:
+  [exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-hints.txt).
+- Solution is available here:
+  [exercise-k-means-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-k-means-solution.R.R).
 
 ```{r, collapse=TRUE, error=TRUE}
 normalize_standard <- function(dataset) {
@@ -66,11 +67,12 @@ error raising bug, but the other one is a functional one.
 Try to use debugging tools of the [non-interactive debugging](#noninteractive) section to
 find out the bugs.
 
-This example is available here: [exercise-titanic-survivability.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability.R).
-Hints for each of the problems are available here:
-[exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-hints.txt).
-Solution is available here:
-[exercise-titanic-survivability-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-solution.R).
+- This example is available here:
+  [exercise-titanic-survivability.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability.R).
+- Hints for each of the problems are available here:
+  [exercise-k-means-hints.txt](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-hints.txt).
+- Solution is available here:
+  [exercise-titanic-survivability-solution.R](https://raw.githubusercontent.com/AaltoSciComp/r-debugging/main/examples/exercise-titanic-survivability-solution.R).
 
 
 
