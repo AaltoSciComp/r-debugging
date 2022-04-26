@@ -5,7 +5,11 @@ output: html_notebook
 
 # Debugging R code {#debugging}
 
-This chapter follows the excellent [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html)[@wickham2019advanced].
+This chapter's structure follows the excellent [debugging-chapter from Advanced R](https://adv-r.hadley.nz/debugging.html)[@wickham2019advanced].
+
+Another excellent source for debugging in RStudio is
+[this blog post](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-the-RStudio-IDE)
+by Jonathan McPherson.[@RstudioDebug]
 
 ## Tracing errors
 

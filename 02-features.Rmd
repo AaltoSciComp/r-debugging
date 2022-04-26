@@ -1,6 +1,6 @@
 ---
 title: "R features relevant for debugging"
-output: html_notebook
+output: html_document
 ---
 
 # R features relevant for debugging {#features}
@@ -311,6 +311,74 @@ Utilizing these generic functions gives R great power, as one can use similar co
 methods(predict)
 ```
 
+## Signals and error handling
+
+R has a robust system of messages, warnings and errors, that allow users
+to prevent erroneous behaviour.
+
+R has three different signal types:
+
+- Messages: Messages are meant for informing the user that some action has been taken.
+- Warnings: Warnings are meant to signal that not everything went correctly, but
+  the program execution will continue.
+- Errors: Errors indicate to R that something went wrong and the program execution should
+  stop.
+
+To raise these signals, one can use the following functions:
+```{r, collapse=TRUE, error=TRUE}
+message('This is a message')
+warning('This is a warning')
+stop('This is an error')
+```
+
+One can suppress these messages with `try()`, `suppressWarnings()` and `suppressMessages()`:
+```{r, error=TRUE, collapse=TRUE}
+signalsender <- function(signal_function, text) { signal_function(text) }
+signalsender(message, 'This is a message')
+suppressMessages(signalsender(message, 'This is a message'))
+
+signalsender(warning, 'This is a warning')
+suppressWarnings(signalsender(warning, 'This is a warning'))
+
+try(signalsender(stop, 'This is an error'))
+try(signalsender(stop, 'This is an error'), silent=TRUE)
+signalsender(stop, 'This is an error')
+```
+By default `try` will still print that an error has occured, but it can be silenced.
+However, silencing errors is risky and should only be used when the reason for the error is
+known and expected.
+
+All of the signals have handlers: functions that react when the signals are raised.
+These handlers can be overwritten with `tryCatch()`- and `withCallingHandlers()`-functions:
+```{r, collapse=TRUE, error=TRUE}
+tryCatch(
+  error = function(cond) {
+    message(paste('Received an error\n', cond))
+  },
+  signalsender(stop, 'Raise an error')
+)
+withCallingHandlers(
+  message = function(cond) {
+    stop(paste('I did not expect a message:\n', cond,'\nRaising an error!'), call.=FALSE)
+  },
+  signalsender(message, 'Send a message')
+)
+```
+There's a difference between these two functions. From Advanced R:
+
+> - `tryCatch()` defines exiting handlers; after the condition is handled, control returns to the context where tryCatch() was called. This makes tryCatch() most suitable for working with errors and interrupts, as these have to exit anyway.
+  - `withCallingHandlers()` defines calling handlers; after the condition is captured control returns to the context where the condition was signalled. This makes it most suitable for working with non-error conditions.
+
+The difference is also well illustrated in the following quote from Advanced R:
+
+> - An exiting handler handles a signal like you handle a problem; it makes the problem go away.
+  - A calling handler handles a signal like you handle a car; the car still exists.
+
+[rlang](https://rlang.r-lib.org/)-package[@R-rlang] provides additional wrappers for these signals that
+can make error raising and handling easier. You can easily create your own custom error types with it.
+
+For more info on R's error handling and on using `rlang`, see
+[this chapter of Advanced R](https://adv-r.hadley.nz/conditions.html).
 
 ## Libraries
 
@@ -327,6 +395,9 @@ However, this API can be very complicated and thus most new packages use C/C++ w
 This means that during installation many R libraries need C and C++ compilers and external libraries,
 which can result in various errors if you lack said requirements.
 
-Debugging `Rcpp`-code requires one to utilize C/C++ debuggers. For more information one can look for example at [this blog post ](https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/).[@VaughanRcppDebug]
+Debugging C or C++ code requires one to utilize C/C++ debuggers. For more information one
+can look for example at
+[this blog post](https://blog.davisvaughan.com/2019/04/05/debug-r-package-with-cpp/)[@VaughanRcppDebug] or
+at the [various links](https://adv-r.hadley.nz/debugging.html#debug-compiled) provided in Advanced R.
 
 For more information on Rcpp, one can check [Rcpp for everyone](https://teuder.github.io/rcpp4everyone_en/)[@RcppForEveryone], [this chapter in Advanced R](https://adv-r.hadley.nz/rcpp.html)
