@@ -1,5 +1,4 @@
 ---
-title: "What is debugging?"
 output: html_notebook
 ---
 

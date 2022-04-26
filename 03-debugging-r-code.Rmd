@@ -1,5 +1,4 @@
 ---
-title: "Debugging R code"
 output: html_notebook
 ---
 

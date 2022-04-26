@@ -1,5 +1,4 @@
 ---
-title: "R features relevant for debugging"
 output: html_document
 ---
 
