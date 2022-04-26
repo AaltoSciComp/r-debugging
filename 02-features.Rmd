@@ -364,6 +364,7 @@ withCallingHandlers(
   signalsender(message, 'Send a message')
 )
 ```
+
 There's a difference between these two functions. From Advanced R:
 
 > - `tryCatch()` defines exiting handlers; after the condition is handled, control returns to the context where tryCatch() was called. This makes tryCatch() most suitable for working with errors and interrupts, as these have to exit anyway.
